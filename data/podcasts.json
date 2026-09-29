@@ -1,0 +1,193 @@
+[
+  {
+    "id": "pod_tmi",
+    "title": "The Messy Inbetween (TMI)",
+    "hosts": "Murugi Munyi & Lydia KM",
+    "category": "Culture & Relationships",
+    "dialect": "English & Sheng",
+    "county": "Nairobi City",
+    "cover": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1200&h=400&fit=crop",
+    "bio": "Kenya's leading lifestyle, relationships, and messy twenties-to-thirties conversations. Unfiltered real talk about navigating adulting in Nairobi.",
+    "subscribers": 142000,
+    "rating": 4.9,
+    "episodes": [
+      {
+        "id": "ep_tmi_101",
+        "podcastId": "pod_tmi",
+        "title": "Ep 101: Nairobi Dating Red Flags & Matatu Romance",
+        "season": 4,
+        "episodeNumber": 12,
+        "date": "Sep 18, 2026",
+        "duration": 2840,
+        "durationStr": "47m 20s",
+        "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+        "desc": "In this episode, Murugi and Lydia dive into the wild world of Nairobi dating scenes, bill-splitting etiquette, and red flags you should never ignore.",
+        "chapters": [
+          { "time": "0:00", "title": "Intro & Life Updates" },
+          { "time": "12:30", "title": "The Nairobi Dating Landscape" },
+          { "time": "28:15", "title": "Red Flags vs Quirkiness" },
+          { "time": "41:00", "title": "Q&A with Listeners" }
+        ],
+        "plays": 48200,
+        "likes": 3910
+      },
+      {
+        "id": "ep_tmi_102",
+        "podcastId": "pod_tmi",
+        "title": "Ep 102: Financial Freedom & Fuliza Habits in Kenya",
+        "season": 4,
+        "episodeNumber": 13,
+        "date": "Sep 11, 2026",
+        "duration": 3120,
+        "durationStr": "52m 00s",
+        "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+        "desc": "How to budget in an economy with inflation, avoiding bad debt, and setting realistic investment goals while living in 254.",
+        "chapters": [
+          { "time": "0:00", "title": "Money Mindset Intro" },
+          { "time": "15:10", "title": "Emergency Funds & M-Shwari" },
+          { "time": "34:20", "title": "Side Hustles That Actually Work" }
+        ],
+        "plays": 53100,
+        "likes": 4200
+      }
+    ]
+  },
+  {
+    "id": "pod_legally",
+    "title": "Legally Clueless Africa",
+    "hosts": "Adelle Onyango",
+    "category": "Human Stories & Inspiration",
+    "dialect": "English & Swahili",
+    "county": "Nairobi City",
+    "cover": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=600&h=600&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200&h=400&fit=crop",
+    "bio": "A completely syndicated audio sanctuary chronicling human stories of everyday Africans navigating life, healing, careers, and finding their voice.",
+    "subscribers": 189000,
+    "rating": 5.0,
+    "episodes": [
+      {
+        "id": "ep_legally_250",
+        "podcastId": "pod_legally",
+        "title": "Ep 250: Finding Rhythm Beyond the Noise of the City",
+        "season": 6,
+        "episodeNumber": 1,
+        "date": "Sep 20, 2026",
+        "duration": 2280,
+        "durationStr": "38m 00s",
+        "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+        "desc": "Adelle chats with grassroots artists who chose peace over Nairobi's fast-paced chaos, reconnecting with rural roots in Kilifi and Nanyuki.",
+        "chapters": [
+          { "time": "0:00", "title": "The Need for Slowing Down" },
+          { "time": "10:45", "title": "Guest Story: Rebuilding in Nanyuki" },
+          { "time": "27:00", "title": "Lessons on Creative Burnout" }
+        ],
+        "plays": 62400,
+        "likes": 5890
+      }
+    ]
+  },
+  {
+    "id": "pod_sandwich",
+    "title": "A Sandwich Podcast",
+    "hosts": "Owen, Kibz, Nyamita & Joan",
+    "category": "Urban Banter & Pop Culture",
+    "dialect": "Sheng & English",
+    "county": "Nairobi City",
+    "cover": "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=600&h=600&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1200&h=400&fit=crop",
+    "bio": "The most hilarious, high-energy 254 crew breaking down music trends, nightlife, Gen Z slangs, and Matatu culture with pure comedy.",
+    "subscribers": 115000,
+    "rating": 4.8,
+    "episodes": [
+      {
+        "id": "ep_sandwich_88",
+        "podcastId": "pod_sandwich",
+        "title": "Ep 88: Arbantone vs Gengetone — Who Owns the Streets?",
+        "season": 3,
+        "episodeNumber": 18,
+        "date": "Sep 15, 2026",
+        "duration": 2700,
+        "durationStr": "45m 00s",
+        "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+        "desc": "The crew debates whether Arbantone is just a TikTok fad or the rightful heir to 2019 Gengetone, featuring special guest artist commentary.",
+        "chapters": [
+          { "time": "0:00", "title": "Intro Banter" },
+          { "time": "08:15", "title": "The Rise of Arbantone Sample Culture" },
+          { "time": "22:40", "title": "Where are the OG Gengetone Groups?" },
+          { "time": "38:00", "title": "Song of the Week Pick" }
+        ],
+        "plays": 71000,
+        "likes": 6400
+      }
+    ]
+  },
+  {
+    "id": "pod_zr_spotlight",
+    "title": "ZR Kenya Music Spotlight",
+    "hosts": "ZetuRoots Editorial & Sound Masters",
+    "category": "Music Breakdown & History",
+    "dialect": "Swahili & Sheng",
+    "county": "All",
+    "cover": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=600&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&h=400&fit=crop",
+    "bio": "Behind the hits! We dissect legendary Kenyan records from Daudi Kabaka and Fadhili William to E-Sir, Boutross, and Nadia Mukami.",
+    "subscribers": 86000,
+    "rating": 4.9,
+    "episodes": [
+      {
+        "id": "ep_zr_1",
+        "podcastId": "pod_zr_spotlight",
+        "title": "Ep 01: The Anatomy of a Sheng Hook — How Boutross Crafted Shrap",
+        "season": 1,
+        "episodeNumber": 1,
+        "date": "Sep 21, 2026",
+        "duration": 1920,
+        "durationStr": "32m 00s",
+        "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+        "desc": "An exclusive audio journey into studio stems, polyrhythmic drum machines, and Kenyan linguistic mastery behind modern Shrap and Gengetone.",
+        "chapters": [
+          { "time": "0:00", "title": "The Origin of Shrapnel Sound" },
+          { "time": "11:20", "title": "Deconstructing 808s in Sheng" },
+          { "time": "24:00", "title": "Producer Roundtable" }
+        ],
+        "plays": 39400,
+        "likes": 3800
+      }
+    ]
+  },
+  {
+    "id": "pod_mashinani",
+    "title": "Mashinani Folk & Heritage Tales",
+    "hosts": "Mzee Wafula & Amina Hassan",
+    "category": "Grassroots History & Folklore",
+    "dialect": "Swahili, Dholuo & Luhya",
+    "county": "Kakamega",
+    "cover": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&h=600&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=1200&h=400&fit=crop",
+    "bio": "Preserving stories from all 47 counties. Traditional instruments (Nyatiti, Isukuti, Orutu, Wandindi) and the folklore that shaped Kenya.",
+    "subscribers": 64000,
+    "rating": 5.0,
+    "episodes": [
+      {
+        "id": "ep_mashinani_1",
+        "podcastId": "pod_mashinani",
+        "title": "Ep 01: The Sacred Drums of Kakamega Bullfighting",
+        "season": 1,
+        "episodeNumber": 1,
+        "date": "Sep 19, 2026",
+        "duration": 2100,
+        "durationStr": "35m 00s",
+        "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+        "desc": "How Isukuti rhythms communicate across hills, the spiritual power of bullfighting drumbeats, and the living legends of Western Kenya.",
+        "chapters": [
+          { "time": "0:00", "title": "Welcome to Malinya Grounds" },
+          { "time": "12:00", "title": "The Science of Isukuti Poly-rhythms" },
+          { "time": "25:30", "title": "Living Protectors of the Beat" }
+        ],
+        "plays": 28900,
+        "likes": 2750
+      }
+    ]
+  }
+]

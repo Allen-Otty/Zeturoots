@@ -1,0 +1,46 @@
+{
+  "name": "ZetuRoots Music",
+  "short_name": "ZetuRoots",
+  "description": "Kenya's Premier Mobile-First Music & Culture Streaming Platform",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ZetuRoots Toppers Charts",
+      "url": "./index.html#toppers",
+      "description": "View Kenya's Daily & Weekly Top 100 Leaderboards"
+    },
+    {
+      "name": "Explore 47 Counties",
+      "url": "./index.html#explore",
+      "description": "Discover grassroot sounds across Kenya's counties"
+    },
+    {
+      "name": "Artist Studio",
+      "url": "./index.html#studio",
+      "description": "Upload new tracks & manage analytics"
+    },
+    {
+      "name": "Live Events",
+      "url": "./index.html#events",
+      "description": "Book tickets via M-Pesa for live festivals"
+    }
+  ]
+}

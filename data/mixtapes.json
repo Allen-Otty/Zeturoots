@@ -1,0 +1,96 @@
+[
+  {
+    "id": "mix_lyta_1",
+    "title": "Eastlands Matatu Soundclash Vol. 9",
+    "djName": "DJ Lyta",
+    "djId": "usr_dj_1",
+    "crew": "Nakuru & Eastlands Bass Kings",
+    "route": "Route 58 (Buruburu) & 237 (Thika Rd)",
+    "bpm": 112,
+    "genre": "Gengetone & Arbantone",
+    "duration": 3480,
+    "durationStr": "58m 00s",
+    "cover": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
+    "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+    "plays": 128400,
+    "likes": 11200,
+    "tracklist": [
+      "01. DJ Lyta Intro - Bass Drop",
+      "02. Boutross - Angela (Extended Remix)",
+      "03. Trio Mio - Sipangwingwi (Street Beat)",
+      "04. Fathermoh - Kaskie Vibaya (Hype Edit)",
+      "05. Mejja - Kanairo Dating Clout",
+      "06. Nadia Mukami - Kai Wangu (Club Mix)",
+      "07. Wakadinali - Geri Inengi (808 Boom)",
+      "08. MC Masaku - Masaku Drill Anthem"
+    ]
+  },
+  {
+    "id": "mix_demakufu_2",
+    "title": "Arbantone Street Hype Explosion 2026",
+    "djName": "DJ Demakufu",
+    "djId": "usr_dj_2",
+    "crew": "Demakufu Sound Systems",
+    "route": "Route 111 (Ngong Rd) & 125 (Rongai)",
+    "bpm": 105,
+    "genre": "Arbantone & Sheng Groove",
+    "duration": 3120,
+    "durationStr": "52m 00s",
+    "cover": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=600&fit=crop",
+    "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+    "plays": 95200,
+    "likes": 8400,
+    "tracklist": [
+      "01. Demakufu Signature Siren Intro",
+      "02. Sean MMG - Nairobi City Arbantone",
+      "03. Ybw Smith - Bad Girl Ting",
+      "04. Tipsy G - Ndovu Kuu Street Anthem",
+      "05. Lil Maina - Kishash (Bass Boosted)"
+    ]
+  },
+  {
+    "id": "mix_grauchi_3",
+    "title": "The Wake Up Call: Kenya Drill vs Afro-Fusion",
+    "djName": "DJ Grauchi",
+    "djId": "usr_dj_3",
+    "crew": "The Grauchi Effect 254",
+    "route": "Westlands & Kilimani Elite Line",
+    "bpm": 140,
+    "genre": "Kenyan Drill",
+    "duration": 3720,
+    "durationStr": "62m 00s",
+    "cover": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=600&fit=crop",
+    "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+    "plays": 142000,
+    "likes": 14900,
+    "tracklist": [
+      "01. DJ Grauchi Intro - Westlands Vibe",
+      "02. Wakadinali - Case Closed (Grauchi Mashup)",
+      "03. Boutross - Yeh Yeh Yeh (Drill Tempo)",
+      "04. Buruklyn Boyz - 23 (Nairobi Drill)",
+      "05. Scar Mkadinali - Kovu"
+    ]
+  },
+  {
+    "id": "mix_taarab_4",
+    "title": "Pwani Gold: Taarab & Bango Acoustic Nights",
+    "djName": "DJ Mombasani",
+    "djId": "usr_dj_4",
+    "crew": "Old Town Mombasa Collective",
+    "route": "Mombasa Ferry & Nyali Strip",
+    "bpm": 95,
+    "genre": "Taarab",
+    "duration": 2880,
+    "durationStr": "48m 00s",
+    "cover": "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&h=600&fit=crop",
+    "audioSrc": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3",
+    "plays": 61200,
+    "likes": 5300,
+    "tracklist": [
+      "01. Pwani Intro - Oud & Waves",
+      "02. Nyota Ndogo - Watu na Viatu (Live Strings)",
+      "03. Mzee Yusuph - Classical Taarab Medley",
+      "04. Malika - Vidonge Vyao"
+    ]
+  }
+]

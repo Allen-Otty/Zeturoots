@@ -1,0 +1,98 @@
+[
+  {
+    "id": "pl_nairobi_night",
+    "title": "Nairobi Night Drives",
+    "curator": "ZetuRoots Editorial 🇰🇪",
+    "cover": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=600&fit=crop",
+    "desc": "Mellow Arbantone, late-night Shrap, and soulful 254 basslines for cruising the Expressway and Southern Bypass.",
+    "genre": "Arbantone & Shrap",
+    "county": "Nairobi City",
+    "followers": 38400,
+    "likes": 5920,
+    "trackIds": [1, 2, 3, 5, 8]
+  },
+  {
+    "id": "pl_drill_invasion",
+    "title": "254 Drill & Shrap Invasion",
+    "curator": "Eastlands Bass Kings",
+    "cover": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop",
+    "desc": "Aggressive sliding 808s, raw Sheng lyricism, and the heaviest drill bangers from Kayole, Umoja, and Machakos.",
+    "genre": "Kenyan Drill",
+    "county": "Nairobi City",
+    "followers": 52100,
+    "likes": 8410,
+    "trackIds": [1, 3, 6, 8]
+  },
+  {
+    "id": "pl_genge_legends",
+    "title": "Gengetone & Arbantone Kings",
+    "curator": "Black Market Africa",
+    "cover": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
+    "desc": "The youth movement that redefined Kenyan sound. Fast-paced party tracks and infectious singalong hooks.",
+    "genre": "Gengetone",
+    "county": "Nakuru",
+    "followers": 67300,
+    "likes": 11200,
+    "trackIds": [2, 3, 4, 7]
+  },
+  {
+    "id": "pl_ohangla_nights",
+    "title": "Ohangla Royale: Lakeside Anthems",
+    "curator": "Kisumu Dala Beats",
+    "cover": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=600&fit=crop",
+    "desc": "Live orutu strings, heavy nyatiti, and electric basslines from Nyanza's premier Ohangla maestros.",
+    "genre": "Ohangla",
+    "county": "Kisumu",
+    "followers": 41800,
+    "likes": 6740,
+    "trackIds": [4, 7]
+  },
+  {
+    "id": "pl_mugithi_fame",
+    "title": "Mugithi Bar & Club Anthems",
+    "curator": "Mt. Kenya Acoustic Club",
+    "cover": "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=600&h=600&fit=crop",
+    "desc": "One-man guitar riffs, high-tempo acoustic Kikuyu folk bangers, and barroom classics from Central Kenya.",
+    "genre": "Mugithi",
+    "county": "Kiambu",
+    "followers": 33900,
+    "likes": 4820,
+    "trackIds": [2, 5]
+  },
+  {
+    "id": "pl_taarab_pwani",
+    "title": "Pwani Taarab & Coast Breeze",
+    "curator": "Mombasa Old Town Collective",
+    "cover": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=600&fit=crop",
+    "desc": "Rich Swahili poetry, coastal violins, and melodic Taarab love serenades from Mombasa, Lamu, and Malindi.",
+    "genre": "Taarab",
+    "county": "Mombasa",
+    "followers": 29600,
+    "likes": 3950,
+    "trackIds": [5, 8]
+  },
+  {
+    "id": "pl_matatu_bangers",
+    "title": "Route 125 & 58 Matatu Bangers",
+    "curator": "DJ Lyta & Matatu Sound System",
+    "cover": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=600&fit=crop",
+    "desc": "The raw energy vibrating inside Nganya buses across Rongai, Buruburu, and Thika Road.",
+    "genre": "Matatu Street Mix",
+    "county": "Nairobi City",
+    "followers": 74500,
+    "likes": 13900,
+    "trackIds": [1, 2, 4, 6]
+  },
+  {
+    "id": "pl_afrofusion_roots",
+    "title": "Kenya Folk & Afro-Fusion Roots",
+    "curator": "KECOBO Cultural Heritage",
+    "cover": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=600&h=600&fit=crop",
+    "desc": "Timeless acoustic compositions, traditional Kenyan instruments, and multi-vocal harmonies across all 47 counties.",
+    "genre": "Afro-Fusion",
+    "county": "Machakos",
+    "followers": 31200,
+    "likes": 4530,
+    "trackIds": [2, 6, 7]
+  }
+]

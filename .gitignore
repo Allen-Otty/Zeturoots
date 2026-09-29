@@ -1,0 +1,8 @@
+# runtime / private data (never commit)
+data/users.json
+data/ad_stats.json
+data/mpesa_transactions.json
+data/tickets.json
+data/reactions.json
+.env
+node_modules/

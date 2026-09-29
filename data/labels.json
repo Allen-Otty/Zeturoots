@@ -1,0 +1,57 @@
+[
+  {
+    "id": "label_kaka",
+    "name": "Kaka Empire Management",
+    "founder": "King Kaka (Kennedy Ombima)",
+    "city": "Nairobi",
+    "county": "Nairobi City",
+    "foundedYear": 2012,
+    "logo": "https://images.unsplash.com/photo-1598387993441-a364f854cfac?w=300&h=300&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200&h=400&fit=crop",
+    "bio": "One of East Africa's powerhouse talent management agencies and record labels, championing Kenyan street poetry, hip-hop, and mainstream hits.",
+    "totalStreams": 48200000,
+    "signedArtists": [
+      { "id": "usr_artist_1", "name": "Boutross Munene", "role": "Shrap & Gengetone Lead", "tracksCount": 12 },
+      { "id": "usr_artist_nadia", "name": "Nadia Mukami", "role": "Pop & Afro-Fusion Queen", "tracksCount": 18 },
+      { "id": "usr_artist_femi", "name": "Femi One", "role": "Hip Hop & Sheng Maestro", "tracksCount": 14 }
+    ],
+    "verified": true,
+    "kecoboReg": "CPR/2021/77881"
+  },
+  {
+    "id": "label_sol",
+    "name": "Sol Generation Records",
+    "founder": "Sauti Sol",
+    "city": "Nairobi",
+    "county": "Nairobi City",
+    "foundedYear": 2019,
+    "logo": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1200&h=400&fit=crop",
+    "bio": "Grammy-recognized, multi-award-winning record label producing iconic African soulful records, world tour performances, and songwriting camps.",
+    "totalStreams": 92500000,
+    "signedArtists": [
+      { "id": "usr_artist_nviiri", "name": "Nviiri The Storyteller", "role": "Acoustic Soul", "tracksCount": 22 },
+      { "id": "usr_artist_bensoul", "name": "Bensoul", "role": "Afro-Pop & Live Bass", "tracksCount": 24 }
+    ],
+    "verified": true,
+    "kecoboReg": "CPR/2019/33419"
+  },
+  {
+    "id": "label_blackmarket",
+    "name": "Black Market Records Africa",
+    "founder": "Cedric Singleton",
+    "city": "Nairobi",
+    "county": "Nairobi City",
+    "foundedYear": 2018,
+    "logo": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=400&fit=crop",
+    "bio": "The epicenter that birthed the 2019 Gengetone explosion, signing raw street talents from Kayole, Umoja, Rongai, and Nakuru.",
+    "totalStreams": 67400000,
+    "signedArtists": [
+      { "id": "usr_artist_fathermoh", "name": "Fathermoh", "role": "Arbantone & Gengetone Hitmaker", "tracksCount": 16 },
+      { "id": "usr_artist_shekinah", "name": "Ssaru", "role": "Femcee & Street Flow", "tracksCount": 15 }
+    ],
+    "verified": true,
+    "kecoboReg": "CPR/2018/11902"
+  }
+]

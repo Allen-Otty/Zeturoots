@@ -1,0 +1,178 @@
+[
+  {
+    "id": "benga",
+    "name": "Benga",
+    "icon": "album",
+    "color": "from-yellow-600 to-lime-600",
+    "countyOrigin": "Machakos, Kakamega & Siaya",
+    "dialect": "Kikamba, Dholuo & Luhya",
+    "bpmRange": "125 - 140 BPM",
+    "desc": "Kenya's iconic national guitar style characterized by bright, rolling lead guitar riffs, interlocking basslines, and syncopated high-hat rhythms.",
+    "topArtists": ["Kithungo Raha", "Ken wa Maria", "Sukuma Bin Ongaro", "D.O. Misiani"]
+  },
+  {
+    "id": "gengetone",
+    "name": "Gengetone",
+    "icon": "local_fire_department",
+    "color": "from-red-600 to-amber-500",
+    "countyOrigin": "Nairobi City (Eastlands)",
+    "dialect": "Sheng",
+    "bpmRange": "108 - 118 BPM",
+    "desc": "The raw youth movement birthed in 2018 featuring rapid-fire Sheng bars, bouncing 808 kicks, and infectious street anthems.",
+    "topArtists": ["Boutross", "Trio Mio", "Wakadinali", "Fathermoh", "Ssaru"]
+  },
+  {
+    "id": "urbantone",
+    "name": "Urbantone",
+    "icon": "graphic_eq",
+    "color": "from-amber-500 to-yellow-400",
+    "countyOrigin": "Nairobi City & Nakuru",
+    "dialect": "Sheng & Swahili",
+    "bpmRange": "102 - 108 BPM",
+    "desc": "The modern evolution of Kenyan street sound, fusing classic Kapuka/Genge nostalgia with amapiano log drums and laid-back Sheng flows.",
+    "topArtists": ["Sean MMG", "Ybw Smith", "Tipsy G", "Lil Maina"]
+  },
+  {
+    "id": "genge",
+    "name": "Genge",
+    "icon": "mic",
+    "color": "from-rose-600 to-red-500",
+    "countyOrigin": "Nairobi City (California Estate)",
+    "dialect": "Sheng & Swahili",
+    "bpmRange": "95 - 105 BPM",
+    "desc": "The foundational Kenyan hip-hop sound pioneered by Calif Records in early 2000s, telling conversational everyday street stories.",
+    "topArtists": ["Juacali", "Nonini", "Mejja", "Clemo"]
+  },
+  {
+    "id": "kapuka",
+    "name": "Kapuka",
+    "icon": "stadium",
+    "color": "from-pink-600 to-rose-500",
+    "countyOrigin": "Nairobi City",
+    "dialect": "Kiswahili & Sheng",
+    "bpmRange": "100 - 110 BPM",
+    "desc": "The signature Ogopa Deejays boom of the 2000s that dominated East African dancefloors with infectious synthesizer hooks and call-and-response choruses.",
+    "topArtists": ["Nameless", "E-Sir", "Amani", "Big Pin", "Wahu"]
+  },
+  {
+    "id": "afropop",
+    "name": "Afropop",
+    "icon": "celebration",
+    "color": "from-orange-500 to-amber-500",
+    "countyOrigin": "Nairobi City & Coastal Kenya",
+    "dialect": "Kiswahili & English",
+    "bpmRange": "105 - 120 BPM",
+    "desc": "Vibrant, radio-friendly contemporary African pop blending Afrobeat grooves with rich Swahili melodic hooks.",
+    "topArtists": ["Sauti Sol", "Bien", "Nadia Mukami", "Otile Brown"]
+  },
+  {
+    "id": "taarab",
+    "name": "Taarab",
+    "icon": "sailing",
+    "color": "from-cyan-600 to-blue-500",
+    "countyOrigin": "Mombasa, Lamu & Kilifi",
+    "dialect": "Kiswahili Sanifu",
+    "bpmRange": "85 - 98 BPM",
+    "desc": "Centuries-old coastal Swahili musical poetry featuring classical oud, violins, qanun, and heartfelt love and philosophical verses.",
+    "topArtists": ["Nyota wa Pwani", "Malika", "Zanzibar Stars", "Bi Kidude"]
+  },
+  {
+    "id": "afrofusion",
+    "name": "Afrofusion",
+    "icon": "diversity_3",
+    "color": "from-teal-600 to-emerald-400",
+    "countyOrigin": "All 47 Counties",
+    "dialect": "Multilingual & Indigenous",
+    "bpmRange": "95 - 115 BPM",
+    "desc": "Sophisticated blend of indigenous Kenyan folk rhythms with contemporary jazz, neo-soul, funk, and acoustic vocal arrangements.",
+    "topArtists": ["Eric Wainaina", "Ayub Ogada", "Suzanna Owiyo", "Nikita Kering'"]
+  },
+  {
+    "id": "swahili_pop",
+    "name": "Swahili pop",
+    "icon": "waves",
+    "color": "from-blue-600 to-cyan-500",
+    "countyOrigin": "Mombasa, Malindi & Lamu",
+    "dialect": "Kiswahili",
+    "bpmRange": "98 - 112 BPM",
+    "desc": "Smooth coastal R&B and Bongo-adjacent melodies celebrating romance, coastal warmth, and Swahili poetic elegance.",
+    "topArtists": ["Otile Brown", "Masauti", "Ali B", "Susumila"]
+  },
+  {
+    "id": "hip_hop",
+    "name": "Hip hop",
+    "icon": "headphones",
+    "color": "from-purple-700 to-indigo-600",
+    "countyOrigin": "Nairobi City, Nakuru & Eldoret",
+    "dialect": "Sheng & English",
+    "bpmRange": "88 - 98 BPM",
+    "desc": "Hard-hitting lyrical storytelling, classic boom-bap, and trap beats chronicling urban realities and political consciousness.",
+    "topArtists": ["Wakadinali", "Khaligraph Jones", "Octopizzo", "King Kaka", "Kalamashaka"]
+  },
+  {
+    "id": "reggae_dancehall",
+    "name": "Reggae/dancehall",
+    "icon": "sports_kabaddi",
+    "color": "from-green-600 to-yellow-500",
+    "countyOrigin": "Nairobi (Umoja, Dagoretti) & Mombasa",
+    "dialect": "Sheng & Patois Blend",
+    "bpmRange": "90 - 130 BPM",
+    "desc": "Deep roots reggae and vibrant dancehall deeply entrenched in Kenyan matatu sound system culture and youth expression.",
+    "topArtists": ["Wyre", "Redsan", "Nazizi", "Gravitti Band"]
+  },
+  {
+    "id": "benga_fusion",
+    "name": "Benga fusion",
+    "icon": "queue_music",
+    "color": "from-amber-600 to-orange-500",
+    "countyOrigin": "Machakos, Kisumu & Nyeri",
+    "dialect": "Kamba, Luo, Gikuyu & Sheng",
+    "bpmRange": "120 - 135 BPM",
+    "desc": "Innovative fusion of traditional Benga lead guitar fingerpicking with modern electronic synths, trap hi-hats, and pop vocals.",
+    "topArtists": ["Kithungo Raha", "Ken wa Maria", "Dan Aceda", "Mugithi Guys"]
+  },
+  {
+    "id": "rhumba",
+    "name": "Rhumba",
+    "icon": "music_video",
+    "color": "from-indigo-600 to-blue-700",
+    "countyOrigin": "Nairobi City & Western Kenya",
+    "dialect": "Lingala, Swahili & Dholuo",
+    "bpmRange": "95 - 110 BPM",
+    "desc": "Sensuous brass arrangements, sebene dance climaxes, and timeless guitar arpeggios that have captivated Kenyan generations.",
+    "topArtists": ["Les Mangelepa", "Them Mushrooms", "Samba Mapangala", "Maroon Commandos"]
+  },
+  {
+    "id": "ohangla",
+    "name": "Ohangla",
+    "icon": "music_note",
+    "color": "from-emerald-600 to-teal-500",
+    "countyOrigin": "Kisumu, Siaya & Homa Bay",
+    "dialect": "Dholuo",
+    "bpmRange": "115 - 130 BPM",
+    "desc": "Hypnotic high-tempo traditional Luo dance music driven by the orutu single-string fiddle, electric bass, and rapid talking drums.",
+    "topArtists": ["Prince Indah", "Achieng Adhiambo", "Emma Jalamo", "Musa Jakadala"]
+  },
+  {
+    "id": "mugithi",
+    "name": "Mugithi",
+    "icon": "guitar",
+    "color": "from-orange-600 to-amber-600",
+    "countyOrigin": "Kiambu, Nyeri & Murang'a",
+    "dialect": "Gikuyu",
+    "bpmRange": "120 - 135 BPM",
+    "desc": "Acoustic one-man guitar folk music, country picking, and communal call-and-response train dance anthems popular across Central Kenya.",
+    "topArtists": ["Samidoh", "Salim Young", "Jose Gatutura", "Kamande wa Kioi"]
+  },
+  {
+    "id": "isikuti",
+    "name": "Isikuti",
+    "icon": "podcasts",
+    "color": "from-lime-600 to-emerald-600",
+    "countyOrigin": "Kakamega, Vihiga & Bungoma",
+    "dialect": "Luhya (Isukha & Idakho)",
+    "bpmRange": "128 - 142 BPM",
+    "desc": "UNESCO-recognized celebratory indigenous dance tradition powered by a set of three resonant Isukuti drums, bells, and communal horn calls.",
+    "topArtists": ["Isukuti All Stars", "Kakamega Cultural Troupes", "Sukuma Bin Ongaro"]
+  }
+]
