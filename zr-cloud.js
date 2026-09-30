@@ -4,6 +4,8 @@
   const SB_KEY = 'sb_publishable_1LzWRTo5JaeYBylcrj2IGw_bK0mVXdv';
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const $ = (id) => document.getElementById(id);
+  const sess = (() => { let k = sessionStorage.getItem('zr_sess'); if (!k) { k = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now()); sessionStorage.setItem('zr_sess', k); } return k; })();
+  let playTimer = null;
   let sb, user = null, queue = [], lib = [], qi = -1, yt = null;
 
   function ytId(u) {
@@ -23,6 +25,7 @@
       <h3 class="font-display font-black text-base text-white mb-1">Add a link</h3>
       <p class="text-xs text-text-muted mb-3">Share music or videos from YouTube. ZetuRoots plays them from the original source.</p>
       <div id="zr-auth"></div>
+      <div id="zr-stats" class="hidden rounded-xl bg-white/5 p-3 mb-3 text-xs text-white"></div>
       <div id="zr-add" class="hidden space-y-2">
         <input id="zr-url" placeholder="Paste a YouTube link" class="w-full rounded-xl bg-black border border-white/10 px-3 py-2 text-sm text-white"/>
         <div class="flex gap-2">
@@ -93,9 +96,31 @@
     const d = document.createElement('div');
     d.id = 'zr-player';
     d.className = 'fixed bottom-16 right-2 left-2 sm:left-auto sm:w-96 z-[80] hidden rounded-2xl bg-black border border-primary-gold/40 p-2 shadow-2xl';
-    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-white truncate"></span><button id="zr-x" class="text-white text-lg leading-none px-2">×</button></div><div id="zr-frame"></div>';
+    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-white truncate"></span><button id="zr-x" class="text-white text-lg leading-none px-2">×</button></div><div id="zr-frame"></div><div id="zr-gifts" class="flex gap-1 pt-2"></div>';
     document.body.appendChild(d);
+    fillGifts();
     $('zr-x').onclick = () => { if (yt && yt.stopVideo) yt.stopVideo(); d.classList.add('hidden'); };
+  }
+
+  async function fillGifts() {
+    const { data } = await sb.from('gifts').select('id,name,coins,icon').order('coins');
+    $('zr-gifts').innerHTML = (data || []).map((g) => `<button data-g="${esc(g.id)}" class="flex-1 rounded-lg bg-white/10 py-1 text-[11px] text-white">${esc(g.icon)}<br>${g.coins}</button>`).join('');
+    $('zr-gifts').querySelectorAll('button').forEach((b) => (b.onclick = async () => {
+      if (!user) return toast('Sign in to send gifts.');
+      const m = queue[qi];
+      const { error } = await sb.rpc('send_gift', { p_gift: b.dataset.g, p_media: m.id });
+      toast(error ? (/not enough/.test(error.message) ? 'Not enough coins yet.' : /cannot gift/.test(error.message) ? 'You can\'t gift your own track.' : error.message) : 'Gift sent 🎁');
+      loadStats();
+    }));
+  }
+  async function loadStats() {
+    const box = $('zr-stats');
+    if (!user) return box.classList.add('hidden');
+    const { data } = await sb.rpc('artist_stats');
+    if (!data) return;
+    box.classList.remove('hidden');
+    box.innerHTML = `<div class="flex justify-between"><span>Coins: <b>${data.balance}</b></span><span>Earned: <b>${data.earned}</b></span><span>Plays: <b>${data.plays}</b></span><span>Gifts: <b>${data.gifts}</b></span></div>` +
+      (data.top.length ? '<div class="mt-2 text-text-muted">Top tracks: ' + data.top.map((x) => esc(x.title) + ' (' + x.plays + ')').join(' · ') + '</div>' : '');
   }
 
   function loadYT(cb) {
@@ -114,7 +139,7 @@
       if (yt && yt.loadVideoById) { yt.loadVideoById(m.provider_id); return; }
       $('zr-frame').innerHTML = '<div id="zr-yt"></div>';
       yt = new YT.Player('zr-yt', { width: '100%', height: h, videoId: m.provider_id, playerVars: { playsinline: 1, autoplay: 1 },
-        events: { onReady: (e) => e.target.playVideo(), onStateChange: (e) => { if (e.data === 0) play((qi + 1) % queue.length); } } });
+        events: { onReady: (e) => e.target.playVideo(), onStateChange: (e) => { clearTimeout(playTimer); if (e.data === 1) { const id = queue[qi] && queue[qi].id; playTimer = setTimeout(() => id && sb.rpc('record_play', { p_media: id, p_session: sess }), 30000); } if (e.data === 0) play((qi + 1) % queue.length); } } });
     });
   }
 
@@ -161,13 +186,13 @@
     $('zr-pl-new').onclick = newPl;
     $('zr-out').onclick = () => sb.auth.signOut();
     sb.from('genres').select('id,name').order('name').then(({ data }) => (data || []).forEach((g) => $('zr-genre').insertAdjacentHTML('beforeend', `<option value="${esc(g.id)}">${esc(g.name)}</option>`)));
-    renderAuth(); loadList(); loadPlaylists();
+    renderAuth(); loadList(); loadPlaylists(); loadStats();
   }
 
   function init() {
     sb = supabase.createClient(SB_URL, SB_KEY);
     sb.auth.getSession().then(({ data }) => { user = data.session ? data.session.user : null; mount(); });
-    sb.auth.onAuthStateChange((_e, s) => { user = s ? s.user : null; if ($('zr-auth')) { renderAuth(); loadPlaylists(); } });
+    sb.auth.onAuthStateChange((_e, s) => { user = s ? s.user : null; if ($('zr-auth')) { renderAuth(); loadPlaylists(); loadStats(); } });
     if (window.app && app.navigate) { const n = app.navigate.bind(app); app.navigate = (v) => { n(v); if (v === 'studio') setTimeout(mount, 0); }; }
   }
 
