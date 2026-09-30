@@ -120,7 +120,14 @@
     if (!data) return;
     box.classList.remove('hidden');
     box.innerHTML = `<div class="flex justify-between"><span>Coins: <b>${data.balance}</b></span><span>Earned: <b>${data.earned}</b></span><span>Plays: <b>${data.plays}</b></span><span>Gifts: <b>${data.gifts}</b></span></div>` +
-      (data.top.length ? '<div class="mt-2 text-text-muted">Top tracks: ' + data.top.map((x) => esc(x.title) + ' (' + x.plays + ')').join(' · ') + '</div>' : '');
+      (data.top.length ? '<div class="mt-2 text-text-muted">Top tracks: ' + data.top.map((x) => esc(x.title) + ' (' + x.plays + ')').join(' · ') + '</div>' : '') +
+      (data.earned >= 1000 ? '<div class="mt-3 flex gap-2"><input id="zr-co-coins" type="number" min="1000" placeholder="Coins (1000+)" class="w-1/3 rounded-lg bg-black border border-white/10 px-2 py-1 text-white"/><input id="zr-co-phone" placeholder="2547XXXXXXXX" class="flex-1 rounded-lg bg-black border border-white/10 px-2 py-1 text-white"/><button id="zr-co-go" class="bg-primary-gold text-black font-bold rounded-full px-3">Cash out</button></div>' : '<div class="mt-2 text-text-muted">Cash-out opens at 1000 earned coins.</div>');
+    const go = $('zr-co-go');
+    if (go) go.onclick = async () => {
+      const { error } = await sb.rpc('request_cashout', { p_coins: +$('zr-co-coins').value, p_phone: $('zr-co-phone').value.trim() });
+      toast(error ? error.message : 'Request sent. We review payouts by hand before paying.');
+      loadStats();
+    };
   }
 
   function loadYT(cb) {
