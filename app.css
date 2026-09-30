@@ -743,3 +743,23 @@ input[type="range"].audio-range::-webkit-slider-thumb:hover {
 /* Brand: metallic gold fills */
 .bg-primary-gold,.bg-primary-container{background-image:linear-gradient(135deg,#F4E08A 0%,#DEB74C 55%,#A67C1E 100%)!important}
 body{background:#000}
+
+/* ── Refined buttons: compact, modern, not chunky ───────────────────── */
+button { -webkit-tap-highlight-color: transparent; transition: transform .12s ease, filter .15s ease, background-color .15s ease, border-color .15s ease; }
+button:active:not(:disabled) { transform: scale(.97); }
+button:focus-visible { outline: 2px solid #DEB74C; outline-offset: 2px; }
+button:disabled { opacity: .5; }
+/* full-width buttons become centred, content-sized actions */
+button.w-full:not(.text-left):not([class*="justify-between"]) { width: fit-content; min-width: 8.5rem; max-width: 100%; margin-inline: auto; padding-inline: 1.25rem; display: flex; justify-content: center; align-items: center; gap: .4rem; }
+/* slimmer vertical padding */
+button.py-3, button.py-3\.5, button.py-4 { padding-block: .5rem; }
+button.py-2\.5 { padding-block: .42rem; }
+button.py-2 { padding-block: .38rem; }
+button.px-4.py-3, button.py-3.px-4 { padding-inline: 1rem; }
+/* big round play buttons */
+button.h-16.w-16 { height: 3rem; width: 3rem; }
+button.h-12.w-12 { height: 2.5rem; width: 2.5rem; }
+/* labels: small, confident, tidy */
+button.text-xs, button.text-sm { font-weight: 600; letter-spacing: .01em; line-height: 1.2; }
+button.bg-primary-gold { box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 4px 14px -6px rgba(222,183,76,.55); }
+button.bg-primary-gold:hover { filter: brightness(1.06); }

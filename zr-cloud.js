@@ -27,20 +27,19 @@
       <div id="zr-auth"></div>
       <div id="zr-stats" class="hidden rounded-xl bg-white/5 p-3 mb-3 text-xs text-white"></div>
       <div id="zr-add" class="hidden space-y-2">
-        <input id="zr-url" placeholder="Paste a YouTube link" class="w-full rounded-xl bg-black border border-white/10 px-3 py-2 text-sm text-white"/>
+        <div class="flex gap-2"><input id="zr-url" placeholder="Paste a YouTube link" class="min-w-0 flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/><button id="zr-save" class="shrink-0 bg-primary-gold text-black font-bold rounded-full px-4 py-1.5 text-xs">Add</button></div>
         <div class="flex gap-2">
-          <select id="zr-genre" class="flex-1 rounded-xl bg-black border border-white/10 px-2 py-2 text-sm text-white"><option value="">Genre</option></select>
-          <select id="zr-type" class="rounded-xl bg-black border border-white/10 px-2 py-2 text-sm text-white"><option value="video">Video</option><option value="audio">Audio</option></select>
+          <select id="zr-genre" class="flex-1 rounded-full bg-black border border-white/10 px-2 py-1.5 text-xs text-white"><option value="">Genre</option></select>
+          <select id="zr-type" class="rounded-full bg-black border border-white/10 px-2 py-1.5 text-xs text-white"><option value="video">Video</option><option value="audio">Audio</option></select>
         </div>
-        <input id="zr-county" placeholder="County (optional)" class="w-full rounded-xl bg-black border border-white/10 px-3 py-2 text-sm text-white"/>
-        <button id="zr-save" class="bg-primary-gold text-black font-bold rounded-full px-5 py-2 text-sm">Add to ZetuRoots</button>
-        <button id="zr-out" class="ml-2 text-xs text-text-muted underline">Sign out</button>
+        <input id="zr-county" placeholder="County (optional)" class="w-full rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/>
+        <div class="flex justify-end"><button id="zr-out" class="text-[11px] text-text-muted hover:text-white">Sign out</button></div>
       </div>
       <h4 class="font-bold text-sm text-white mt-5 mb-2">Linked library</h4>
       <div id="zr-list" class="space-y-2"></div>
       <h4 class="font-bold text-sm text-white mt-5 mb-2">Playlists</h4>
-      <div id="zr-pl-make" class="hidden flex gap-2 mb-2"><input id="zr-pl-name" placeholder="New playlist name" class="flex-1 rounded-xl bg-black border border-white/10 px-3 py-2 text-sm text-white"/><button id="zr-pl-new" class="bg-primary-gold text-black font-bold rounded-full px-4 py-2 text-sm">Create</button></div>
-      <select id="zr-pl-target" class="hidden w-full rounded-xl bg-black border border-white/10 px-2 py-2 text-xs text-white mb-2"></select>
+      <div id="zr-pl-make" class="hidden flex gap-2 mb-2"><input id="zr-pl-name" placeholder="New playlist name" class="flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/><button id="zr-pl-new" class="bg-primary-gold text-black font-bold rounded-full px-3.5 py-1.5 text-xs">Create</button></div>
+      <select id="zr-pl-target" class="hidden w-full rounded-full bg-black border border-white/10 px-2 py-2 text-xs text-white mb-2"></select>
       <div id="zr-pls" class="space-y-2"></div>
     </div>`;
   }
@@ -48,10 +47,10 @@
   function renderAuth() {
     $('zr-add').classList.toggle('hidden', !user);
     $('zr-auth').innerHTML = user ? '' : `<div class="space-y-2">
-      <input id="zr-email" type="email" placeholder="Email" class="w-full rounded-xl bg-black border border-white/10 px-3 py-2 text-sm text-white"/>
-      <input id="zr-pass" type="password" placeholder="Password (6+ characters)" class="w-full rounded-xl bg-black border border-white/10 px-3 py-2 text-sm text-white"/>
-      <button id="zr-in" class="bg-primary-gold text-black font-bold rounded-full px-5 py-2 text-sm">Sign in</button>
-      <button id="zr-up" class="ml-2 text-sm text-white underline">Create account</button></div>`;
+      <input id="zr-email" type="email" placeholder="Email" class="w-full rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/>
+      <input id="zr-pass" type="password" placeholder="Password (6+ characters)" class="w-full rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/>
+      <button id="zr-in" class="bg-primary-gold text-black font-bold rounded-full px-4 py-1.5 text-xs">Sign in</button>
+      <button id="zr-up" class="ml-1 px-2 text-xs text-white/80 hover:text-white">Create account</button></div>`;
     if (!user) {
       const go = async (up) => {
         const cred = { email: $('zr-email').value.trim(), password: $('zr-pass').value };
@@ -96,7 +95,7 @@
     const d = document.createElement('div');
     d.id = 'zr-player';
     d.className = 'fixed bottom-16 right-2 left-2 sm:left-auto sm:w-96 z-[80] hidden rounded-2xl bg-black border border-primary-gold/40 p-2 shadow-2xl';
-    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-white truncate"></span><button id="zr-x" class="text-white text-lg leading-none px-2">×</button></div><div id="zr-frame"></div><div id="zr-gifts" class="flex gap-1 pt-2"></div>';
+    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-white truncate"></span><button id="zr-x" class="text-white text-lg leading-none px-2">×</button></div><div id="zr-frame"></div><div id="zr-gifts" class="flex flex-wrap justify-center gap-1.5 pt-2"></div>';
     document.body.appendChild(d);
     fillGifts();
     $('zr-x').onclick = () => { if (yt && yt.stopVideo) yt.stopVideo(); d.classList.add('hidden'); };
@@ -104,7 +103,7 @@
 
   async function fillGifts() {
     const { data } = await sb.from('gifts').select('id,name,coins,icon').order('coins');
-    $('zr-gifts').innerHTML = (data || []).map((g) => `<button data-g="${esc(g.id)}" class="flex-1 rounded-lg bg-white/10 py-1 text-[11px] text-white">${esc(g.icon)}<br>${g.coins}</button>`).join('');
+    $('zr-gifts').innerHTML = (data || []).map((g) => `<button data-g="${esc(g.id)}" class="rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] leading-tight text-white">${esc(g.icon)}<br>${g.coins}</button>`).join('');
     $('zr-gifts').querySelectorAll('button').forEach((b) => (b.onclick = async () => {
       if (!user) return toast('Sign in to send gifts.');
       const m = queue[qi];
