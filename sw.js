@@ -1,10 +1,11 @@
-// ZetuRoots PWA Service Worker v1.1.0
-const CACHE_NAME = 'zeturoots-v1.1.0';
+// ZetuRoots PWA Service Worker v1.2.0
+const CACHE_NAME = 'zeturoots-v1.2.0';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './app.css',
   './app.js',
+  './zr-cloud.js',
   './manifest.webmanifest',
   './assets/logo.png',
   './icons/icon-192.png',
