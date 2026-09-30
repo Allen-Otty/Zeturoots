@@ -4,7 +4,7 @@
   const SB_KEY = 'sb_publishable_1LzWRTo5JaeYBylcrj2IGw_bK0mVXdv';
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const $ = (id) => document.getElementById(id);
-  let sb, user = null, queue = [], qi = -1, yt = null;
+  let sb, user = null, queue = [], lib = [], qi = -1, yt = null;
 
   function ytId(u) {
     try {
@@ -35,6 +35,10 @@
       </div>
       <h4 class="font-bold text-sm text-white mt-5 mb-2">Linked library</h4>
       <div id="zr-list" class="space-y-2"></div>
+      <h4 class="font-bold text-sm text-white mt-5 mb-2">Playlists</h4>
+      <div id="zr-pl-make" class="hidden flex gap-2 mb-2"><input id="zr-pl-name" placeholder="New playlist name" class="flex-1 rounded-xl bg-black border border-white/10 px-3 py-2 text-sm text-white"/><button id="zr-pl-new" class="bg-primary-gold text-black font-bold rounded-full px-4 py-2 text-sm">Create</button></div>
+      <select id="zr-pl-target" class="hidden w-full rounded-xl bg-black border border-white/10 px-2 py-2 text-xs text-white mb-2"></select>
+      <div id="zr-pls" class="space-y-2"></div>
     </div>`;
   }
 
@@ -60,11 +64,11 @@
   async function loadList() {
     const { data, error } = await sb.from('media_items').select('id,provider_id,title,artist_name,thumbnail_url,media_type').order('created_at', { ascending: false }).limit(30);
     if (error) return ($('zr-list').textContent = 'Could not load library.');
-    queue = data;
+    lib = data;
     $('zr-list').innerHTML = data.length ? data.map((m, i) => `<button data-i="${i}" class="w-full flex items-center gap-3 text-left rounded-xl bg-white/5 p-2">
       <img src="${esc(m.thumbnail_url)}" alt="" class="w-14 h-14 rounded-lg object-cover"/>
-      <span class="min-w-0"><span class="block text-sm text-white truncate">${esc(m.title)}</span><span class="block text-xs text-text-muted truncate">${esc(m.artist_name)} · ${esc(m.media_type)}</span></span></button>`).join('') : '<p class="text-xs text-text-muted">No links yet. Be the first to add one.</p>';
-    $('zr-list').querySelectorAll('button').forEach((b) => (b.onclick = () => play(+b.dataset.i)));
+      <span class="min-w-0"><span class="block text-sm text-white truncate">${esc(m.title)}</span><span class="block text-xs text-text-muted truncate">${esc(m.artist_name)} · ${esc(m.media_type)}</span></span><span data-add="${i}" class="ml-auto px-2 text-lg text-primary-gold">+</span></button>`).join('') : '<p class="text-xs text-text-muted">No links yet. Be the first to add one.</p>';
+    $('zr-list').querySelectorAll('button').forEach((b) => (b.onclick = (e) => (e.target.dataset.add ? addToPl(lib[+e.target.dataset.add].id) : play(+b.dataset.i, lib))));
   }
 
   async function save() {
@@ -100,7 +104,8 @@
     const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s);
   }
 
-  function play(i) {
+  function play(i, list) {
+    if (list) queue = list;
     if (!queue[i]) return;
     qi = i; const m = queue[i]; playerShell();
     $('zr-player').classList.remove('hidden'); $('zr-now').textContent = m.title;
@@ -113,6 +118,38 @@
     });
   }
 
+  async function loadPlaylists() {
+    $('zr-pl-make').classList.toggle('hidden', !user);
+    const { data } = await sb.from('playlists').select('id,title,owner_id,playlist_items(count)').order('created_at', { ascending: false }).limit(20);
+    const all = data || [];
+    $('zr-pls').innerHTML = all.length ? all.map((p) => `<button data-p="${esc(p.id)}" class="w-full text-left rounded-xl bg-white/5 p-3 text-sm text-white">${esc(p.title)} <span class="text-xs text-text-muted">· ${p.playlist_items[0] ? p.playlist_items[0].count : 0} items</span></button>`).join('') : '<p class="text-xs text-text-muted">No playlists yet.</p>';
+    $('zr-pls').querySelectorAll('button').forEach((b) => (b.onclick = () => playPl(b.dataset.p)));
+    const mine = user ? all.filter((p) => p.owner_id === user.id) : [];
+    const sel = $('zr-pl-target');
+    sel.classList.toggle('hidden', !mine.length);
+    sel.innerHTML = '<option value="">Add tracks to…</option>' + mine.map((p) => `<option value="${esc(p.id)}">${esc(p.title)}</option>`).join('');
+  }
+  async function playPl(id) {
+    const { data, error } = await sb.from('playlist_items').select('added_at,media_items(id,provider_id,title,media_type)').eq('playlist_id', id).order('added_at');
+    if (error || !data.length) return toast('This playlist is empty.');
+    play(0, data.map((r) => r.media_items).filter(Boolean));
+  }
+  async function addToPl(mediaId) {
+    if (!user) return toast('Sign in to build playlists.');
+    const pid = $('zr-pl-target').value;
+    if (!pid) return toast('Pick one of your playlists first.');
+    const { error } = await sb.from('playlist_items').insert({ playlist_id: pid, media_id: mediaId });
+    toast(error ? (error.code === '23505' ? 'Already in that playlist.' : error.message) : 'Added to playlist ✅');
+    if (!error) loadPlaylists();
+  }
+  async function newPl() {
+    const title = $('zr-pl-name').value.trim();
+    if (!title) return;
+    const { error } = await sb.from('playlists').insert({ title, owner_id: user.id });
+    if (error) return toast(error.message);
+    $('zr-pl-name').value = ''; loadPlaylists();
+  }
+
   function mount() {
     const v = $('view-studio');
     if (!v || $('zr-link-card')) return;
@@ -121,15 +158,16 @@
     const up = dz && (dz.closest('.surface-card') || dz);
     if (up) up.classList.add('hidden');
     $('zr-save').onclick = save;
+    $('zr-pl-new').onclick = newPl;
     $('zr-out').onclick = () => sb.auth.signOut();
     sb.from('genres').select('id,name').order('name').then(({ data }) => (data || []).forEach((g) => $('zr-genre').insertAdjacentHTML('beforeend', `<option value="${esc(g.id)}">${esc(g.name)}</option>`)));
-    renderAuth(); loadList();
+    renderAuth(); loadList(); loadPlaylists();
   }
 
   function init() {
     sb = supabase.createClient(SB_URL, SB_KEY);
     sb.auth.getSession().then(({ data }) => { user = data.session ? data.session.user : null; mount(); });
-    sb.auth.onAuthStateChange((_e, s) => { user = s ? s.user : null; if ($('zr-auth')) renderAuth(); });
+    sb.auth.onAuthStateChange((_e, s) => { user = s ? s.user : null; if ($('zr-auth')) { renderAuth(); loadPlaylists(); } });
     if (window.app && app.navigate) { const n = app.navigate.bind(app); app.navigate = (v) => { n(v); if (v === 'studio') setTimeout(mount, 0); }; }
   }
 
