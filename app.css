@@ -766,3 +766,18 @@ button.bg-primary-gold:hover { filter: brightness(1.06); }
 
 /* Studio: links only (file upload retired) */
 #view-studio > :not(#studio-role-banner):not(#zr-link-card) { display: none !important; }
+
+/* Static full-width top bar */
+header.sticky.top-0 { position: fixed; top: 0; left: 0; right: 0; width: 100%; padding-top: calc(.5rem + env(safe-area-inset-top, 0px)); }
+body { padding-top: calc(49px + env(safe-area-inset-top, 0px)); }
+
+/* Trending: square, scrollable list; the top bar never moves */
+#home-trending-container { aspect-ratio: 1 / 1; width: 100%; max-width: 560px; overflow-y: auto; overscroll-behavior: contain; padding: .5rem; margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,.08); border-radius: 1.25rem; background: rgba(255,255,255,.02); scrollbar-width: thin; scrollbar-color: #DEB74C transparent; }
+#home-trending-container > * + * { margin-top: .5rem !important; }
+#home-trending-container > div { flex-direction: row !important; }
+#home-trending-container > div > div:first-child { width: 7.5rem !important; flex-shrink: 0; aspect-ratio: 1 / 1 !important; }
+#home-trending-container > div > div:first-child .w-12 { width: 2rem; height: 2rem; }
+#home-trending-container > div > div:first-child .material-symbols-outlined.text-3xl { font-size: 1.25rem; }
+#home-trending-container > div > div:last-child { padding: .6rem !important; min-width: 0; }
+#home-trending-container .border-t { margin-top: .35rem; padding-top: .35rem; }

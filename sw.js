@@ -1,5 +1,5 @@
-// ZetuRoots PWA Service Worker v1.7.0
-const CACHE_NAME = 'zeturoots-v1.7.0';
+// ZetuRoots PWA Service Worker v1.8.0
+const CACHE_NAME = 'zeturoots-v1.8.0';
 const STATIC_ASSETS = [
   './',
   './index.html',
