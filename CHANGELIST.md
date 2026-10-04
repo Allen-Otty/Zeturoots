@@ -20,7 +20,7 @@
 
 ### Money
 - [ ] M-Pesa Daraja: payment prompt, callback, payouts (needs Daraja credentials)
-- [ ] Wallet screens: top-up, gift history, wallet page
+- [x] Wallet page: balance, coin packs, activity, gift history, cash-outs (M-Pesa top-up button waits on Daraja)
 
 ### Running the platform
 - [ ] Admin screen: approve payouts, remove content, handle reports

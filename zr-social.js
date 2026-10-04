@@ -169,7 +169,7 @@
         [...c.childNodes].forEach((n) => { if (n !== ic) n.remove(); }); c.insertAdjacentHTML('beforeend', `<span>${label}</span>`);
         a.insertAdjacentElement('afterend', c);
       });
-      const tn = $('.topnav-btn'); if (tn) { const c = tn.cloneNode(true); c.dataset.topnav = view; c.setAttribute('onclick', `app.navigate('${view}')`); c.title = label; c.querySelector('.material-symbols-outlined').textContent = icon; c.querySelector('span:last-child').textContent = label; c.classList.remove('active'); tn.parentElement.appendChild(c); }
+      const tn = $('.topnav-btn'); if (tn) { const c = tn.cloneNode(true); c.dataset.topnav = view; c.setAttribute('onclick', `app.navigate('${view}')`); c.title = label; c.querySelector('.material-symbols-outlined').textContent = icon; c.querySelector('span:last-child').textContent = label; c.classList.remove('active'); c.classList.add('topnav-icon'); tn.parentElement.appendChild(c); }
     });
   }
   function start() {
