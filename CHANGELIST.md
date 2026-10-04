@@ -7,9 +7,9 @@
 - Compact button styling
 
 ## Requested next
-- [ ] Chat between users
-- [ ] Follow
-- [ ] Subscribe
+- [x] Chat between users (rooms and direct messages; pages built)
+- [x] Follow (page built)
+- [x] Subscribe: free bell alerts and fan clubs (paid joining waits on M-Pesa)
 
 ## Backlog
 ### Old features with no working backend (still call the missing `/api/...` server)

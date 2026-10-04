@@ -185,6 +185,7 @@
     if (!queue[i]) return;
     qi = i; const m = queue[i]; playerShell();
     $('zr-player').classList.remove('hidden'); $('zr-now').textContent = m.title;
+    document.dispatchEvent(new CustomEvent('zr:play', { detail: m }));
     const emb = $('zr-emb'), isYT = m.provider === 'youtube';
     $('zr-yt-wrap').classList.toggle('hidden', !isYT); emb.classList.toggle('hidden', isYT);
     if (!isYT) {
@@ -251,8 +252,10 @@
 
   function init() {
     sb = supabase.createClient(SB_URL, SB_KEY);
+    window.ZR = { sb, user: () => user, toast };
+    document.dispatchEvent(new Event('zr:ready'));
     sb.auth.getSession().then(({ data }) => { user = data.session ? data.session.user : null; mount(); });
-    sb.auth.onAuthStateChange((_e, s) => { user = s ? s.user : null; if ($('zr-auth')) { renderAuth(); loadPlaylists(); loadStats(); } });
+    sb.auth.onAuthStateChange((_e, s) => { user = s ? s.user : null; document.dispatchEvent(new Event('zr:auth')); if ($('zr-auth')) { renderAuth(); loadPlaylists(); loadStats(); } });
     if (window.app && app.navigate) { const n = app.navigate.bind(app); app.navigate = (v) => { n(v); if (v === 'studio') setTimeout(mount, 0); }; }
   }
 
