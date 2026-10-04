@@ -182,22 +182,35 @@
         <div class="flex items-center cursor-pointer select-none" onclick="app.navigate('home')"><img src="assets/logo.png" alt="ZetuRoots" class="h-7 sm:h-8 w-auto"/></div>
       </div>
 
-      <!-- Right: Sleek Compact Action Buttons -->
+      <!-- Center: primary navigation fills the bar -->
+      <nav class="hidden lg:flex flex-1 items-center justify-center min-w-0" aria-label="Primary">
+        <div class="flex w-full max-w-3xl items-center gap-0.5 rounded-xl bg-white/[0.03] border border-white/[0.06] p-0.5">
+          <button data-topnav="home" onclick="app.navigate('home')" class="topnav-btn" title="Home"><span class="material-symbols-outlined">home</span><span class="hidden xl:inline">Home</span></button>
+          <button data-topnav="explore" onclick="app.navigate('explore')" class="topnav-btn" title="Counties"><span class="material-symbols-outlined">public</span><span class="hidden xl:inline">Counties</span></button>
+          <button data-topnav="toppers" onclick="app.navigate('toppers')" class="topnav-btn" title="Top 100"><span class="material-symbols-outlined">leaderboard</span><span class="hidden xl:inline">Top 100</span></button>
+          <button data-topnav="artists" onclick="app.navigate('artists')" class="topnav-btn" title="Artists"><span class="material-symbols-outlined">groups</span><span class="hidden xl:inline">Artists</span></button>
+          <button data-topnav="genres" onclick="app.navigate('genres')" class="topnav-btn" title="Genres"><span class="material-symbols-outlined">category</span><span class="hidden xl:inline">Genres</span></button>
+          <button data-topnav="playlists" onclick="app.navigate('playlists')" class="topnav-btn" title="Playlists"><span class="material-symbols-outlined">library_music</span><span class="hidden xl:inline">Playlists</span></button>
+          <button data-topnav="dj-hub" onclick="app.navigate('dj-hub')" class="topnav-btn" title="Mixtapes"><span class="material-symbols-outlined">album</span><span class="hidden xl:inline">Mixtapes</span></button>
+        </div>
+      </nav>
+
+      <!-- Right: Search + account -->
       <div class="flex items-center gap-1.5 sm:gap-2">
         <!-- Compact Search Pill Button -->
-        <button onclick="app.toggleSearchBar()" class="h-7 px-2.5 sm:px-3 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-primary-gold/40 text-text-muted hover:text-white text-[11px] font-display font-medium flex items-center gap-1 active:scale-95 transition-all shadow-sm">
+        <button onclick="app.toggleSearchBar()" class="h-8 lg:w-44 xl:w-64 justify-start px-2.5 sm:px-3 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-primary-gold/40 text-text-muted hover:text-white text-[11px] font-display font-medium flex items-center gap-1 active:scale-95 transition-all shadow-sm">
           <span class="material-symbols-outlined text-[13px] text-primary-gold">search</span>
-          <span>Search</span>
+          <span class="truncate">Search<span class="hidden lg:inline"> genres, counties, artists…</span></span>
         </button>
 
         <!-- Compact Sign In Pill Button (Guest) -->
-        <button id="header-signin-btn" onclick="app.openLoginModal()" class="h-7 px-2.5 sm:px-3 rounded-full bg-primary-gold/15 hover:bg-primary-gold text-primary-gold hover:text-black border border-primary-gold/40 hover:border-primary-gold text-[11px] font-display font-semibold flex items-center gap-1 active:scale-95 transition-all shadow-sm">
+        <button id="header-signin-btn" onclick="app.openLoginModal()" class="h-8 px-3 sm:px-4 rounded-full bg-primary-gold/15 hover:bg-primary-gold text-primary-gold hover:text-black border border-primary-gold/40 hover:border-primary-gold text-[11px] font-display font-semibold flex items-center gap-1 active:scale-95 transition-all shadow-sm">
           <span class="material-symbols-outlined text-[13px]">login</span>
           <span>Sign in</span>
         </button>
 
         <!-- Compact Authenticated User Badge & Avatar -->
-        <div id="header-user-badge" class="hidden h-7 flex items-center gap-1.5 px-2 rounded-full bg-white/[0.04] border border-primary-gold/40 cursor-pointer hover:border-primary-gold transition-colors" onclick="app.navigate('profile')">
+        <div id="header-user-badge" class="hidden h-8 flex items-center gap-1.5 px-2 rounded-full bg-white/[0.04] border border-primary-gold/40 cursor-pointer hover:border-primary-gold transition-colors" onclick="app.navigate('profile')">
           <div class="w-4 h-4 rounded-full overflow-hidden border border-primary-gold/60">
             <img id="header-user-avatar" src="https://images.unsplash.com/photo-1534308143439-3c0e5d430e77?w=120&h=120&fit=crop" class="w-full h-full object-cover"/>
           </div>
@@ -4678,5 +4691,14 @@
   <!-- App Core Scripts -->
   <script src="app.js"></script>
   <script src="zr-cloud.js"></script>
+  <script>
+    (function () {
+      var a = window.app; if (!a || !a.navigate) return;
+      var go = a.navigate.bind(a);
+      function mark(v) { document.querySelectorAll('[data-topnav]').forEach(function (b) { b.classList.toggle('active', b.dataset.topnav === v); }); }
+      a.navigate = function (v) { var r = go.apply(null, arguments); mark(v); return r; };
+      mark('home');
+    })();
+  </script>
 </body>
 </html>

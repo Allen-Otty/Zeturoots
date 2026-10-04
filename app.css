@@ -781,3 +781,13 @@ body { padding-top: calc(49px + env(safe-area-inset-top, 0px)); }
 #home-trending-container > div > div:first-child .material-symbols-outlined.text-3xl { font-size: 1.25rem; }
 #home-trending-container > div > div:last-child { padding: .6rem !important; min-width: 0; }
 #home-trending-container .border-t { margin-top: .35rem; padding-top: .35rem; }
+
+/* Primary nav: segmented buttons that fill the top bar */
+.topnav-btn { flex: 1; height: 2rem; display: flex; align-items: center; justify-content: center; gap: .35rem; border-radius: .6rem; font-size: 12px; font-weight: 600; color: #BDB8A8; white-space: nowrap; min-width: 0; }
+.topnav-btn .material-symbols-outlined { font-size: 16px; }
+.topnav-btn:hover { color: #fff; background: rgba(255,255,255,.06); }
+.topnav-btn.active { color: #DEB74C; background: rgba(222,183,76,.12); box-shadow: inset 0 -2px 0 #DEB74C; }
+/* County dropdown */
+.zr-select { appearance: none; -webkit-appearance: none; width: 100%; max-width: 20rem; height: 2.5rem; padding: 0 2.25rem 0 1rem; border-radius: 9999px; background: #0D0D0D url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23DEB74C' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 1rem center; border: 1px solid rgba(255,255,255,.12); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; }
+.zr-select:hover, .zr-select:focus { border-color: #DEB74C; outline: none; }
+.zr-select option { background: #0D0D0D; color: #fff; }
