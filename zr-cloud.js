@@ -8,32 +8,78 @@
   let playTimer = null;
   let sb, user = null, queue = [], lib = [], qi = -1, yt = null;
 
-  function ytId(u) {
-    try {
-      const x = new URL(u.trim());
-      if (x.hostname === 'youtu.be') return x.pathname.slice(1, 12);
-      if (!/(^|\.)youtube\.com$/.test(x.hostname)) return null;
-      if (x.searchParams.get('v')) return x.searchParams.get('v');
-      const m = x.pathname.match(/^\/(shorts|embed|live)\/([\w-]{11})/);
-      return m ? m[2] : null;
-    } catch { return null; }
+  const SUPPORTED = 'YouTube, Spotify, SoundCloud, Audiomack, Mixcloud or Vimeo';
+  function parseLink(raw) {
+    let x; try { x = new URL(String(raw).trim()); } catch { return null; }
+    const h = x.hostname.replace(/^(www|m|open|music)\./, ''), p = x.pathname.replace(/\/+$/, '');
+    if (h === 'youtu.be') return p.length > 1 ? { provider: 'youtube', id: p.slice(1, 12) } : null;
+    if (h === 'youtube.com') {
+      const v = x.searchParams.get('v'); if (v) return { provider: 'youtube', id: v.slice(0, 11) };
+      const m = p.match(/^\/(shorts|embed|live)\/([\w-]{11})/); return m ? { provider: 'youtube', id: m[2] } : null;
+    }
+    if (h === 'spotify.com') { const m = p.match(/\/(track|album|playlist|episode|show)\/(\w{22})/); return m ? { provider: 'spotify', id: m[1] + '/' + m[2] } : null; }
+    if (h === 'soundcloud.com') return /^\/[^/]+\/[^/]+/.test(p) ? { provider: 'soundcloud', id: p.slice(1) } : null;
+    if (h === 'audiomack.com') { const m = p.match(/^\/([^/]+)\/(song|album|playlist)\/([^/]+)/); return m ? { provider: 'audiomack', id: m[1] + '/' + m[2] + '/' + m[3] } : null; }
+    if (h === 'mixcloud.com') return /^\/[^/]+\/[^/]+/.test(p) ? { provider: 'mixcloud', id: p } : null;
+    if (h === 'vimeo.com') { const m = p.match(/^\/(\d+)/); return m ? { provider: 'vimeo', id: m[1] } : null; }
+    return null;
+  }
+  const canon = (l) => ({ youtube: 'https://www.youtube.com/watch?v=' + l.id, spotify: 'https://open.spotify.com/' + l.id, soundcloud: 'https://soundcloud.com/' + l.id,
+    audiomack: 'https://audiomack.com/' + l.id, mixcloud: 'https://www.mixcloud.com' + l.id, vimeo: 'https://vimeo.com/' + l.id }[l.provider]);
+  const OEMBED = { youtube: 'https://www.youtube.com/oembed?format=json&url=', spotify: 'https://open.spotify.com/oembed?url=', soundcloud: 'https://soundcloud.com/oembed?format=json&url=',
+    mixcloud: 'https://app.mixcloud.com/oembed/?format=json&url=', vimeo: 'https://vimeo.com/api/oembed.json?url=' };
+  const metaCache = {};
+  async function fetchMeta(l) {
+    const u = canon(l); if (metaCache[u]) return metaCache[u];
+    const out = { title: '', artist: '', thumb: l.provider === 'youtube' ? `https://i.ytimg.com/vi/${l.id}/hqdefault.jpg` : '' };
+    if (OEMBED[l.provider]) {
+      try { const r = await fetch(OEMBED[l.provider] + encodeURIComponent(u)); if (r.ok) { const j = await r.json(); out.title = j.title || ''; out.artist = j.author_name || ''; out.thumb = j.thumbnail_url || out.thumb; } } catch {}
+    }
+    return (metaCache[u] = out);
+  }
+  function embedUrl(m) {
+    switch (m.provider) {
+      case 'spotify': return 'https://open.spotify.com/embed/' + m.provider_id + '?theme=0';
+      case 'soundcloud': return 'https://w.soundcloud.com/player/?auto_play=true&url=' + encodeURIComponent('https://soundcloud.com/' + m.provider_id);
+      case 'audiomack': { const [a, ty, s] = m.provider_id.split('/'); return 'https://audiomack.com/embed/' + ty + '/' + a + '/' + s; }
+      case 'mixcloud': return 'https://www.mixcloud.com/widget/iframe/?autoplay=1&feed=' + encodeURIComponent(m.provider_id + '/');
+      case 'vimeo': return 'https://player.vimeo.com/video/' + m.provider_id + '?autoplay=1';
+    }
+    return 'about:blank';
+  }
+  let urlT;
+  function onUrl() {
+    clearTimeout(urlT);
+    urlT = setTimeout(async () => {
+      const l = parseLink($('zr-url').value);
+      $('zr-hint').textContent = l ? 'Detected: ' + l.provider : $('zr-url').value.trim() ? 'Supported: ' + SUPPORTED : '';
+      if (!l) return;
+      $('zr-type').value = l.provider === 'youtube' || l.provider === 'vimeo' ? 'video' : 'audio';
+      const mt = await fetchMeta(l);
+      if (mt.title) $('zr-title').value = mt.title;
+      if (mt.artist) $('zr-artist').value = mt.artist;
+    }, 450);
   }
   const toast = (m) => (window.app && app.showToast ? app.showToast(m) : alert(m));
 
   function card() {
     return `<div id="zr-link-card" class="surface-card rounded-2xl p-4 mb-4 border border-primary-gold/30">
       <h3 class="font-display font-black text-base text-white mb-1">Add a link</h3>
-      <p class="text-xs text-text-muted mb-3">Share music or videos from YouTube. ZetuRoots plays them from the original source.</p>
+      <p class="text-xs text-text-muted mb-3">Share music, mixes and videos from other platforms. ZetuRoots plays them from the original source.</p>
       <div id="zr-auth"></div>
       <div id="zr-stats" class="hidden rounded-xl bg-white/5 p-3 mb-3 text-xs text-white"></div>
       <div id="zr-add" class="hidden space-y-2">
-        <div class="flex gap-2"><input id="zr-url" placeholder="Paste a YouTube link" class="min-w-0 flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/><button id="zr-save" class="shrink-0 bg-primary-gold text-black font-bold rounded-full px-4 py-1.5 text-xs">Add</button></div>
+        <input id="zr-url" placeholder="Paste a link from ${SUPPORTED}" class="w-full rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/>
+        <p id="zr-hint" class="px-1 text-[11px] text-text-muted"></p>
+        <div class="flex gap-2"><input id="zr-title" placeholder="Title" class="min-w-0 flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/><input id="zr-artist" placeholder="Artist" class="min-w-0 flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/></div>
         <div class="flex gap-2">
-          <select id="zr-genre" class="flex-1 rounded-full bg-black border border-white/10 px-2 py-1.5 text-xs text-white"><option value="">Genre</option></select>
-          <select id="zr-type" class="rounded-full bg-black border border-white/10 px-2 py-1.5 text-xs text-white"><option value="video">Video</option><option value="audio">Audio</option></select>
+          <select id="zr-kind" class="rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"><option value="track">Track</option><option value="mixtape">DJ mixtape</option><option value="episode">Podcast</option></select>
+          <select id="zr-genre" class="min-w-0 flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"><option value="">Genre</option></select>
+          <select id="zr-type" class="rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"><option value="video">Video</option><option value="audio">Audio</option></select>
         </div>
         <input id="zr-county" placeholder="County (optional)" class="w-full rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/>
-        <div class="flex justify-end"><button id="zr-out" class="text-[11px] text-text-muted hover:text-white">Sign out</button></div>
+        <div class="flex items-center justify-between"><button id="zr-out" class="text-[11px] text-text-muted hover:text-white">Sign out</button><button id="zr-save" class="bg-primary-gold text-black font-bold rounded-full px-4 py-1.5 text-xs">Add link</button></div>
+        <p class="px-1 text-[10px] text-text-muted">By adding a link you confirm it is your music or you have permission to share it.</p>
       </div>
       <h4 class="font-bold text-sm text-white mt-5 mb-2">Linked library</h4>
       <div id="zr-list" class="space-y-2"></div>
@@ -64,30 +110,27 @@
   }
 
   async function loadList() {
-    const { data, error } = await sb.from('media_items').select('id,provider_id,title,artist_name,thumbnail_url,media_type').order('created_at', { ascending: false }).limit(30);
+    const { data, error } = await sb.from('media_items').select('id,provider,provider_id,title,artist_name,thumbnail_url,media_type').order('created_at', { ascending: false }).limit(30);
     if (error) return ($('zr-list').textContent = 'Could not load library.');
     lib = data;
     $('zr-list').innerHTML = data.length ? data.map((m, i) => `<button data-i="${i}" class="w-full flex items-center gap-3 text-left rounded-xl bg-white/5 p-2">
-      <img src="${esc(m.thumbnail_url)}" alt="" class="w-14 h-14 rounded-lg object-cover"/>
-      <span class="min-w-0"><span class="block text-sm text-white truncate">${esc(m.title)}</span><span class="block text-xs text-text-muted truncate">${esc(m.artist_name)} · ${esc(m.media_type)}</span></span><span data-add="${i}" class="ml-auto px-2 text-lg text-primary-gold">+</span></button>`).join('') : '<p class="text-xs text-text-muted">No links yet. Be the first to add one.</p>';
+      ${m.thumbnail_url ? `<img src="${esc(m.thumbnail_url)}" alt="" class="w-14 h-14 rounded-lg object-cover"/>` : '<div class="w-14 h-14 rounded-lg bg-white/10"></div>'}
+      <span class="min-w-0"><span class="block text-sm text-white truncate">${esc(m.title)}</span><span class="block text-xs text-text-muted truncate">${esc(m.artist_name)} · ${esc(m.provider)}</span></span><span data-add="${i}" class="ml-auto px-2 text-lg text-primary-gold">+</span></button>`).join('') : '<p class="text-xs text-text-muted">No links yet. Be the first to add one.</p>';
     $('zr-list').querySelectorAll('button').forEach((b) => (b.onclick = (e) => (e.target.dataset.add ? addToPl(lib[+e.target.dataset.add].id) : play(+b.dataset.i, lib))));
   }
 
   async function save() {
-    const url = $('zr-url').value, id = ytId(url);
-    if (!id) return toast('Please paste a valid YouTube link.');
-    let title = 'Untitled', author = '', thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
-    try {
-      const r = await fetch('https://www.youtube.com/oembed?format=json&url=' + encodeURIComponent('https://www.youtube.com/watch?v=' + id));
-      if (r.ok) { const j = await r.json(); title = j.title; author = j.author_name; thumb = j.thumbnail_url || thumb; }
-    } catch {}
+    const l = parseLink($('zr-url').value);
+    if (!l) return toast('Paste a link from ' + SUPPORTED + '.');
+    const meta = await fetchMeta(l);
     const { error } = await sb.from('media_items').insert({
-      provider: 'youtube', provider_id: id, url: 'https://www.youtube.com/watch?v=' + id, media_type: $('zr-type').value,
-      title, artist_name: author, thumbnail_url: thumb, genre_id: $('zr-genre').value || null,
-      county: $('zr-county').value.trim() || null, added_by: user.id,
+      provider: l.provider, provider_id: l.id, url: canon(l), kind: $('zr-kind').value, media_type: $('zr-type').value,
+      title: $('zr-title').value.trim() || meta.title || 'Untitled', artist_name: $('zr-artist').value.trim() || meta.artist || null,
+      thumbnail_url: meta.thumb || null, genre_id: $('zr-genre').value || null, county: $('zr-county').value.trim() || null, added_by: user.id,
     });
     if (error) return toast(error.code === '23505' ? 'That link is already on ZetuRoots.' : error.message);
-    $('zr-url').value = ''; toast('Link added 🎶'); loadList();
+    ['zr-url', 'zr-title', 'zr-artist'].forEach((id) => ($(id).value = '')); $('zr-hint').textContent = '';
+    toast('Link added 🎶'); loadList();
   }
 
   function playerShell() {
@@ -95,10 +138,12 @@
     const d = document.createElement('div');
     d.id = 'zr-player';
     d.className = 'fixed bottom-16 right-2 left-2 sm:left-auto sm:w-96 z-[80] hidden rounded-2xl bg-black border border-primary-gold/40 p-2 shadow-2xl';
-    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-white truncate"></span><button id="zr-x" class="text-white text-lg leading-none px-2">×</button></div><div id="zr-frame"></div><div id="zr-gifts" class="flex flex-wrap justify-center gap-1.5 pt-2"></div>';
+    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-white truncate"></span><span class="flex items-center"><button id="zr-prev" class="text-white px-2">‹</button><button id="zr-next" class="text-white px-2">›</button><button id="zr-x" class="text-white text-lg leading-none px-2">×</button></span></div><div id="zr-frame"><div id="zr-yt-wrap"><div id="zr-yt"></div></div><iframe id="zr-emb" class="hidden w-full rounded-xl" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Player"></iframe></div><div id="zr-gifts" class="flex flex-wrap justify-center gap-1.5 pt-2"></div>';
     document.body.appendChild(d);
     fillGifts();
-    $('zr-x').onclick = () => { if (yt && yt.stopVideo) yt.stopVideo(); d.classList.add('hidden'); };
+    $('zr-x').onclick = () => { if (yt && yt.stopVideo) yt.stopVideo(); $('zr-emb').src = 'about:blank'; d.classList.add('hidden'); };
+    $('zr-prev').onclick = () => play((qi - 1 + queue.length) % queue.length);
+    $('zr-next').onclick = () => play((qi + 1) % queue.length);
   }
 
   async function fillGifts() {
@@ -140,10 +185,18 @@
     if (!queue[i]) return;
     qi = i; const m = queue[i]; playerShell();
     $('zr-player').classList.remove('hidden'); $('zr-now').textContent = m.title;
+    const emb = $('zr-emb'), isYT = m.provider === 'youtube';
+    $('zr-yt-wrap').classList.toggle('hidden', !isYT); emb.classList.toggle('hidden', isYT);
+    if (!isYT) {
+      if (yt && yt.pauseVideo) yt.pauseVideo();
+      emb.style.height = m.provider === 'spotify' ? '152px' : m.provider === 'vimeo' ? '210px' : '166px';
+      emb.src = embedUrl(m);
+      return;
+    }
+    emb.src = 'about:blank';
     const h = m.media_type === 'audio' ? 200 : 210;
     loadYT(() => {
       if (yt && yt.loadVideoById) { yt.loadVideoById(m.provider_id); return; }
-      $('zr-frame').innerHTML = '<div id="zr-yt"></div>';
       yt = new YT.Player('zr-yt', { width: '100%', height: h, videoId: m.provider_id, playerVars: { playsinline: 1, autoplay: 1 },
         events: { onReady: (e) => e.target.playVideo(), onStateChange: (e) => { clearTimeout(playTimer); if (e.data === 1) { const id = queue[qi] && queue[qi].id; playTimer = setTimeout(() => id && sb.rpc('record_play', { p_media: id, p_session: sess }), 30000); } if (e.data === 0) play((qi + 1) % queue.length); } } });
     });
@@ -161,7 +214,7 @@
     sel.innerHTML = '<option value="">Add tracks to…</option>' + mine.map((p) => `<option value="${esc(p.id)}">${esc(p.title)}</option>`).join('');
   }
   async function playPl(id) {
-    const { data, error } = await sb.from('playlist_items').select('added_at,media_items(id,provider_id,title,media_type)').eq('playlist_id', id).order('added_at');
+    const { data, error } = await sb.from('playlist_items').select('added_at,media_items(id,provider,provider_id,title,media_type)').eq('playlist_id', id).order('added_at');
     if (error || !data.length) return toast('This playlist is empty.');
     play(0, data.map((r) => r.media_items).filter(Boolean));
   }
@@ -184,10 +237,11 @@
   function mount() {
     const v = $('view-studio');
     if (!v || $('zr-link-card')) return;
-    v.insertAdjacentHTML('afterbegin', card());
-    const dz = $('studio-audio-dropzone'); // retire file upload: links only
-    const up = dz && (dz.closest('.surface-card') || dz);
-    if (up) up.classList.add('hidden');
+    const banner = $('studio-role-banner');
+    if (banner) banner.insertAdjacentHTML('afterend', card()); else v.insertAdjacentHTML('afterbegin', card());
+    const sub = [...v.querySelectorAll('#studio-role-banner *')].find((e) => !e.children.length && /Direct upload/i.test(e.textContent));
+    if (sub) sub.textContent = 'Share your music from YouTube, Spotify, SoundCloud and more';
+    $('zr-url').addEventListener('input', onUrl);
     $('zr-save').onclick = save;
     $('zr-pl-new').onclick = newPl;
     $('zr-out').onclick = () => sb.auth.signOut();

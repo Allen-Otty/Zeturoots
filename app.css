@@ -763,3 +763,6 @@ button.h-12.w-12 { height: 2.5rem; width: 2.5rem; }
 button.text-xs, button.text-sm { font-weight: 600; letter-spacing: .01em; line-height: 1.2; }
 button.bg-primary-gold { box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 4px 14px -6px rgba(222,183,76,.55); }
 button.bg-primary-gold:hover { filter: brightness(1.06); }
+
+/* Studio: links only (file upload retired) */
+#view-studio > :not(#studio-role-banner):not(#zr-link-card) { display: none !important; }

@@ -31,7 +31,7 @@
 - [ ] Custom player controls and mini-player bar
 - [ ] Search, genre and county filters, trending, likes
 - [ ] Public artist pages with verified badges
-- [ ] More sources: SoundCloud, Audiomack, Mixcloud
+- [x] More sources: Spotify, SoundCloud, Audiomack, Mixcloud, Vimeo (auto-advance to the next item works on YouTube only)
 - [ ] Sleep timer, lock-screen controls (best effort)
 
 ### Getting it to users
