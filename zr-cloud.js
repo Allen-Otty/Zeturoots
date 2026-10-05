@@ -265,7 +265,7 @@
 
   function init() {
     sb = supabase.createClient(SB_URL, SB_KEY);
-    window.ZR = { sb, user: () => user, toast };
+    window.ZR = { sb, user: () => user, toast, play: (i, list) => play(i, list) };
     document.dispatchEvent(new Event('zr:ready'));
     sb.auth.getSession().then(({ data }) => { user = data.session ? data.session.user : null; mount(); });
     sb.auth.onAuthStateChange((_e, s) => { user = s ? s.user : null; document.dispatchEvent(new Event('zr:auth')); if ($('zr-auth')) { renderAuth(); loadPlaylists(); loadStats(); } });

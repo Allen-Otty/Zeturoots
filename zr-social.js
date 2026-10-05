@@ -184,6 +184,7 @@
   }
   function start() {
     Z = window.ZR; sb = Z.sb(); if (!$('#view-home')) return;
+    Z.startDm = startDm;
     pages(); addNav();
     const go = window.app.navigate.bind(window.app);
     window.app.navigate = function (v) { const r = go.apply(null, arguments); if (v === 'chat') renderChat(); if (v === 'following') renderFollowing(); return r; };
