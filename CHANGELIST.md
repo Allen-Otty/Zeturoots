@@ -16,7 +16,8 @@
 - [ ] Events and tickets with QR check-in
 - [ ] Subscriptions and "Go Ad-Free"
 - [ ] Brand ads engine
-- [ ] Reactions, labels, podcasts, mixtapes
+- [x] Browse pages on the database: home trending, Top 100, genres, artists, mixtapes, podcasts, labels
+- [ ] Reactions
 
 ### Money
 - [ ] M-Pesa Daraja: payment prompt, callback, payouts (needs Daraja credentials)
@@ -30,7 +31,7 @@
 
 ### Listening experience
 - [ ] Custom player controls and mini-player bar
-- [ ] Search, genre and county filters, trending, likes
+- [ ] Search, county filters, likes (genre pages and trending done)
 - [ ] Public artist pages with verified badges
 - [x] More sources: Spotify, SoundCloud, Audiomack, Mixcloud, Vimeo (auto-advance to the next item works on YouTube only)
 - [ ] Sleep timer, lock-screen controls (best effort)
