@@ -19,6 +19,14 @@
   const gate = (what) => `<div class="surface-card rounded-2xl p-6 text-center"><p class="text-sm text-white mb-3">Sign in to use ${what}.</p><button data-go="studio" class="${GOLD}">Sign in</button></div>`;
   const tabs = (items, cur, attr) => `<div class="flex gap-1 rounded-full bg-white/5 p-0.5">${items.map(([k, l]) => `<button ${attr}="${k}" class="rounded-full px-3 py-1 text-xs font-semibold ${k === cur ? 'bg-primary-gold text-black' : 'text-text-muted'}">${l}</button>`).join('')}</div>`;
 
+  async function reportIt(type, id, snap) {
+    if (!me()) return toast('Sign in first (Studio page).');
+    const reason = window.prompt('Why are you reporting this? (for example: spam, not theirs, abusive, broken link)');
+    if (!reason || !reason.trim()) return;
+    const { error } = await sb.from('reports').insert({ reporter_id: me().id, target_type: type, target_id: String(id), reason: reason.trim().slice(0, 200), snapshot: snap ? String(snap).slice(0, 1000) : null });
+    toast(error ? error.message : 'Thanks. An admin will review this.');
+  }
+
   // ───────── Chat page ─────────
   async function renderChat() {
     const v = $('#view-chat');
@@ -53,6 +61,7 @@
     T.innerHTML = `<div class="flex items-center justify-between px-4 py-2 border-b border-white/10"><span class="font-bold text-sm text-white truncate">${esc(title)}</span>${type === 'dm' ? '<button id="zc-block" class="text-[11px] text-text-muted hover:text-white">Block</button>' : ''}</div>
       <div id="zc-msgs" class="flex-1 overflow-y-auto p-3 space-y-2"></div>
       <div class="flex gap-2 p-2 border-t border-white/10"><input id="zc-in" maxlength="1000" placeholder="Write a message" class="min-w-0 flex-1 ${IN}"/><button id="zc-send" class="${GOLD}">Send</button></div>`;
+    $('#zc-msgs').onclick = (e) => { const b = e.target.closest('[data-rep]'); if (b) reportIt(S.cur.type === 'room' ? 'message' : 'dm_message', b.dataset.rep, b.dataset.body); };
     const t = type === 'room' ? 'chat_messages' : 'dm_messages', col = type === 'room' ? 'room_id' : 'conversation_id';
     const { data } = await sb.from(t).select('id,sender_id,body').eq(col, id).order('created_at', { ascending: false }).limit(50);
     const rows = (data || []).reverse(); await nm(rows.map((r) => r.sender_id)); rows.forEach(addMsg);
@@ -75,7 +84,7 @@
   function addMsg(m) {
     const box = $('#zc-msgs'); if (!box || box.querySelector(`[data-mid="${m.id}"]`)) return;
     const mine = m.sender_id === me().id;
-    box.insertAdjacentHTML('beforeend', `<div data-mid="${m.id}" class="flex ${mine ? 'justify-end' : ''}"><div class="max-w-[80%] rounded-2xl px-3 py-1.5 text-xs ${mine ? 'bg-primary-gold text-black' : 'bg-white/10 text-white'}">${mine ? '' : `<b class="block text-[10px] text-primary-gold">${esc(names[m.sender_id])}</b>`}${esc(m.body)}</div></div>`);
+    box.insertAdjacentHTML('beforeend', `<div data-mid="${m.id}" class="flex ${mine ? 'justify-end' : ''}"><div class="max-w-[80%] rounded-2xl px-3 py-1.5 text-xs ${mine ? 'bg-primary-gold text-black' : 'bg-white/10 text-white'}">${mine ? '' : `<b class="block text-[10px] text-primary-gold">${esc(names[m.sender_id])}</b>`}${esc(m.body)}${mine ? '' : `<button data-rep="${m.id}" data-body="${esc(m.body)}" class="ml-2 text-[10px] opacity-60" title="Report">⚑</button>`}</div></div>`);
     box.scrollTop = box.scrollHeight;
   }
   async function startDm(other) {
@@ -147,9 +156,10 @@
     if (!data || !data.added_by || (me() && data.added_by === me().id)) return;
     const a = data.added_by, nmx = (data.profiles && data.profiles.display_name) || 'Artist', price = data.profiles && data.profiles.subscription_price_kes;
     let f = null; if (me()) { const r = await sb.from('follows').select('notify').match({ follower_id: me().id, followee_id: a }).maybeSingle(); f = r.data; }
-    bar.innerHTML = `<span class="mr-1 max-w-[7rem] truncate text-text-muted">${esc(nmx)}</span><button data-a="follow" class="${PILL}">${f ? 'Following' : 'Follow'}</button><button data-a="bell" class="${PILL}">${f && f.notify ? '🔔' : '🔕'}</button><button data-a="dm" class="${PILL}">💬</button>${price ? `<button data-a="club" class="${PILL}">Fan club · KES ${price}</button>` : ''}`;
+    bar.innerHTML = `<span class="mr-1 max-w-[7rem] truncate text-text-muted">${esc(nmx)}</span><button data-a="follow" class="${PILL}">${f ? 'Following' : 'Follow'}</button><button data-a="bell" class="${PILL}">${f && f.notify ? '🔔' : '🔕'}</button><button data-a="dm" class="${PILL}">💬</button>${price ? `<button data-a="club" class="${PILL}">Fan club · KES ${price}</button>` : ''}<button data-a="report" class="${PILL}" title="Report this link">⚑</button>`;
     bar.querySelectorAll('[data-a]').forEach((b) => (b.onclick = async () => {
       const k = b.dataset.a;
+      if (k === 'report') return reportIt('media', m.id, m.title);
       if (k === 'dm') return startDm(a);
       if (k === 'club') { if (!me()) return toast('Sign in first (Studio page).'); const { error } = await sb.rpc('start_artist_subscription', { p_artist: a }); return toast(error ? error.message : 'Fan club request created. Payment opens once M-Pesa is connected.'); }
       await setFollow(a, k === 'bell' ? 'bell' : f ? 'unfollow' : 'follow'); artistBar(m);

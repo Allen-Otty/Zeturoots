@@ -5,7 +5,7 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const $ = (id) => document.getElementById(id);
   const sess = (() => { let k = sessionStorage.getItem('zr_sess'); if (!k) { k = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now()); sessionStorage.setItem('zr_sess', k); } return k; })();
-  let playTimer = null;
+  let playTimer = null, userMode = null;
   let sb, user = null, queue = [], lib = [], qi = -1, yt = null;
 
   const SUPPORTED = 'YouTube, Spotify, SoundCloud, Audiomack, Mixcloud or Vimeo';
@@ -138,12 +138,13 @@
     const d = document.createElement('div');
     d.id = 'zr-player';
     d.className = 'fixed bottom-16 right-2 left-2 sm:left-auto sm:w-96 z-[80] hidden rounded-2xl bg-black border border-primary-gold/40 p-2 shadow-2xl';
-    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-white truncate"></span><span class="flex items-center"><button id="zr-prev" class="text-white px-2">‹</button><button id="zr-next" class="text-white px-2">›</button><button id="zr-x" class="text-white text-lg leading-none px-2">×</button></span></div><div id="zr-frame"><div id="zr-yt-wrap"><div id="zr-yt"></div></div><iframe id="zr-emb" class="hidden w-full rounded-xl" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Player"></iframe></div><div id="zr-gifts" class="flex flex-wrap justify-center gap-1.5 pt-2"></div>';
+    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-white truncate"></span><span class="flex items-center"><button id="zr-mode" class="mr-1 rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-white"></button><button id="zr-prev" class="text-white px-2">‹</button><button id="zr-next" class="text-white px-2">›</button><button id="zr-x" class="text-white text-lg leading-none px-2">×</button></span></div><div id="zr-frame"><div id="zr-yt-wrap"><div id="zr-yt"></div></div><iframe id="zr-emb" class="hidden w-full rounded-xl" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Player"></iframe></div><div id="zr-gifts" class="flex flex-wrap justify-center gap-1.5 pt-2"></div>';
     document.body.appendChild(d);
     fillGifts();
     $('zr-x').onclick = () => { if (yt && yt.stopVideo) yt.stopVideo(); $('zr-emb').src = 'about:blank'; d.classList.add('hidden'); };
     $('zr-prev').onclick = () => play((qi - 1 + queue.length) % queue.length);
     $('zr-next').onclick = () => play((qi + 1) % queue.length);
+    $('zr-mode').onclick = () => { const m = queue[qi]; userMode = modeFor(m) === 'video' ? 'audio' : 'video'; applySize(m); };
   }
 
   async function fillGifts() {
@@ -180,12 +181,24 @@
     const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s);
   }
 
+  function modeFor(m) { return userMode || (m.media_type === 'audio' ? 'audio' : 'video'); }
+  function applySize(m) {
+    const P = $('zr-player'), mode = modeFor(m), can = m.provider === 'youtube' || m.provider === 'vimeo';
+    P.dataset.mode = can ? mode : 'audio';
+    const b = $('zr-mode'); b.classList.toggle('hidden', !can); b.textContent = mode === 'video' ? '🎧 Audio view' : '🎬 Video view';
+    setTimeout(() => {
+      const w = $('zr-frame').clientWidth || 340, h = mode === 'video' && can ? Math.round(w * 9 / 16) : 200;
+      if (m.provider === 'youtube') { if (yt && yt.setSize) yt.setSize(w, h); } else if (m.provider === 'vimeo') $('zr-emb').style.height = h + 'px';
+    }, 60);
+  }
+
   function play(i, list) {
     if (list) queue = list;
     if (!queue[i]) return;
     qi = i; const m = queue[i]; playerShell();
     $('zr-player').classList.remove('hidden'); $('zr-now').textContent = m.title;
     document.dispatchEvent(new CustomEvent('zr:play', { detail: m }));
+    applySize(m);
     const emb = $('zr-emb'), isYT = m.provider === 'youtube';
     $('zr-yt-wrap').classList.toggle('hidden', !isYT); emb.classList.toggle('hidden', isYT);
     if (!isYT) {
@@ -195,11 +208,11 @@
       return;
     }
     emb.src = 'about:blank';
-    const h = m.media_type === 'audio' ? 200 : 210;
+    const h = modeFor(m) === 'video' ? 210 : 200;
     loadYT(() => {
       if (yt && yt.loadVideoById) { yt.loadVideoById(m.provider_id); return; }
       yt = new YT.Player('zr-yt', { width: '100%', height: h, videoId: m.provider_id, playerVars: { playsinline: 1, autoplay: 1 },
-        events: { onReady: (e) => e.target.playVideo(), onStateChange: (e) => { clearTimeout(playTimer); if (e.data === 1) { const id = queue[qi] && queue[qi].id; playTimer = setTimeout(() => id && sb.rpc('record_play', { p_media: id, p_session: sess }), 30000); } if (e.data === 0) play((qi + 1) % queue.length); } } });
+        events: { onReady: (e) => { e.target.playVideo(); applySize(queue[qi]); }, onStateChange: (e) => { clearTimeout(playTimer); if (e.data === 1) { const id = queue[qi] && queue[qi].id; playTimer = setTimeout(() => id && sb.rpc('record_play', { p_media: id, p_session: sess }), 30000); } if (e.data === 0) play((qi + 1) % queue.length); } } });
     });
   }
 

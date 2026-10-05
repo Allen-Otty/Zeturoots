@@ -23,8 +23,9 @@
 - [x] Wallet page: balance, coin packs, activity, gift history, cash-outs (M-Pesa top-up button waits on Daraja)
 
 ### Running the platform
-- [ ] Admin screen: approve payouts, remove content, handle reports
-- [ ] Moderation: report-a-link button, takedowns, dead-link detection
+- [x] Admin page: overview, payouts, reports (admin accounts only)
+- [x] Report buttons on links and chat messages
+- [ ] Dead-link detection
 - [ ] Legal: terms, privacy policy, copyright takedown process, virtual-coin review, data protection registration
 
 ### Listening experience

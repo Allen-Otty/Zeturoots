@@ -796,3 +796,6 @@ body { padding-top: calc(49px + env(safe-area-inset-top, 0px)); }
 .topnav-icon { flex: 0 0 2.25rem; }
 .topnav-icon span:last-child { display: none !important; }
 nav[aria-label="Primary"] > div { max-width: 56rem; }
+
+/* Player: compact audio view, roomy video view (YouTube needs a visible player of at least 200x200) */
+@media (min-width: 640px) { #zr-player { width: 24rem; } #zr-player[data-mode="video"] { width: 36rem; } #zr-player[data-mode="audio"] { width: 20rem; } }
