@@ -743,3 +743,59 @@ input[type="range"].audio-range::-webkit-slider-thumb:hover {
 /* Brand: metallic gold fills */
 .bg-primary-gold,.bg-primary-container{background-image:linear-gradient(135deg,#F4E08A 0%,#DEB74C 55%,#A67C1E 100%)!important}
 body{background:#000}
+
+/* ── Refined buttons: compact, modern, not chunky ───────────────────── */
+button { -webkit-tap-highlight-color: transparent; transition: transform .12s ease, filter .15s ease, background-color .15s ease, border-color .15s ease; }
+button:active:not(:disabled) { transform: scale(.97); }
+button:focus-visible { outline: 2px solid #DEB74C; outline-offset: 2px; }
+button:disabled { opacity: .5; }
+/* full-width buttons become centred, content-sized actions */
+button.w-full:not(.text-left):not([class*="justify-between"]) { width: fit-content; min-width: 8.5rem; max-width: 100%; margin-inline: auto; padding-inline: 1.25rem; display: flex; justify-content: center; align-items: center; gap: .4rem; }
+/* slimmer vertical padding */
+button.py-3, button.py-3\.5, button.py-4 { padding-block: .5rem; }
+button.py-2\.5 { padding-block: .42rem; }
+button.py-2 { padding-block: .38rem; }
+button.px-4.py-3, button.py-3.px-4 { padding-inline: 1rem; }
+/* big round play buttons */
+button.h-16.w-16 { height: 3rem; width: 3rem; }
+button.h-12.w-12 { height: 2.5rem; width: 2.5rem; }
+/* labels: small, confident, tidy */
+button.text-xs, button.text-sm { font-weight: 600; letter-spacing: .01em; line-height: 1.2; }
+button.bg-primary-gold { box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 4px 14px -6px rgba(222,183,76,.55); }
+button.bg-primary-gold:hover { filter: brightness(1.06); }
+
+/* Studio: links only (file upload retired) */
+#view-studio > :not(#studio-role-banner):not(#zr-link-card) { display: none !important; }
+
+/* Static full-width top bar */
+header.sticky.top-0 { position: fixed; top: 0; left: 0; right: 0; width: 100%; padding-top: calc(.5rem + env(safe-area-inset-top, 0px)); }
+body { padding-top: calc(49px + env(safe-area-inset-top, 0px)); }
+
+/* Trending: square, scrollable list; the top bar never moves */
+#home-trending-container { aspect-ratio: 1 / 1; width: 100%; max-width: 560px; overflow-y: auto; overscroll-behavior: contain; padding: .5rem; margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,.08); border-radius: 1.25rem; background: rgba(255,255,255,.02); scrollbar-width: thin; scrollbar-color: #DEB74C transparent; }
+#home-trending-container > * + * { margin-top: .5rem !important; }
+#home-trending-container > div { flex-direction: row !important; }
+#home-trending-container > div > div:first-child { width: 7.5rem !important; flex-shrink: 0; aspect-ratio: 1 / 1 !important; }
+#home-trending-container > div > div:first-child .w-12 { width: 2rem; height: 2rem; }
+#home-trending-container > div > div:first-child .material-symbols-outlined.text-3xl { font-size: 1.25rem; }
+#home-trending-container > div > div:last-child { padding: .6rem !important; min-width: 0; }
+#home-trending-container .border-t { margin-top: .35rem; padding-top: .35rem; }
+
+/* Primary nav: segmented buttons that fill the top bar */
+.topnav-btn { flex: 1; height: 2rem; display: flex; align-items: center; justify-content: center; gap: .35rem; border-radius: .6rem; font-size: 12px; font-weight: 600; color: #BDB8A8; white-space: nowrap; min-width: 0; }
+.topnav-btn .material-symbols-outlined { font-size: 16px; }
+.topnav-btn:hover { color: #fff; background: rgba(255,255,255,.06); }
+.topnav-btn.active { color: #DEB74C; background: rgba(222,183,76,.12); box-shadow: inset 0 -2px 0 #DEB74C; }
+/* County dropdown */
+.zr-select { appearance: none; -webkit-appearance: none; width: 100%; max-width: 20rem; height: 2.5rem; padding: 0 2.25rem 0 1rem; border-radius: 9999px; background: #0D0D0D url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23DEB74C' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 1rem center; border: 1px solid rgba(255,255,255,.12); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; }
+.zr-select:hover, .zr-select:focus { border-color: #DEB74C; outline: none; }
+.zr-select option { background: #0D0D0D; color: #fff; }
+
+/* New pages: icon-only buttons at the end of the top nav */
+.topnav-icon { flex: 0 0 2.25rem; }
+.topnav-icon span:last-child { display: none !important; }
+nav[aria-label="Primary"] > div { max-width: 56rem; }
+
+/* Player: compact audio view, roomy video view (YouTube needs a visible player of at least 200x200) */
+@media (min-width: 640px) { #zr-player { width: 24rem; } #zr-player[data-mode="video"] { width: 36rem; } #zr-player[data-mode="audio"] { width: 20rem; } }

@@ -1572,14 +1572,13 @@ class ZetuRootsApp {
     // Render county buttons, dialect chips, genre heatmap
     const countyChipsContainer = document.getElementById('explore-county-chips');
     if (countyChipsContainer) {
-      countyChipsContainer.innerHTML = [
-        "All Counties", "Nairobi City", "Mombasa", "Kisumu", "Nakuru", "Kiambu", "Uasin Gishu", "Machakos", "Kilifi"
-      ].map(c => `
-        <button class="filter-chip ${this.selectedCounty === c || (c === 'All Counties' && this.selectedCounty === 'All') ? 'active' : ''}"
-                onclick="app.selectCounty('${c === 'All Counties' ? 'All' : c}')">
-          ${c}
-        </button>
-      `).join('');
+      const sel = this.selectedCounty || 'All';
+      countyChipsContainer.innerHTML = `
+        <select aria-label="Choose a county" class="zr-select" onchange="app.selectCounty(this.value)">
+          <option value="All" ${sel === 'All' ? 'selected' : ''}>All Counties (47)</option>
+          ${KENYA_COUNTIES.map(c => `<option value="${c}" ${sel === c ? 'selected' : ''}>${c}</option>`).join('')}
+        </select>
+      `;
     }
 
     const genreGrid = document.getElementById('explore-genre-heatmap');
