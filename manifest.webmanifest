@@ -4,8 +4,8 @@
   "description": "Kenya's Premier Mobile-First Music & Culture Streaming Platform",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#F6F2E8",
+  "theme_color": "#F6F2E8",
   "orientation": "portrait-primary",
   "icons": [
     {

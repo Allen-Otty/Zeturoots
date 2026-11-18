@@ -1127,10 +1127,10 @@ class ZetuRootsApp {
     document.querySelectorAll('.desktop-nav-link').forEach(link => {
       if (link.dataset.view === viewName) {
         link.classList.add('bg-surface-card', 'text-primary-gold', 'font-bold');
-        link.classList.remove('text-[#BDB8A8]');
+        link.classList.remove('text-on-surface-variant');
       } else {
         link.classList.remove('bg-surface-card', 'text-primary-gold', 'font-bold');
-        link.classList.add('text-[#BDB8A8]');
+        link.classList.add('text-on-surface-variant');
       }
     });
 
@@ -1307,21 +1307,21 @@ class ZetuRootsApp {
              onclick="app.playTrackById(${t.id})">
           <div class="absolute inset-0">
             <img src="${t.img}" alt="${t.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
           </div>
           
           <div class="relative z-10 p-3 flex justify-between items-start">
             <span class="font-display font-black text-xs px-2 py-0.5 rounded-full ${b.bg}">
               #${t.rank || idx + 1}
             </span>
-            <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-black/60 text-secondary-green border border-secondary-green/30">
+            <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-white/60 text-secondary-green border border-secondary-green/30">
               ${t.plays}
             </span>
           </div>
 
           <div class="relative z-10 p-3">
-            <p class="font-display font-bold text-base text-white truncate leading-tight">${t.artist}</p>
-            <p class="text-xs text-[#A0A0A0] truncate font-mono mt-0.5">${t.title}</p>
+            <p class="font-display font-bold text-base text-ink truncate leading-tight">${t.artist}</p>
+            <p class="text-xs text-text-muted truncate font-mono mt-0.5">${t.title}</p>
             <div class="flex items-center gap-1.5 mt-2">
               <span class="text-[10px] px-2 py-0.5 rounded-full bg-surface-high text-primary-gold border border-primary-gold/30">
                 ${t.county}
@@ -1358,7 +1358,7 @@ class ZetuRootsApp {
       container.innerHTML = `
         <div class="surface-card rounded-2xl p-8 text-center border border-surface-border">
           <span class="material-symbols-outlined text-4xl text-primary-gold/60 mb-2">music_off</span>
-          <p class="font-display font-bold text-base text-white">No tracks match current filters</p>
+          <p class="font-display font-bold text-base text-ink">No tracks match current filters</p>
           <p class="text-xs text-text-muted mt-1">Try switching dialect or genre from the pills above.</p>
           <button onclick="app.filterTrending('hot')" class="mt-3 px-4 py-1.5 rounded-full bg-primary-gold/20 text-primary-gold border border-primary-gold/40 text-xs font-mono font-bold hover:bg-primary-gold hover:text-black transition-colors">
             Reset to Hot 🔥
@@ -1369,7 +1369,7 @@ class ZetuRootsApp {
     }
 
     container.innerHTML = filtered.map((t, idx) => `
-      <div class="surface-card rounded-2xl overflow-hidden flex flex-col sm:flex-row items-stretch group border border-surface-border hover:border-primary-gold/50 transition-all shadow-md hover:shadow-xl hover:shadow-primary-gold/5 bg-[#17140B]">
+      <div class="surface-card rounded-2xl overflow-hidden flex flex-col sm:flex-row items-stretch group border border-surface-border hover:border-primary-gold/50 transition-all shadow-md hover:shadow-xl hover:shadow-primary-gold/5 bg-[#FFFFFF]">
         <!-- 16:9 Thumbnail (Left Column as drawn in sketch) -->
         <div class="relative w-full sm:w-60 md:w-72 shrink-0 aspect-video bg-black overflow-hidden cursor-pointer" onclick="app.playTrackById(${t.id})">
           <img src="${t.img}" alt="${t.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90"/>
@@ -1384,14 +1384,14 @@ class ZetuRootsApp {
 
           <!-- Big Centered Play Button (▷) -->
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="w-12 h-12 rounded-full bg-primary-gold/90 text-surface-card flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+            <div class="w-12 h-12 rounded-full bg-primary-gold/90 text-black flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
               <span class="material-symbols-outlined text-3xl font-bold ml-0.5">play_arrow</span>
             </div>
           </div>
 
           <!-- Bottom Right Duration Badge (▷ 3:45) -->
           <div class="absolute bottom-2.5 right-2.5">
-            <span class="text-xs font-mono font-bold text-white bg-black/80 px-2 py-0.5 rounded-full flex items-center gap-1 border border-white/20">
+            <span class="text-xs font-mono font-bold text-ink bg-black/80 px-2 py-0.5 rounded-full flex items-center gap-1 border border-ink/15">
               <span class="material-symbols-outlined text-xs text-primary-gold">play_circle</span>
               <span>${t.duration}</span>
             </span>
@@ -1405,11 +1405,11 @@ class ZetuRootsApp {
               <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-surface-high text-primary-gold border border-primary-gold/30">
                 ${t.county}
               </span>
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-surface-high text-[#A0A0A0]">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-surface-high text-text-muted">
                 ${t.genre} • ${t.dialect}
               </span>
             </div>
-            <h3 class="font-display font-black text-base sm:text-lg text-white group-hover:text-primary-gold transition-colors line-clamp-1 leading-snug">${t.title}</h3>
+            <h3 class="font-display font-black text-base sm:text-lg text-ink group-hover:text-primary-gold transition-colors line-clamp-1 leading-snug">${t.title}</h3>
             <p class="text-xs text-text-muted mt-1 flex items-center gap-1">
               <span>${t.artist}</span>
               <span class="material-symbols-outlined text-xs text-secondary-green" title="Verified Kenyan Artist">verified</span>
@@ -1431,7 +1431,7 @@ class ZetuRootsApp {
               <button class="p-2 rounded-lg hover:bg-surface-card text-text-muted hover:text-primary-gold active:scale-90 transition-all" onclick="event.stopPropagation(); app.shareTrack(${t.id})" title="Share Track">
                 <span class="material-symbols-outlined text-lg">share</span>
               </button>
-              <button class="px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500 hover:text-black text-emerald-400 text-xs font-bold font-mono transition-all flex items-center gap-1 active:scale-95" onclick="event.stopPropagation(); app.openArtistTipModal('${t.artist}')" title="Tip with Lipa na M-Pesa">
+              <button class="px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500 hover:text-black text-emerald-600 text-xs font-bold font-mono transition-all flex items-center gap-1 active:scale-95" onclick="event.stopPropagation(); app.openArtistTipModal('${t.artist}')" title="Tip with Lipa na M-Pesa">
                 <span class="material-symbols-outlined text-sm">payments</span>
                 <span>Tip</span>
               </button>
@@ -1459,7 +1459,7 @@ class ZetuRootsApp {
             <img src="${p2.img}" class="w-16 h-16 rounded-full object-cover border-2 border-silver shadow-lg"/>
             <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full badge-silver font-bold text-xs flex items-center justify-center">2</span>
           </div>
-          <p class="font-display font-bold text-xs text-white text-center truncate w-full">${p2.artist}</p>
+          <p class="font-display font-bold text-xs text-ink text-center truncate w-full">${p2.artist}</p>
           <span class="text-[10px] text-silver font-mono">${p2.plays || '1.8M'}</span>
           <div class="w-full h-20 bg-surface-card border-t-2 border-silver rounded-t-lg mt-2 flex items-center justify-center">
             <span class="text-xs font-mono text-silver">SILVER</span>
@@ -1477,9 +1477,9 @@ class ZetuRootsApp {
           </div>
           <p class="font-display font-bold text-sm text-primary-gold text-center truncate w-full">${p1.artist}</p>
           <span class="text-[11px] text-secondary-green font-mono">${p1.plays || '2.8M'}</span>
-          <div class="w-full h-28 bg-[#141414] border-t-4 border-primary-gold rounded-t-lg mt-2 flex flex-col items-center justify-center glow-gold">
+          <div class="w-full h-28 bg-surface-container border-t-4 border-primary-gold rounded-t-lg mt-2 flex flex-col items-center justify-center glow-gold">
             <span class="text-xs font-black text-primary-gold">#1 TOPPER</span>
-            <span class="text-[9px] text-[#A0A0A0]">${p1.county || 'Nairobi City'}</span>
+            <span class="text-[9px] text-text-muted">${p1.county || 'Nairobi City'}</span>
           </div>
         </div>
 
@@ -1489,7 +1489,7 @@ class ZetuRootsApp {
             <img src="${p3.img}" class="w-16 h-16 rounded-full object-cover border-2 border-bronze shadow-lg"/>
             <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full badge-bronze font-bold text-xs flex items-center justify-center">3</span>
           </div>
-          <p class="font-display font-bold text-xs text-white text-center truncate w-full">${p3.artist}</p>
+          <p class="font-display font-bold text-xs text-ink text-center truncate w-full">${p3.artist}</p>
           <span class="text-[10px] text-bronze font-mono">${p3.plays || '1.4M'}</span>
           <div class="w-full h-16 bg-surface-card border-t-2 border-bronze rounded-t-lg mt-2 flex items-center justify-center">
             <span class="text-xs font-mono text-bronze">BRONZE</span>
@@ -1514,7 +1514,7 @@ class ZetuRootsApp {
           </span>
           <img src="${t.img}" alt="${t.title}" class="w-12 h-12 rounded-lg object-cover"/>
           <div>
-            <h4 class="font-display font-bold text-sm text-white truncate max-w-[160px] md:max-w-xs">${t.title}</h4>
+            <h4 class="font-display font-bold text-sm text-ink truncate max-w-[160px] md:max-w-xs">${t.title}</h4>
             <p class="text-xs text-primary-gold truncate">${t.artist}</p>
             <div class="flex items-center gap-1.5 mt-0.5">
               <span class="text-[10px] font-mono text-secondary-green">${t.county}</span>
@@ -1526,8 +1526,8 @@ class ZetuRootsApp {
 
         <div class="flex items-center gap-3">
           <div class="text-right">
-            <p class="text-xs font-mono font-bold text-white">${t.plays}</p>
-            <span class="text-[10px] font-mono ${(t.delta || '+1').startsWith('+') ? 'text-secondary-green' : t.delta === 'NEW' ? 'text-primary-gold' : 'text-red-400'}">
+            <p class="text-xs font-mono font-bold text-ink">${t.plays}</p>
+            <span class="text-[10px] font-mono ${(t.delta || '+1').startsWith('+') ? 'text-secondary-green' : t.delta === 'NEW' ? 'text-primary-gold' : 'text-red-600'}">
               ${t.delta || '+1'}
             </span>
           </div>
@@ -1587,7 +1587,7 @@ class ZetuRootsApp {
         <div class="surface-card rounded-xl p-3 cursor-pointer hover:border-secondary-green transition-all"
              onclick="app.selectGenre('${g}')">
           <div class="flex justify-between items-center mb-1">
-            <h4 class="font-display font-bold text-sm text-white">${g}</h4>
+            <h4 class="font-display font-bold text-sm text-ink">${g}</h4>
             <span class="text-xs text-secondary-green font-mono">🔥</span>
           </div>
           <p class="text-[11px] text-text-muted">Explore Top 100 & Dialects</p>
@@ -1613,12 +1613,12 @@ class ZetuRootsApp {
       const stat = (this.countiesStats && this.countiesStats[c]) || null;
       const countLabel = stat && stat.tracksCount ? `${stat.tracksCount} tracks` : 'Top 100';
       return `
-      <div class="p-3 rounded-lg bg-surface-card hover:bg-[#141414] hover:border-primary-gold/40 border border-transparent cursor-pointer flex items-center justify-between"
+      <div class="p-3 rounded-lg bg-surface-card hover:bg-surface-container hover:border-primary-gold/40 border border-transparent cursor-pointer flex items-center justify-between"
            onclick="app.selectCounty('${c}'); app.closeCountiesModal();">
         <div class="flex items-center gap-3">
           <span class="text-xs font-mono text-text-dim w-6">#${i + 1}</span>
           <div>
-            <span class="font-display text-sm font-semibold text-white block">${c}</span>
+            <span class="font-display text-sm font-semibold text-ink block">${c}</span>
             ${stat && stat.topGenres && stat.topGenres.length ? `<span class="text-[10px] text-text-muted">${stat.topGenres.slice(0, 2).join(' • ')}</span>` : ''}
           </div>
         </div>
@@ -1635,20 +1635,20 @@ class ZetuRootsApp {
     container.innerHTML = this.events.map(ev => `
       <div class="surface-card rounded-xl overflow-hidden h-full flex flex-col justify-between">
         <div>
-          <div class="relative w-full h-48 bg-black">
+          <div class="relative w-full h-48 bg-white/70">
             <img src="${ev.img}" alt="${ev.title}" class="w-full h-full object-cover opacity-80"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent"></div>
-            <span class="absolute top-3 left-3 bg-primary-gold text-surface-card font-bold text-xs px-2.5 py-1 rounded-full">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+            <span class="absolute top-3 left-3 bg-primary-gold text-black font-bold text-xs px-2.5 py-1 rounded-full">
               ${ev.county}
             </span>
-            <span class="absolute bottom-3 right-3 text-xs font-mono text-white bg-black/60 px-2 py-0.5 rounded">
+            <span class="absolute bottom-3 right-3 text-xs font-mono text-ink bg-white/60 px-2 py-0.5 rounded">
               KES ${ev.price}
             </span>
           </div>
           <div class="p-4 pb-0">
             <div class="flex items-start justify-between">
               <div>
-                <h3 class="font-display font-bold text-lg text-white">${ev.title}</h3>
+                <h3 class="font-display font-bold text-lg text-ink">${ev.title}</h3>
                 <p class="text-xs text-primary-gold mt-0.5">${ev.venue}, ${ev.city}</p>
               </div>
               <span class="text-xs font-mono text-secondary-green">${ev.date}</span>
@@ -1657,12 +1657,12 @@ class ZetuRootsApp {
           </div>
         </div>
         <div class="p-4 pt-4 flex gap-2">
-          <button class="flex-1 py-2.5 rounded-lg bg-primary-gold text-surface-card font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-transform"
+          <button class="flex-1 py-2.5 rounded-lg bg-primary-gold text-black font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-transform"
                   onclick="app.openTicketPurchaseModal(${ev.id})">
             <span class="material-symbols-outlined text-base">confirmation_number</span>
             Buy Ticket with M-Pesa
           </button>
-          <button class="px-3 rounded-lg border border-surface-border text-white hover:bg-surface-high"
+          <button class="px-3 rounded-lg border border-surface-border text-ink hover:bg-surface-high"
                   onclick="app.showToast('Event added to your calendar!')">
             <span class="material-symbols-outlined text-base">calendar_add_on</span>
           </button>
@@ -1753,7 +1753,7 @@ class ZetuRootsApp {
       if (roleIcon) roleIcon.textContent = 'graphic_eq';
       if (roleTitle) roleTitle.textContent = 'ZR Creator Studio';
       if (roleBadge) {
-        roleBadge.className = 'bg-surface-card border border-white/20 text-text-muted px-2 py-0.5 rounded-full text-[10px] font-bold uppercase';
+        roleBadge.className = 'bg-surface-card border border-ink/15 text-text-muted px-2 py-0.5 rounded-full text-[10px] font-bold uppercase';
         roleBadge.textContent = '🎧 Fan';
       }
       if (roleSubtitle) roleSubtitle.textContent = 'Switch to Artist or DJ to publish tracks on official charts';
@@ -1803,7 +1803,7 @@ class ZetuRootsApp {
     countyBars.innerHTML = data.map(d => `
       <div class="mb-3">
         <div class="flex justify-between text-xs font-mono mb-1">
-          <span class="text-white">${d.county}</span>
+          <span class="text-ink">${d.county}</span>
           <span class="text-secondary-green">${d.listeners} (${d.pct}%)</span>
         </div>
         <div class="w-full h-2 bg-surface-high rounded-full overflow-hidden">
@@ -1819,20 +1819,20 @@ class ZetuRootsApp {
 
     container.innerHTML = this.reactions.map(r => `
       <div class="surface-card rounded-xl p-3.5 flex items-start gap-3 h-full">
-        <div class="w-10 h-10 rounded-full bg-[#141414] border border-primary-gold/40 flex items-center justify-center font-display font-bold text-primary-gold shrink-0">
+        <div class="w-10 h-10 rounded-full bg-surface-container border border-primary-gold/40 flex items-center justify-center font-display font-bold text-primary-gold shrink-0">
           ${r.author.charAt(0)}
         </div>
         <div class="flex-1 flex flex-col justify-between h-full">
           <div>
             <div class="flex items-center justify-between">
-              <h4 class="font-display font-bold text-xs text-white">@${r.author}</h4>
+              <h4 class="font-display font-bold text-xs text-ink">@${r.author}</h4>
               <span class="text-[10px] font-mono text-text-dim">${r.time}</span>
             </div>
             <span class="text-[10px] font-mono text-primary-gold">${r.county}</span>
-            <p class="text-xs text-[#BDB8A8] mt-1.5 leading-relaxed">${r.text}</p>
+            <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">${r.text}</p>
           </div>
           <div class="flex items-center gap-4 mt-3 text-text-dim text-[11px]">
-            <button class="flex items-center gap-1 hover:text-red-400" onclick="app.likeReaction(${r.id})">
+            <button class="flex items-center gap-1 hover:text-red-600" onclick="app.likeReaction(${r.id})">
               <span class="material-symbols-outlined text-sm">favorite</span> ${r.likes}
             </button>
             <button class="hover:text-primary-gold" onclick="app.showToast('Reply feature coming in next drop!')">Reply</button>
@@ -1967,21 +1967,21 @@ class ZetuRootsApp {
       if (user.role === 'artist') {
         roleActions.innerHTML = `
           <div class="grid grid-cols-2 gap-2 mb-3">
-            <button class="p-3 bg-[#141414] border border-primary-gold/40 rounded-xl text-left hover:border-primary-gold active:scale-95 transition-all" onclick="app.navigate('studio')">
+            <button class="p-3 bg-surface-container border border-primary-gold/40 rounded-xl text-left hover:border-primary-gold active:scale-95 transition-all" onclick="app.navigate('studio')">
               <span class="material-symbols-outlined text-primary-gold text-xl">upload</span>
-              <p class="font-bold text-xs text-white mt-1">Upload New Track</p>
+              <p class="font-bold text-xs text-ink mt-1">Upload New Track</p>
               <span class="text-[10px] text-text-muted">Direct to 47 Counties</span>
             </button>
-            <button class="p-3 bg-[#141414] border border-primary-gold/40 rounded-xl text-left hover:border-primary-gold active:scale-95 transition-all" onclick="app.navigate('analytics')">
+            <button class="p-3 bg-surface-container border border-primary-gold/40 rounded-xl text-left hover:border-primary-gold active:scale-95 transition-all" onclick="app.navigate('analytics')">
               <span class="material-symbols-outlined text-secondary-green text-xl">insights</span>
-              <p class="font-bold text-xs text-white mt-1">Artist Analytics</p>
+              <p class="font-bold text-xs text-ink mt-1">Artist Analytics</p>
               <span class="text-[10px] text-text-muted">Plays & KES Revenue</span>
             </button>
           </div>
           <div class="p-3 bg-surface rounded-xl border border-surface-border flex items-center justify-between">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary-gold">verified_user</span>
-              <span class="text-xs text-white">KECOBO ISRC: <b class="font-mono text-secondary-green">${user.kecoboReg || 'Registered'}</b></span>
+              <span class="text-xs text-ink">KECOBO ISRC: <b class="font-mono text-secondary-green">${user.kecoboReg || 'Registered'}</b></span>
             </div>
             <button class="text-xs text-primary-gold underline" onclick="app.navigate('copyright')">View Claims</button>
           </div>
@@ -1989,14 +1989,14 @@ class ZetuRootsApp {
       } else if (user.role === 'dj') {
         roleActions.innerHTML = `
           <div class="grid grid-cols-2 gap-2 mb-3">
-            <button class="p-3 bg-[#141414] border border-cyan-400/40 rounded-xl text-left hover:border-cyan-400 active:scale-95 transition-all" onclick="app.navigate('studio')">
-              <span class="material-symbols-outlined text-cyan-400 text-xl">album</span>
-              <p class="font-bold text-xs text-white mt-1">Upload Mixtape</p>
+            <button class="p-3 bg-surface-container border border-cyan-400/40 rounded-xl text-left hover:border-cyan-400 active:scale-95 transition-all" onclick="app.navigate('studio')">
+              <span class="material-symbols-outlined text-cyan-600 text-xl">album</span>
+              <p class="font-bold text-xs text-ink mt-1">Upload Mixtape</p>
               <span class="text-[10px] text-text-muted">Street Mixes & Sets</span>
             </button>
-            <button class="p-3 bg-[#141414] border border-cyan-400/40 rounded-xl text-left hover:border-cyan-400 active:scale-95 transition-all" onclick="app.navigate('analytics')">
+            <button class="p-3 bg-surface-container border border-cyan-400/40 rounded-xl text-left hover:border-cyan-400 active:scale-95 transition-all" onclick="app.navigate('analytics')">
               <span class="material-symbols-outlined text-secondary-green text-xl">headphones</span>
-              <p class="font-bold text-xs text-white mt-1">DJ Plays & Reach</p>
+              <p class="font-bold text-xs text-ink mt-1">DJ Plays & Reach</p>
               <span class="text-[10px] text-text-muted">Club & Party Stats</span>
             </button>
           </div>
@@ -2004,14 +2004,14 @@ class ZetuRootsApp {
       } else if (user.role === 'organizer') {
         roleActions.innerHTML = `
           <div class="grid grid-cols-2 gap-2 mb-3">
-            <button class="p-3 bg-[#141414] border border-purple-400/40 rounded-xl text-left hover:border-purple-400 active:scale-95 transition-all" onclick="app.navigate('events')">
-              <span class="material-symbols-outlined text-purple-400 text-xl">add_circle</span>
-              <p class="font-bold text-xs text-white mt-1">Create Live Event</p>
+            <button class="p-3 bg-surface-container border border-purple-400/40 rounded-xl text-left hover:border-purple-400 active:scale-95 transition-all" onclick="app.navigate('events')">
+              <span class="material-symbols-outlined text-purple-600 text-xl">add_circle</span>
+              <p class="font-bold text-xs text-ink mt-1">Create Live Event</p>
               <span class="text-[10px] text-text-muted">Concerts & Festivals</span>
             </button>
-            <button class="p-3 bg-[#141414] border border-purple-400/40 rounded-xl text-left hover:border-purple-400 active:scale-95 transition-all" onclick="app.openMpesaModal('Event Revenue Withdrawal', 5000)">
+            <button class="p-3 bg-surface-container border border-purple-400/40 rounded-xl text-left hover:border-purple-400 active:scale-95 transition-all" onclick="app.openMpesaModal('Event Revenue Withdrawal', 5000)">
               <span class="material-symbols-outlined text-secondary-green text-xl">payments</span>
-              <p class="font-bold text-xs text-white mt-1">M-Pesa Ticket Payouts</p>
+              <p class="font-bold text-xs text-ink mt-1">M-Pesa Ticket Payouts</p>
               <span class="text-[10px] text-text-muted">Instant Daraja Payout</span>
             </button>
           </div>
@@ -2019,14 +2019,14 @@ class ZetuRootsApp {
       } else if (user.role === 'label') {
         roleActions.innerHTML = `
           <div class="grid grid-cols-2 gap-2 mb-3">
-            <button class="p-3 bg-[#141414] border border-amber-400/40 rounded-xl text-left hover:border-amber-400 active:scale-95 transition-all" onclick="app.navigate('studio')">
-              <span class="material-symbols-outlined text-amber-400 text-xl">groups</span>
-              <p class="font-bold text-xs text-white mt-1">Manage Roster</p>
+            <button class="p-3 bg-surface-container border border-amber-400/40 rounded-xl text-left hover:border-amber-400 active:scale-95 transition-all" onclick="app.navigate('studio')">
+              <span class="material-symbols-outlined text-amber-600 text-xl">groups</span>
+              <p class="font-bold text-xs text-ink mt-1">Manage Roster</p>
               <span class="text-[10px] text-text-muted">Artist Contracts & Catalog</span>
             </button>
-            <button class="p-3 bg-[#141414] border border-amber-400/40 rounded-xl text-left hover:border-amber-400 active:scale-95 transition-all" onclick="app.navigate('copyright')">
+            <button class="p-3 bg-surface-container border border-amber-400/40 rounded-xl text-left hover:border-amber-400 active:scale-95 transition-all" onclick="app.navigate('copyright')">
               <span class="material-symbols-outlined text-primary-gold text-xl">policy</span>
-              <p class="font-bold text-xs text-white mt-1">Licensing & Rights</p>
+              <p class="font-bold text-xs text-ink mt-1">Licensing & Rights</p>
               <span class="text-[10px] text-text-muted">KECOBO Registrations</span>
             </button>
           </div>
@@ -2036,7 +2036,7 @@ class ZetuRootsApp {
           <div class="p-3 bg-surface rounded-xl border border-surface-border flex items-center justify-between mb-3">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-secondary-green">favorite</span>
-              <span class="text-xs text-white">Fan Supporter of Kenyan Grassroots Sound</span>
+              <span class="text-xs text-ink">Fan Supporter of Kenyan Grassroots Sound</span>
             </div>
             <button class="text-xs font-bold text-primary-gold hover:underline" onclick="app.navigate('toppers')">Browse Top 100</button>
           </div>
@@ -2336,7 +2336,7 @@ class ZetuRootsApp {
       bar.style.width = '8%';
       bar.className = 'h-full bg-red-500 transition-all';
       label.textContent = 'Too Short';
-      label.className = 'text-red-400 font-bold';
+      label.className = 'text-red-600 font-bold';
       return;
     }
 
@@ -2351,17 +2351,17 @@ class ZetuRootsApp {
       bar.style.width = '20%';
       bar.className = 'h-full bg-red-500 transition-all';
       label.textContent = 'Weak';
-      label.className = 'text-red-400 font-bold';
+      label.className = 'text-red-600 font-bold';
     } else if (score === 2) {
       bar.style.width = '45%';
       bar.className = 'h-full bg-amber-500 transition-all';
       label.textContent = 'Fair';
-      label.className = 'text-amber-400 font-bold';
+      label.className = 'text-amber-600 font-bold';
     } else if (score === 3 || score === 4) {
       bar.style.width = '75%';
       bar.className = 'h-full bg-blue-400 transition-all';
       label.textContent = 'Good';
-      label.className = 'text-blue-400 font-bold';
+      label.className = 'text-blue-600 font-bold';
     } else {
       bar.style.width = '100%';
       bar.className = 'h-full bg-secondary-green transition-all';
@@ -2940,7 +2940,7 @@ class ZetuRootsApp {
       bar.style.width = '8%';
       bar.className = 'h-full bg-red-500 transition-all duration-300';
       label.textContent = 'Too Short';
-      label.className = 'text-red-400 font-bold';
+      label.className = 'text-red-600 font-bold';
       if (hintLength) hintLength.innerHTML = '⚪ 8+ chars';
       if (hintNumber) hintNumber.innerHTML = '⚪ Numbers';
       if (hintSpecial) hintSpecial.innerHTML = '⚪ Special symbol';
@@ -2974,17 +2974,17 @@ class ZetuRootsApp {
       bar.style.width = '20%';
       bar.className = 'h-full bg-red-500 transition-all duration-300';
       label.textContent = 'Weak';
-      label.className = 'text-red-400 font-bold';
+      label.className = 'text-red-600 font-bold';
     } else if (score === 2) {
       bar.style.width = '45%';
       bar.className = 'h-full bg-amber-500 transition-all duration-300';
       label.textContent = 'Fair';
-      label.className = 'text-amber-400 font-bold';
+      label.className = 'text-amber-600 font-bold';
     } else if (score === 3 || score === 4) {
       bar.style.width = '75%';
       bar.className = 'h-full bg-blue-400 transition-all duration-300';
       label.textContent = 'Good';
-      label.className = 'text-blue-400 font-bold';
+      label.className = 'text-blue-600 font-bold';
     } else {
       bar.style.width = '100%';
       bar.className = 'h-full bg-secondary-green transition-all duration-300';
@@ -3159,7 +3159,7 @@ class ZetuRootsApp {
       bar.style.width = '8%';
       bar.className = 'h-full bg-red-500 transition-all duration-300';
       label.textContent = 'Too Short';
-      label.className = 'text-red-400 font-bold';
+      label.className = 'text-red-600 font-bold';
       if (hintLength) hintLength.innerHTML = '⚪ 8+ chars';
       if (hintNumber) hintNumber.innerHTML = '⚪ Numbers';
       if (hintSpecial) hintSpecial.innerHTML = '⚪ Special symbol';
@@ -3187,17 +3187,17 @@ class ZetuRootsApp {
       bar.style.width = '20%';
       bar.className = 'h-full bg-red-500 transition-all duration-300';
       label.textContent = 'Weak';
-      label.className = 'text-red-400 font-bold';
+      label.className = 'text-red-600 font-bold';
     } else if (score === 2) {
       bar.style.width = '45%';
       bar.className = 'h-full bg-amber-500 transition-all duration-300';
       label.textContent = 'Fair';
-      label.className = 'text-amber-400 font-bold';
+      label.className = 'text-amber-600 font-bold';
     } else if (score === 3 || score === 4) {
       bar.style.width = '75%';
       bar.className = 'h-full bg-blue-400 transition-all duration-300';
       label.textContent = 'Good';
-      label.className = 'text-blue-400 font-bold';
+      label.className = 'text-blue-600 font-bold';
     } else {
       bar.style.width = '100%';
       bar.className = 'h-full bg-secondary-green transition-all duration-300';
@@ -3258,7 +3258,7 @@ class ZetuRootsApp {
     if (!container) return;
 
     container.innerHTML = this.audio.queue.map((t, idx) => `
-      <div class="flex items-center justify-between p-2 rounded-lg ${idx === this.audio.currentIndex ? 'bg-[#141414] border border-primary-gold/40' : 'hover:bg-surface-high'} cursor-pointer"
+      <div class="flex items-center justify-between p-2 rounded-lg ${idx === this.audio.currentIndex ? 'bg-surface-container border border-primary-gold/40' : 'hover:bg-surface-high'} cursor-pointer"
            onclick="app.playTrackById(${t.id})">
         <div class="flex items-center gap-3">
           <span class="text-xs font-mono ${idx === this.audio.currentIndex ? 'text-secondary-green font-bold' : 'text-text-dim'}">
@@ -3266,7 +3266,7 @@ class ZetuRootsApp {
           </span>
           <img src="${t.img}" class="w-10 h-10 rounded object-cover"/>
           <div>
-            <p class="text-xs font-bold text-white truncate max-w-[160px]">${t.title}</p>
+            <p class="text-xs font-bold text-ink truncate max-w-[160px]">${t.title}</p>
             <p class="text-[10px] text-text-muted">${t.artist}</p>
           </div>
         </div>
@@ -3432,7 +3432,7 @@ class ZetuRootsApp {
         trendingContainer.innerHTML = `
           <div class="surface-card rounded-xl p-8 text-center">
             <span class="material-symbols-outlined text-4xl text-text-dim mb-2">search_off</span>
-            <p class="text-sm font-bold text-white">No tracks match "${query}"</p>
+            <p class="text-sm font-bold text-ink">No tracks match "${query}"</p>
             <p class="text-xs text-text-muted mt-1">Try searching another Kenyan county, genre, or artist</p>
           </div>
         `;
@@ -3442,12 +3442,12 @@ class ZetuRootsApp {
             <div class="flex items-center gap-3">
               <img src="${t.img}" class="w-12 h-12 rounded object-cover"/>
               <div>
-                <h4 class="font-bold text-sm text-white">${t.title}</h4>
+                <h4 class="font-bold text-sm text-ink">${t.title}</h4>
                 <p class="text-xs text-primary-gold">${t.artist}</p>
                 <span class="text-[10px] text-secondary-green">${t.county} • ${t.dialect}</span>
               </div>
             </div>
-            <button class="w-9 h-9 rounded-full bg-primary-gold text-surface-card flex items-center justify-center">
+            <button class="w-9 h-9 rounded-full bg-primary-gold text-black flex items-center justify-center">
               <span class="material-symbols-outlined text-xl">play_arrow</span>
             </button>
           </div>
@@ -3578,7 +3578,7 @@ class ZetuRootsApp {
       const btn = document.getElementById(`tier-btn-${t}`);
       if (btn) {
         if (t === tier.toLowerCase()) {
-          btn.className = 'ticket-tier-card active p-2.5 rounded-xl border text-center transition-all bg-[#141414] border-primary-gold';
+          btn.className = 'ticket-tier-card active p-2.5 rounded-xl border text-center transition-all bg-surface-container border-primary-gold';
         } else {
           btn.className = 'ticket-tier-card p-2.5 rounded-xl border text-center transition-all bg-surface-card border-surface-border hover:border-surface-border';
         }
@@ -3826,16 +3826,16 @@ class ZetuRootsApp {
       }
 
       container.innerHTML = tickets.map(t => `
-        <div class="p-3 bg-[#1B170B] border border-primary-gold/40 rounded-xl flex items-center justify-between hover:border-primary-gold transition-colors">
+        <div class="p-3 bg-[#F8EFD5] border border-primary-gold/40 rounded-xl flex items-center justify-between hover:border-primary-gold transition-colors">
           <div class="flex items-center gap-2.5">
-            <div class="w-10 h-10 rounded-lg bg-black/60 border border-primary-gold/40 flex flex-col items-center justify-center font-mono">
+            <div class="w-10 h-10 rounded-lg bg-white/60 border border-primary-gold/40 flex flex-col items-center justify-center font-mono">
               <span class="text-[9px] text-text-dim uppercase">${t.date?.split(' ')[0] || 'DEC'}</span>
               <span class="text-xs font-bold text-primary-gold">${t.date?.split(' ')[1]?.replace(',', '') || '12'}</span>
             </div>
             <div>
               <div class="flex items-center gap-1.5">
-                <h4 class="font-display font-bold text-xs text-white truncate max-w-[160px]">${t.eventTitle}</h4>
-                <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-black text-secondary-green border border-secondary-green/30">${t.ticketType}</span>
+                <h4 class="font-display font-bold text-xs text-ink truncate max-w-[160px]">${t.eventTitle}</h4>
+                <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/70 text-secondary-green border border-secondary-green/30">${t.ticketType}</span>
               </div>
               <p class="text-[10px] text-text-muted mt-0.5 font-mono">${t.venue} • KES ${t.totalAmount}</p>
             </div>
@@ -3877,29 +3877,29 @@ class ZetuRootsApp {
       const res = await this.apiRequest('/api/tickets/validate', 'POST', { ticketRef });
       resultBox.classList.remove('hidden');
       if (res && res.valid) {
-        resultBox.className = 'p-3.5 rounded-xl border border-secondary-green bg-[#16291A] text-center';
+        resultBox.className = 'p-3.5 rounded-xl border border-secondary-green bg-[#E4F3E9] text-center';
         resultBox.innerHTML = `
           <div class="w-8 h-8 rounded-full bg-secondary-green text-black mx-auto flex items-center justify-center font-bold mb-1">✓</div>
           <p class="font-display font-bold text-sm text-secondary-green">PASS VALID: ENTRY GRANTED</p>
-          <p class="text-xs text-white mt-1 font-bold">${res.ticket.attendeeName} (${res.ticket.ticketType})</p>
+          <p class="text-xs text-ink mt-1 font-bold">${res.ticket.attendeeName} (${res.ticket.ticketType})</p>
           <p class="text-[10px] font-mono text-text-muted mt-0.5">${res.ticket.eventTitle} • Ref: ${res.ticket.ticketRef}</p>
         `;
         this.showToast('Ticket validated! Entrance granted.');
       } else {
-        resultBox.className = 'p-3.5 rounded-xl border border-red-500 bg-[#291616] text-center';
+        resultBox.className = 'p-3.5 rounded-xl border border-red-500 bg-[#FBE6E4] text-center';
         resultBox.innerHTML = `
-          <div class="w-8 h-8 rounded-full bg-red-500 text-white mx-auto flex items-center justify-center font-bold mb-1">✕</div>
-          <p class="font-display font-bold text-sm text-red-400">ENTRY DENIED</p>
-          <p class="text-xs text-red-200 mt-1">${res.error || 'Invalid or already used pass.'}</p>
+          <div class="w-8 h-8 rounded-full bg-red-500 text-ink mx-auto flex items-center justify-center font-bold mb-1">✕</div>
+          <p class="font-display font-bold text-sm text-red-600">ENTRY DENIED</p>
+          <p class="text-xs text-red-700 mt-1">${res.error || 'Invalid or already used pass.'}</p>
         `;
       }
     } catch (err) {
       resultBox.classList.remove('hidden');
-      resultBox.className = 'p-3.5 rounded-xl border border-red-500 bg-[#291616] text-center';
+      resultBox.className = 'p-3.5 rounded-xl border border-red-500 bg-[#FBE6E4] text-center';
       resultBox.innerHTML = `
-        <div class="w-8 h-8 rounded-full bg-red-500 text-white mx-auto flex items-center justify-center font-bold mb-1">✕</div>
-        <p class="font-display font-bold text-sm text-red-400">TICKET ALREADY USED OR INVALID</p>
-        <p class="text-xs text-red-200 mt-1">Pass verification failed in ZetuRoots Ledger.</p>
+        <div class="w-8 h-8 rounded-full bg-red-500 text-ink mx-auto flex items-center justify-center font-bold mb-1">✕</div>
+        <p class="font-display font-bold text-sm text-red-600">TICKET ALREADY USED OR INVALID</p>
+        <p class="text-xs text-red-700 mt-1">Pass verification failed in ZetuRoots Ledger.</p>
       `;
     }
   }
@@ -4468,7 +4468,7 @@ class ZetuRootsApp {
     const subsElem = document.getElementById('ad-kpi-subscribers');
 
     if (impElem) impElem.textContent = (stats.totalImpressions || 0).toLocaleString();
-    if (clicksElem) clicksElem.innerHTML = `${stats.totalClicks || 0} <span id="ad-kpi-ctr" class="text-xs text-amber-400 font-normal font-mono">(${stats.ctr || '0%'})</span>`;
+    if (clicksElem) clicksElem.innerHTML = `${stats.totalClicks || 0} <span id="ad-kpi-ctr" class="text-xs text-amber-600 font-normal font-mono">(${stats.ctr || '0%'})</span>`;
     if (adRevElem) adRevElem.textContent = `KES ${(stats.totalAdRevenueKes || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
     if (grossRevElem) grossRevElem.textContent = `KES ${(stats.grossTotalRevenueKes || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
     if (subsElem) subsElem.textContent = `${stats.activeSubscribersCount || 0} VIP Subscribers`;
@@ -4483,12 +4483,12 @@ class ZetuRootsApp {
             <div class="flex items-center gap-2.5 min-w-0">
               <img src="${ad.logo}" class="w-9 h-9 rounded-lg object-cover shrink-0 border border-surface-border"/>
               <div class="min-w-0">
-                <h5 class="font-display font-bold text-xs text-white truncate">${ad.brand}</h5>
+                <h5 class="font-display font-bold text-xs text-ink truncate">${ad.brand}</h5>
                 <span class="text-[9px] font-mono text-text-dim block">${ad.category} • CPM: KES ${ad.cpmKes}</span>
-                <span class="text-[10px] font-mono text-amber-300 font-bold">Earned: KES ${cStats.revenueKes.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+                <span class="text-[10px] font-mono text-amber-700 font-bold">Earned: KES ${cStats.revenueKes.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
               </div>
             </div>
-            <button onclick="app.previewInPlayAd('${ad.id}')" class="px-2 py-1 rounded bg-amber-400/20 text-amber-300 hover:bg-amber-400 hover:text-black font-display text-[10px] font-bold shrink-0 transition-colors">
+            <button onclick="app.previewInPlayAd('${ad.id}')" class="px-2 py-1 rounded bg-amber-400/20 text-amber-700 hover:bg-amber-400 hover:text-black font-display text-[10px] font-bold shrink-0 transition-colors">
               Play Ad
             </button>
           </div>
@@ -4560,7 +4560,7 @@ class ZetuRootsApp {
 
     if (skipBtn) {
       skipBtn.disabled = true;
-      skipBtn.className = 'py-2 px-3.5 rounded-xl bg-black/80 border border-white/30 text-white font-display font-bold text-xs flex items-center gap-1.5 transition-all cursor-not-allowed';
+      skipBtn.className = 'py-2 px-3.5 rounded-xl bg-black/80 border border-ink/20 text-ink font-display font-bold text-xs flex items-center gap-1.5 transition-all cursor-not-allowed';
       skipBtn.innerHTML = `<span>Skip in <span id="inplay-ad-skip-sec">${this.inPlayAdSkipAfter}</span>s</span>`;
     }
     if (countdownText) countdownText.textContent = `Ad ends in 0:${this.inPlayAdDuration < 10 ? '0' : ''}${this.inPlayAdDuration}`;
@@ -4760,8 +4760,8 @@ class ZetuRootsApp {
     const headerBtn = document.getElementById('header-premium-btn');
     if (headerBtn) {
       if (this.isPremium) {
-        headerBtn.innerHTML = '<span class="material-symbols-outlined text-sm font-bold text-amber-400">verified</span> <span class="hidden sm:inline">VIP Member</span>';
-        headerBtn.className = 'font-display font-bold text-xs px-3 py-1.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-sm flex items-center gap-1';
+        headerBtn.innerHTML = '<span class="material-symbols-outlined text-sm font-bold text-amber-600">verified</span> <span class="hidden sm:inline">VIP Member</span>';
+        headerBtn.className = 'font-display font-bold text-xs px-3 py-1.5 rounded-full bg-amber-400/20 text-amber-700 border border-amber-400/40 shadow-sm flex items-center gap-1';
       } else {
         headerBtn.innerHTML = '<span class="material-symbols-outlined text-sm font-bold">stars</span> <span class="hidden sm:inline">Go Ad-Free</span>';
         headerBtn.className = 'font-display font-bold text-xs px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-500 to-yellow-300 text-black shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1';
@@ -4870,7 +4870,7 @@ class ZetuRootsApp {
               <span class="w-6 text-center font-mono font-bold text-xs text-text-dim group-hover:text-primary-gold">${idx + 1}</span>
               <img src="${t.img}" class="w-10 h-10 rounded-lg object-cover shrink-0 border border-surface-border"/>
               <div class="min-w-0">
-                <h4 class="font-display font-bold text-sm text-white truncate group-hover:text-primary-gold">${t.title}</h4>
+                <h4 class="font-display font-bold text-sm text-ink truncate group-hover:text-primary-gold">${t.title}</h4>
                 <div class="flex items-center gap-2 mt-0.5">
                   <span class="text-[10px] font-mono text-secondary-green">${t.plays} plays</span>
                   <span class="text-[10px] font-mono text-text-dim">• ${t.genre || ''}</span>
@@ -4879,7 +4879,7 @@ class ZetuRootsApp {
             </div>
             <div class="flex items-center gap-2 shrink-0">
               <span class="hidden sm:inline font-mono text-xs text-text-dim mr-2">${t.duration}</span>
-              <button class="p-1.5 text-text-muted hover:text-emerald-400 transition-colors" title="Tip Track Artist" onclick="event.stopPropagation(); app.openArtistTipModal('${artist.id || t.artist}')">
+              <button class="p-1.5 text-text-muted hover:text-emerald-600 transition-colors" title="Tip Track Artist" onclick="event.stopPropagation(); app.openArtistTipModal('${artist.id || t.artist}')">
                 <span class="material-symbols-outlined text-base">payments</span>
               </button>
               <button class="p-1.5 text-text-muted hover:text-red-500 transition-colors" title="Like Track" onclick="event.stopPropagation(); app.toggleLikeTrack(${t.id})">
@@ -4915,7 +4915,7 @@ class ZetuRootsApp {
                 <span class="text-[10px] mt-0.5">254</span>
               </div>
               <div>
-                <h4 class="font-display font-bold text-sm text-white">${e.title}</h4>
+                <h4 class="font-display font-bold text-sm text-ink">${e.title}</h4>
                 <p class="text-xs text-text-muted font-mono mt-0.5">📍 ${e.venue}, ${e.city || e.county} • ${e.date}</p>
               </div>
             </div>
@@ -4939,7 +4939,7 @@ class ZetuRootsApp {
             <div class="w-20 h-20 rounded-full mx-auto overflow-hidden border-2 border-primary-gold/40 shadow-lg mb-2 group-hover:scale-105 transition-transform">
               <img src="${f.avatar}" class="w-full h-full object-cover"/>
             </div>
-            <h4 class="font-display font-bold text-xs text-white truncate group-hover:text-primary-gold">${f.name}</h4>
+            <h4 class="font-display font-bold text-xs text-ink truncate group-hover:text-primary-gold">${f.name}</h4>
             <p class="text-[10px] font-mono text-secondary-green truncate mt-0.5">${f.genre}</p>
             <span class="inline-block mt-2 text-[10px] font-mono px-2 py-0.5 rounded-full bg-surface border border-surface-border text-text-dim">Artist</span>
           </div>
@@ -4963,7 +4963,7 @@ class ZetuRootsApp {
             <span class="material-symbols-outlined text-lg">play_arrow</span>
           </button>
         </div>
-        <h4 class="font-display font-bold text-xs text-white truncate group-hover:text-primary-gold">${t.title}</h4>
+        <h4 class="font-display font-bold text-xs text-ink truncate group-hover:text-primary-gold">${t.title}</h4>
         <p class="text-[11px] font-mono text-text-dim truncate mt-0.5">${t.genre || 'Single'} • ${t.plays || '10K'}</p>
       </div>
     `).join('');
@@ -5102,9 +5102,9 @@ class ZetuRootsApp {
 
     document.querySelectorAll('.tip-preset-btn').forEach(btn => {
       if (parseInt(btn.textContent) === amount) {
-        btn.classList.add('border-emerald-400', 'bg-emerald-950/40');
+        btn.classList.add('border-emerald-400', 'bg-emerald-100/80');
       } else {
-        btn.classList.remove('border-emerald-400', 'bg-emerald-950/40');
+        btn.classList.remove('border-emerald-400', 'bg-emerald-100/80');
       }
     });
   }
@@ -5196,10 +5196,10 @@ class ZetuRootsApp {
           <div class="flex items-start gap-3.5 mb-3">
             <img src="${p.cover}" class="w-16 h-16 rounded-xl object-cover shrink-0 border border-amber-400/30 shadow-md"/>
             <div class="min-w-0 flex-1">
-              <span class="text-[9px] font-mono text-amber-300 px-2 py-0.5 rounded-full bg-amber-950/60 border border-amber-400/30 uppercase tracking-wider inline-block mb-1">
+              <span class="text-[9px] font-mono text-amber-700 px-2 py-0.5 rounded-full bg-amber-100/80 border border-amber-400/30 uppercase tracking-wider inline-block mb-1">
                 ${p.category}
               </span>
-              <h3 class="font-display font-bold text-sm text-white group-hover:text-amber-300 truncate">${p.title}</h3>
+              <h3 class="font-display font-bold text-sm text-ink group-hover:text-amber-700 truncate">${p.title}</h3>
               <p class="text-xs text-text-muted font-mono mt-0.5 truncate">🎙️ ${p.hosts}</p>
             </div>
           </div>
@@ -5209,7 +5209,7 @@ class ZetuRootsApp {
         <div class="pt-3 border-t border-surface-border flex items-center justify-between text-xs font-mono">
           <span class="text-secondary-green font-bold">★ ${p.rating} (${p.episodes ? p.episodes.length : 0} Eps)</span>
           <div class="flex items-center gap-2">
-            <button onclick="app.showPodcastEpisodes('${p.id}')" class="px-2.5 py-1.5 rounded-lg bg-surface border border-surface-border hover:border-amber-400 text-[11px] text-white transition-colors">
+            <button onclick="app.showPodcastEpisodes('${p.id}')" class="px-2.5 py-1.5 rounded-lg bg-surface border border-surface-border hover:border-amber-400 text-[11px] text-ink transition-colors">
               Episodes
             </button>
             <button onclick="app.playPodcastFirstEpisode('${p.id}')" class="px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-black font-bold text-[11px] flex items-center gap-1 active:scale-95 transition-transform">
@@ -5253,10 +5253,10 @@ class ZetuRootsApp {
             <div class="p-3 bg-surface rounded-xl border border-surface-border hover:border-amber-400/40 transition-colors flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center gap-2 mb-1">
-                  <span class="text-[10px] font-mono text-amber-300 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-400/30">S${ep.season || 1} E${ep.episodeNumber || 1}</span>
+                  <span class="text-[10px] font-mono text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded border border-amber-400/30">S${ep.season || 1} E${ep.episodeNumber || 1}</span>
                   <span class="text-[10px] font-mono text-text-dim">${ep.date}</span>
                 </div>
-                <h4 class="font-display font-bold text-sm text-white">${ep.title}</h4>
+                <h4 class="font-display font-bold text-sm text-ink">${ep.title}</h4>
                 <p class="text-xs text-text-muted line-clamp-1 mt-0.5">${ep.desc}</p>
                 <div class="flex items-center gap-3 mt-1.5 text-[10px] font-mono text-text-dim">
                   <span>⏱️ ${ep.durationStr}</span>
@@ -5353,15 +5353,15 @@ class ZetuRootsApp {
           <div class="flex items-start gap-4 mb-3">
             <div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-orange-400/30 shadow-md">
               <img src="${m.cover}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
-              <span class="absolute bottom-0 left-0 right-0 bg-black/80 text-[9px] font-mono text-center text-orange-300 font-bold py-0.5">
+              <span class="absolute bottom-0 left-0 right-0 bg-black/80 text-[9px] font-mono text-center text-orange-700 font-bold py-0.5">
                 ${m.bpm} BPM
               </span>
             </div>
             <div class="min-w-0 flex-1">
-              <span class="text-[9px] font-mono text-orange-300 px-2 py-0.5 rounded-full bg-orange-950/60 border border-orange-400/30 uppercase inline-block mb-1">
+              <span class="text-[9px] font-mono text-orange-700 px-2 py-0.5 rounded-full bg-orange-100/80 border border-orange-400/30 uppercase inline-block mb-1">
                 ${m.genre}
               </span>
-              <h3 class="font-display font-bold text-sm text-white group-hover:text-orange-300 leading-tight">${m.title}</h3>
+              <h3 class="font-display font-bold text-sm text-ink group-hover:text-orange-700 leading-tight">${m.title}</h3>
               <p class="text-xs text-primary-gold font-mono mt-0.5">🎛️ ${m.djName}</p>
               <p class="text-[11px] text-text-dim font-mono mt-0.5 truncate">🚌 ${m.route || m.crew}</p>
             </div>
@@ -5454,10 +5454,10 @@ class ZetuRootsApp {
           <div class="flex items-center gap-3.5 mb-3">
             <img src="${l.logo}" class="w-14 h-14 rounded-2xl object-cover shrink-0 border border-blue-400/30 shadow-lg"/>
             <div class="min-w-0 flex-1">
-              <span class="text-[9px] font-mono text-blue-300 px-2 py-0.5 rounded-full bg-blue-950/60 border border-blue-400/30 uppercase inline-block mb-1">
+              <span class="text-[9px] font-mono text-blue-700 px-2 py-0.5 rounded-full bg-blue-100/80 border border-blue-400/30 uppercase inline-block mb-1">
                 Founded ${l.foundedYear}
               </span>
-              <h3 class="font-display font-bold text-base text-white group-hover:text-blue-300 truncate">${l.name}</h3>
+              <h3 class="font-display font-bold text-base text-ink group-hover:text-blue-700 truncate">${l.name}</h3>
               <p class="text-xs text-text-muted font-mono mt-0.5 truncate">👑 ${l.founder}</p>
             </div>
           </div>
@@ -5467,7 +5467,7 @@ class ZetuRootsApp {
             <span class="text-[10px] font-mono uppercase text-secondary-green block mb-1.5 font-bold">Signed Artist Roster:</span>
             <div class="flex flex-wrap gap-1.5">
               ${(l.signedArtists || []).map(a => `
-                <span onclick="event.stopPropagation(); app.openArtistProfile('${a.name}')" class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-surface border border-surface-border hover:border-primary-gold text-white cursor-pointer transition-colors">
+                <span onclick="event.stopPropagation(); app.openArtistProfile('${a.name}')" class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-surface border border-surface-border hover:border-primary-gold text-ink cursor-pointer transition-colors">
                   ${a.name} (${a.tracksCount})
                 </span>
               `).join('')}
@@ -5511,7 +5511,7 @@ class ZetuRootsApp {
                 <div class="flex items-center gap-3">
                   <img src="${t.img}" class="w-10 h-10 rounded-lg object-cover border border-surface-border"/>
                   <div>
-                    <h4 class="font-display font-bold text-xs text-white">${t.title}</h4>
+                    <h4 class="font-display font-bold text-xs text-ink">${t.title}</h4>
                     <p class="text-[11px] text-primary-gold font-mono">${t.artist} • ${t.genre}</p>
                   </div>
                 </div>
@@ -5626,7 +5626,7 @@ class ZetuRootsApp {
           </div>
 
           <div class="flex items-center gap-1.5 mb-1">
-            <h3 class="font-display font-bold text-sm text-white truncate group-hover:text-primary-gold transition-colors">${a.name}</h3>
+            <h3 class="font-display font-bold text-sm text-ink truncate group-hover:text-primary-gold transition-colors">${a.name}</h3>
             ${a.verified ? `<span class="material-symbols-outlined text-primary-gold text-sm" title="Verified Artist">verified</span>` : ''}
           </div>
           <p class="text-[11px] text-text-muted font-mono truncate mb-2">Dialect: ${a.dialect} • KECOBO: ${a.kecoboReg ? 'Registered' : 'Certified'}</p>
@@ -5639,7 +5639,7 @@ class ZetuRootsApp {
             <span>🎵 ${a.tracksCount || 1} Tracks</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
-            <button onclick="app.openArtistProfile('${a.name}')" class="px-2.5 py-1.5 rounded-xl bg-surface border border-surface-border hover:border-primary-gold text-white font-display font-bold text-xs uppercase text-center active:scale-95 transition-all">
+            <button onclick="app.openArtistProfile('${a.name}')" class="px-2.5 py-1.5 rounded-xl bg-surface border border-surface-border hover:border-primary-gold text-ink font-display font-bold text-xs uppercase text-center active:scale-95 transition-all">
               View Profile
             </button>
             <button onclick="app.openArtistTipModal('${a.id}')" class="px-2.5 py-1.5 rounded-xl bg-primary-gold/15 border border-primary-gold/40 text-primary-gold hover:bg-primary-gold hover:text-black font-display font-bold text-xs uppercase flex items-center justify-center gap-1 active:scale-95 transition-all">
@@ -5708,18 +5708,18 @@ class ZetuRootsApp {
       <div class="surface-card rounded-2xl p-5 border border-surface-border hover:border-secondary-green/50 transition-all flex flex-col justify-between group">
         <div>
           <div class="flex items-center justify-between mb-3">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr ${g.color || 'from-secondary-green to-emerald-800'} flex items-center justify-center text-white shadow-md">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr ${g.color || 'from-secondary-green to-emerald-200'} flex items-center justify-center text-ink shadow-md">
               <span class="material-symbols-outlined text-2xl">${g.icon || 'graphic_eq'}</span>
             </div>
             <div class="text-right">
-              <span class="text-[10px] font-mono text-secondary-green px-2 py-0.5 rounded-full bg-[#0B2214] border border-secondary-green/30 font-bold block">
+              <span class="text-[10px] font-mono text-secondary-green px-2 py-0.5 rounded-full bg-[#E4F3E9] border border-secondary-green/30 font-bold block">
                 ${g.bpmRange || 'All Tempos'}
               </span>
               <span class="text-[10px] font-mono text-text-dim mt-0.5 block">📍 ${g.countyOrigin}</span>
             </div>
           </div>
 
-          <h3 class="font-display font-bold text-lg text-white group-hover:text-secondary-green transition-colors">${g.name}</h3>
+          <h3 class="font-display font-bold text-lg text-ink group-hover:text-secondary-green transition-colors">${g.name}</h3>
           <p class="text-xs text-primary-gold font-mono mb-2">Dialect: ${g.dialect}</p>
           <p class="text-xs text-text-dim leading-relaxed line-clamp-3 mb-3">${g.desc}</p>
 
@@ -5727,7 +5727,7 @@ class ZetuRootsApp {
             <span class="text-[10px] font-mono uppercase text-text-muted block mb-1.5 font-bold">Notable Artists:</span>
             <div class="flex flex-wrap gap-1">
               ${(g.topArtists || []).map(art => `
-                <span onclick="event.stopPropagation(); app.openArtistProfile('${art}')" class="text-[11px] font-mono px-2 py-0.5 rounded-lg bg-surface border border-surface-border text-text-muted hover:text-white hover:border-secondary-green cursor-pointer transition-colors">
+                <span onclick="event.stopPropagation(); app.openArtistProfile('${art}')" class="text-[11px] font-mono px-2 py-0.5 rounded-lg bg-surface border border-surface-border text-text-muted hover:text-ink hover:border-secondary-green cursor-pointer transition-colors">
                   ${art}
                 </span>
               `).join('')}
@@ -5740,7 +5740,7 @@ class ZetuRootsApp {
             <span class="material-symbols-outlined text-base">radio</span>
             <span>Radio Station</span>
           </button>
-          <button onclick="app.filterByGenre('${g.name}')" class="px-3 py-2 rounded-xl bg-surface border border-surface-border hover:border-secondary-green text-white font-display font-bold text-xs uppercase active:scale-95 transition-all">
+          <button onclick="app.filterByGenre('${g.name}')" class="px-3 py-2 rounded-xl bg-surface border border-surface-border hover:border-secondary-green text-ink font-display font-bold text-xs uppercase active:scale-95 transition-all">
             Explore
           </button>
         </div>
@@ -5789,19 +5789,19 @@ class ZetuRootsApp {
             <button onclick="event.stopPropagation(); app.playPlaylist('${p.id}')" class="absolute bottom-3 right-3 w-11 h-11 rounded-full bg-primary-gold text-black flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-transform">
               <span class="material-symbols-outlined text-2xl">play_arrow</span>
             </button>
-            <span class="absolute top-2 left-2 text-[10px] font-mono text-amber-300 px-2 py-0.5 rounded-full bg-black/70 border border-amber-400/30">
+            <span class="absolute top-2 left-2 text-[10px] font-mono text-amber-700 px-2 py-0.5 rounded-full bg-black/70 border border-amber-400/30">
               ${p.genre}
             </span>
           </div>
 
-          <h3 class="font-display font-bold text-sm text-white group-hover:text-amber-300 transition-colors truncate">${p.title}</h3>
+          <h3 class="font-display font-bold text-sm text-ink group-hover:text-amber-700 transition-colors truncate">${p.title}</h3>
           <p class="text-xs text-text-muted font-mono mt-0.5 truncate">Curated by ${p.curator}</p>
           <p class="text-xs text-text-dim line-clamp-2 leading-relaxed mt-2 mb-3">${p.desc}</p>
         </div>
 
         <div class="pt-3 border-t border-surface-border flex items-center justify-between text-xs font-mono">
           <span class="text-text-muted">❤️ ${(p.likes || 1000).toLocaleString()} • 🎵 ${p.trackCount || (p.trackIds || []).length} Tracks</span>
-          <button onclick="app.showPlaylistDetails('${p.id}')" class="px-3 py-1.5 rounded-lg bg-surface border border-surface-border hover:border-amber-400 text-white font-bold active:scale-95 transition-colors">
+          <button onclick="app.showPlaylistDetails('${p.id}')" class="px-3 py-1.5 rounded-lg bg-surface border border-surface-border hover:border-amber-400 text-ink font-bold active:scale-95 transition-colors">
             View Tracks
           </button>
         </div>
@@ -5856,7 +5856,7 @@ class ZetuRootsApp {
                   <span class="font-mono text-xs text-text-dim w-5 text-center">${idx + 1}</span>
                   <img src="${t.img}" class="w-10 h-10 rounded-lg object-cover border border-surface-border"/>
                   <div>
-                    <h4 class="font-display font-bold text-xs text-white">${t.title}</h4>
+                    <h4 class="font-display font-bold text-xs text-ink">${t.title}</h4>
                     <p class="text-[11px] text-primary-gold font-mono">${t.artist} • ${t.county}</p>
                   </div>
                 </div>
@@ -5901,7 +5901,7 @@ class ZetuRootsApp {
           <div class="w-16 h-16 rounded-full bg-rose-500/10 text-rose-500 flex items-center justify-center mx-auto mb-4">
             <span class="material-symbols-outlined text-3xl">favorite_border</span>
           </div>
-          <h3 class="font-display font-bold text-base text-white">Your Liked Songs Vault is Empty</h3>
+          <h3 class="font-display font-bold text-base text-ink">Your Liked Songs Vault is Empty</h3>
           <p class="text-xs text-text-muted mt-1 max-w-sm mx-auto">
             Heart any track while listening or exploring 47 counties to add it to your personal cultural collection.
           </p>
@@ -5919,7 +5919,7 @@ class ZetuRootsApp {
           <span class="font-mono text-xs text-text-dim w-5 text-center">${idx + 1}</span>
           <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover border border-surface-border"/>
           <div>
-            <h4 class="font-display font-bold text-sm text-white">${t.title}</h4>
+            <h4 class="font-display font-bold text-sm text-ink">${t.title}</h4>
             <div class="flex items-center gap-2 mt-0.5">
               <span onclick="event.stopPropagation(); app.openArtistProfile('${t.artist}')" class="text-xs text-primary-gold font-mono hover:underline cursor-pointer">
                 ${t.artist}
@@ -5935,7 +5935,7 @@ class ZetuRootsApp {
           <button onclick="event.stopPropagation(); app.toggleLikeTrack(${t.id}); app.renderLikedSongsView();" class="p-2 text-rose-500 hover:scale-110 active:scale-90 transition-transform" title="Unlike Track">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <button class="w-8 h-8 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center hover:bg-rose-500 hover:text-white transition-colors">
+          <button class="w-8 h-8 rounded-full bg-rose-500/20 text-rose-600 flex items-center justify-center hover:bg-rose-500 hover:text-ink transition-colors">
             <span class="material-symbols-outlined text-lg">play_arrow</span>
           </button>
         </div>
@@ -5987,7 +5987,7 @@ class ZetuRootsApp {
       const isCurrent = this.currentGenreStation === g && this.isGenreStationActive;
       const listeners = 1200 + (idx * 387) % 8500;
       return `
-        <div class="p-4 rounded-2xl bg-[#1A160E] border ${isCurrent ? 'border-primary-gold bg-primary-gold/10' : 'border-surface-border'} hover:border-primary-gold/50 transition-all flex flex-col justify-between group">
+        <div class="p-4 rounded-2xl bg-[#FFFFFF] border ${isCurrent ? 'border-primary-gold bg-primary-gold/10' : 'border-surface-border'} hover:border-primary-gold/50 transition-all flex flex-col justify-between group">
           <div>
             <div class="flex items-center justify-between mb-2">
               <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-primary-gold/20 text-primary-gold border border-primary-gold/30">${f}</span>
@@ -5996,10 +5996,10 @@ class ZetuRootsApp {
                 <span>${listeners.toLocaleString()} LIVE</span>
               </span>
             </div>
-            <h4 class="font-display font-bold text-sm text-white group-hover:text-primary-gold transition-colors">${g}</h4>
+            <h4 class="font-display font-bold text-sm text-ink group-hover:text-primary-gold transition-colors">${g}</h4>
             <p class="text-[11px] text-text-muted font-mono mt-0.5">Non-stop Kenyan ${g} streams</p>
           </div>
-          <button onclick="app.tuneGenreRadio('${g}')" class="mt-3 w-full py-2 rounded-xl ${isCurrent ? 'bg-primary-gold text-black font-bold' : 'bg-surface border border-surface-border text-white group-hover:bg-primary-gold group-hover:text-black'} font-display text-xs uppercase flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow">
+          <button onclick="app.tuneGenreRadio('${g}')" class="mt-3 w-full py-2 rounded-xl ${isCurrent ? 'bg-primary-gold text-black font-bold' : 'bg-surface border border-surface-border text-ink group-hover:bg-primary-gold group-hover:text-black'} font-display text-xs uppercase flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow">
             <span class="material-symbols-outlined text-sm">${isCurrent && this.audio.isPlaying ? 'pause' : 'play_arrow'}</span>
             <span>${isCurrent && this.audio.isPlaying ? 'Tuned In' : 'Tune In'}</span>
           </button>
@@ -6050,7 +6050,7 @@ class ZetuRootsApp {
     const ticker = document.getElementById('radio-shouts-ticker');
     if (ticker) {
       const shoutPill = document.createElement('div');
-      shoutPill.className = 'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-gold/15 border border-primary-gold/40 text-xs font-mono text-white shrink-0 animate-fade-in';
+      shoutPill.className = 'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-gold/15 border border-primary-gold/40 text-xs font-mono text-ink shrink-0 animate-fade-in';
       shoutPill.innerHTML = `<span class="material-symbols-outlined text-primary-gold text-sm">chat_bubble</span> <span><strong>You:</strong> ${text}</span>`;
       ticker.prepend(shoutPill);
     }
@@ -6090,18 +6090,18 @@ class ZetuRootsApp {
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4">
           <div class="p-3 rounded-xl bg-surface border border-surface-border">
             <span class="text-[10px] font-mono text-text-muted block">REGULAR PASS</span>
-            <span class="font-display font-bold text-white text-base">KES 1,500</span>
+            <span class="font-display font-bold text-ink text-base">KES 1,500</span>
             <span class="text-[10px] text-secondary-green block mt-1">Available via M-Pesa</span>
           </div>
           <div class="p-3 rounded-xl bg-surface border border-primary-gold/40">
             <span class="text-[10px] font-mono text-primary-gold block">VIP GOLD PASS</span>
-            <span class="font-display font-bold text-white text-base">KES 3,500</span>
+            <span class="font-display font-bold text-ink text-base">KES 3,500</span>
             <span class="text-[10px] text-primary-gold block mt-1">Front Stage Lounge</span>
           </div>
           <div class="p-3 rounded-xl bg-surface border border-purple-400/40">
-            <span class="text-[10px] font-mono text-purple-300 block">VVIP BOOTH (5 TIX)</span>
-            <span class="font-display font-bold text-white text-base">KES 15,000</span>
-            <span class="text-[10px] text-purple-300 block mt-1">Backstage Access</span>
+            <span class="text-[10px] font-mono text-purple-700 block">VVIP BOOTH (5 TIX)</span>
+            <span class="font-display font-bold text-ink text-base">KES 15,000</span>
+            <span class="text-[10px] text-purple-700 block mt-1">Backstage Access</span>
           </div>
         </div>
         <button onclick="app.openTicketPurchaseModal('${ev.id}')" class="w-full py-3 rounded-xl bg-primary-gold hover:bg-yellow-400 text-black font-display font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 active:scale-95 shadow-lg">
@@ -6148,11 +6148,11 @@ class ZetuRootsApp {
           <div class="flex items-center gap-3">
             <img src="${a.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop'}" class="w-10 h-10 rounded-lg object-cover border border-surface-border"/>
             <div>
-              <h5 class="font-display font-bold text-xs text-white">${a.name}</h5>
+              <h5 class="font-display font-bold text-xs text-ink">${a.name}</h5>
               <p class="text-[10px] font-mono text-primary-gold">${a.genre} • ${a.tracksCount || 10} Tracks</p>
             </div>
           </div>
-          <button onclick="app.openArtistProfile('${a.name}')" class="px-2.5 py-1 rounded-lg bg-surface-card border border-surface-border hover:border-primary-gold text-white text-[11px] font-mono">
+          <button onclick="app.openArtistProfile('${a.name}')" class="px-2.5 py-1 rounded-lg bg-surface-card border border-surface-border hover:border-primary-gold text-ink text-[11px] font-mono">
             Profile
           </button>
         </div>
@@ -6213,10 +6213,10 @@ class ZetuRootsApp {
         <div class="p-4 rounded-xl bg-surface border border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-amber-400/40 transition-colors">
           <div>
             <div class="flex items-center gap-2 mb-1">
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 font-bold">EP ${idx + 1}</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-400/20 text-amber-700 font-bold">EP ${idx + 1}</span>
               <span class="text-[10px] font-mono text-text-dim">${ep.date || 'Recent'} • ${ep.durationStr || '45m'}</span>
             </div>
-            <h5 class="font-display font-bold text-sm text-white">${ep.title}</h5>
+            <h5 class="font-display font-bold text-sm text-ink">${ep.title}</h5>
             <p class="text-xs text-text-muted mt-1 line-clamp-2">${ep.desc || 'Kenyan cultural podcast episode.'}</p>
           </div>
           <button onclick="app.playPodcastEpisode('${ep.id}')" class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-display font-bold text-xs uppercase flex items-center justify-center gap-1.5 shrink-0 active:scale-95 shadow">
@@ -6248,14 +6248,14 @@ class ZetuRootsApp {
       container.innerHTML = `
         <div class="text-center py-8">
           <span class="material-symbols-outlined text-4xl text-primary-gold mb-2 block">search</span>
-          <p class="text-sm font-display font-bold text-white">Search Everything Kenyan</p>
+          <p class="text-sm font-display font-bold text-ink">Search Everything Kenyan</p>
           <p class="text-xs text-text-muted mt-1 max-w-sm mx-auto">Explore across 16 genres, 47 counties, verified artists, live festivals, and Afripods archives.</p>
           <div class="flex flex-wrap items-center justify-center gap-2 mt-4">
             <button onclick="app.fillSearch('Benga')" class="px-3 py-1 rounded-full bg-surface border border-surface-border text-xs text-primary-gold hover:border-primary-gold">Benga</button>
             <button onclick="app.fillSearch('Gengetone')" class="px-3 py-1 rounded-full bg-surface border border-surface-border text-xs text-secondary-green hover:border-secondary-green">Gengetone</button>
-            <button onclick="app.fillSearch('Mugithi')" class="px-3 py-1 rounded-full bg-surface border border-surface-border text-xs text-cyan-400 hover:border-cyan-400">Mugithi</button>
-            <button onclick="app.fillSearch('Taarab')" class="px-3 py-1 rounded-full bg-surface border border-surface-border text-xs text-amber-300 hover:border-amber-300">Taarab</button>
-            <button onclick="app.fillSearch('Ohangla')" class="px-3 py-1 rounded-full bg-surface border border-surface-border text-xs text-purple-300 hover:border-purple-300">Ohangla</button>
+            <button onclick="app.fillSearch('Mugithi')" class="px-3 py-1 rounded-full bg-surface border border-surface-border text-xs text-cyan-600 hover:border-cyan-400">Mugithi</button>
+            <button onclick="app.fillSearch('Taarab')" class="px-3 py-1 rounded-full bg-surface border border-surface-border text-xs text-amber-700 hover:border-amber-300">Taarab</button>
+            <button onclick="app.fillSearch('Ohangla')" class="px-3 py-1 rounded-full bg-surface border border-surface-border text-xs text-purple-700 hover:border-purple-300">Ohangla</button>
           </div>
         </div>
       `;
@@ -6281,7 +6281,7 @@ class ZetuRootsApp {
       container.innerHTML = `
         <div class="text-center py-12">
           <span class="material-symbols-outlined text-3xl text-text-dim mb-2 block">sentiment_dissatisfied</span>
-          <p class="text-sm font-bold text-white">No results found for "${query}"</p>
+          <p class="text-sm font-bold text-ink">No results found for "${query}"</p>
           <p class="text-xs text-text-muted mt-1">Try searching by Kenyan county, dialect, or genre title.</p>
         </div>
       `;
@@ -6298,7 +6298,7 @@ class ZetuRootsApp {
             ${matchedArtists.map(a => `
               <div onclick="app.openArtistProfile('${a.name}')" class="surface-card rounded-xl p-3 text-center cursor-pointer border border-surface-border hover:border-primary-gold transition-all group">
                 <img src="${a.avatar}" class="w-14 h-14 rounded-full mx-auto object-cover border border-surface-border group-hover:scale-105 transition-transform"/>
-                <h5 class="font-display font-bold text-xs text-white mt-2 truncate">${a.name}</h5>
+                <h5 class="font-display font-bold text-xs text-ink mt-2 truncate">${a.name}</h5>
                 <span class="text-[10px] font-mono text-text-muted block truncate">${a.genre}</span>
               </div>
             `).join('')}
@@ -6317,7 +6317,7 @@ class ZetuRootsApp {
                 <div class="flex items-center gap-3">
                   <img src="${t.img}" class="w-11 h-11 rounded-lg object-cover border border-surface-border"/>
                   <div>
-                    <h5 class="font-display font-bold text-sm text-white">${t.title}</h5>
+                    <h5 class="font-display font-bold text-sm text-ink">${t.title}</h5>
                     <p class="text-xs text-text-muted font-mono">${t.artist} • ${t.genre} • ${t.county}</p>
                   </div>
                 </div>
@@ -6400,16 +6400,16 @@ class ZetuRootsApp {
     const notifications = [
       { id: 1, title: 'Royalty Payout Processed', body: 'KES 48,250.00 Daraja B2C royalty disbursement sent to Safaricom M-Pesa.', time: '2 hours ago', icon: 'payments', color: 'text-secondary-green', unread: true },
       { id: 2, title: 'KECOBO Registration Approved', body: 'ISRC KE-ZR1-26-00142 registered with Kenya Copyright Board for digital collection.', time: 'Yesterday', icon: 'verified', color: 'text-primary-gold', unread: true },
-      { id: 3, title: 'VIP Ticket Pass Confirmed', body: 'Blankets & Wine Nairobi Pass QR issued. Ready for Gatekeeper validation.', time: '3 days ago', icon: 'qr_code_2', color: 'text-cyan-400', unread: false },
-      { id: 4, title: 'New Benga Stream Milestone', body: 'Your curated playlist "Nyanza Roots" surpassed 25,000 monthly listeners.', time: '5 days ago', icon: 'trending_up', color: 'text-amber-400', unread: false }
+      { id: 3, title: 'VIP Ticket Pass Confirmed', body: 'Blankets & Wine Nairobi Pass QR issued. Ready for Gatekeeper validation.', time: '3 days ago', icon: 'qr_code_2', color: 'text-cyan-600', unread: false },
+      { id: 4, title: 'New Benga Stream Milestone', body: 'Your curated playlist "Nyanza Roots" surpassed 25,000 monthly listeners.', time: '5 days ago', icon: 'trending_up', color: 'text-amber-600', unread: false }
     ];
 
     container.innerHTML = notifications.map(n => `
-      <div class="p-4 rounded-xl ${n.unread ? 'bg-[#1E1A11] border-primary-gold/40' : 'bg-surface border-surface-border'} border flex items-start gap-3.5 transition-all">
+      <div class="p-4 rounded-xl ${n.unread ? 'bg-[#FFFFFF] border-primary-gold/40' : 'bg-surface border-surface-border'} border flex items-start gap-3.5 transition-all">
         <span class="material-symbols-outlined ${n.color} text-2xl shrink-0 mt-0.5">${n.icon}</span>
         <div class="flex-1">
           <div class="flex items-center justify-between">
-            <h5 class="font-display font-bold text-sm text-white">${n.title}</h5>
+            <h5 class="font-display font-bold text-sm text-ink">${n.title}</h5>
             <span class="text-[10px] font-mono text-text-dim">${n.time}</span>
           </div>
           <p class="text-xs text-text-muted mt-1 leading-relaxed">${n.body}</p>
@@ -6422,7 +6422,7 @@ class ZetuRootsApp {
     const container = document.getElementById('notifications-list-container');
     if (container) {
       container.querySelectorAll('.border-primary-gold\/40').forEach(el => {
-        el.classList.remove('bg-[#1E1A11]', 'border-primary-gold/40');
+        el.classList.remove('bg-[#FFFFFF]', 'border-primary-gold/40');
         el.classList.add('bg-surface', 'border-surface-border');
       });
     }
@@ -6489,7 +6489,7 @@ class ZetuRootsApp {
         icon.textContent = 'verified';
       }
       if (title) {
-        title.className = 'font-display font-black text-lg text-white';
+        title.className = 'font-display font-black text-lg text-ink';
         title.textContent = 'VALID TICKET: ADMIT ONE';
       }
       if (details) {
@@ -6500,15 +6500,15 @@ class ZetuRootsApp {
     } else {
       box.className = 'mt-6 p-5 rounded-2xl border border-red-500/50 bg-red-500/10 text-center animate-fade-in';
       if (icon) {
-        icon.className = 'material-symbols-outlined text-4xl text-red-400 mx-auto mb-2';
+        icon.className = 'material-symbols-outlined text-4xl text-red-600 mx-auto mb-2';
         icon.textContent = 'gpp_bad';
       }
       if (title) {
-        title.className = 'font-display font-black text-lg text-white';
+        title.className = 'font-display font-black text-lg text-ink';
         title.textContent = 'INVALID OR COUNTERFEIT TICKET';
       }
       if (details) {
-        details.className = 'text-xs font-mono text-red-400 mt-1';
+        details.className = 'text-xs font-mono text-red-600 mt-1';
         details.textContent = `Code ${code} is not registered in the Daraja event ticketing database.`;
       }
       this.showToast('❌ Ticket Rejected: Invalid Entry Pass');

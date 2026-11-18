@@ -5,9 +5,9 @@
   let Z, sb, ch = null, names = {};
   const S = { tab: 'rooms', cur: null }, F = { tab: 'following' };
   const me = () => Z.user(), toast = (m) => Z.toast(m);
-  const IN = 'rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white';
+  const IN = 'rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink';
   const GOLD = 'bg-primary-gold text-black font-bold rounded-full px-4 py-1.5 text-xs';
-  const PILL = 'rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] text-white';
+  const PILL = 'rounded-full bg-ink/[0.07] px-2.5 py-0.5 text-[11px] text-ink';
 
   async function nm(ids) {
     const need = [...new Set(ids)].filter((i) => i && !names[i]);
@@ -16,8 +16,8 @@
     (data || []).forEach((p) => (names[p.id] = p.display_name || 'Fan'));
     need.forEach((i) => (names[i] = names[i] || 'Fan'));
   }
-  const gate = (what) => `<div class="surface-card rounded-2xl p-6 text-center"><p class="text-sm text-white mb-3">Sign in to use ${what}.</p><button data-go="studio" class="${GOLD}">Sign in</button></div>`;
-  const tabs = (items, cur, attr) => `<div class="flex gap-1 rounded-full bg-white/5 p-0.5">${items.map(([k, l]) => `<button ${attr}="${k}" class="rounded-full px-3 py-1 text-xs font-semibold ${k === cur ? 'bg-primary-gold text-black' : 'text-text-muted'}">${l}</button>`).join('')}</div>`;
+  const gate = (what) => `<div class="surface-card rounded-2xl p-6 text-center"><p class="text-sm text-ink mb-3">Sign in to use ${what}.</p><button data-go="studio" class="${GOLD}">Sign in</button></div>`;
+  const tabs = (items, cur, attr) => `<div class="flex gap-1 rounded-full bg-ink/[0.04] p-0.5">${items.map(([k, l]) => `<button ${attr}="${k}" class="rounded-full px-3 py-1 text-xs font-semibold ${k === cur ? 'bg-primary-gold text-black' : 'text-text-muted'}">${l}</button>`).join('')}</div>`;
 
   async function reportIt(type, id, snap) {
     if (!me()) return toast('Sign in first (Studio page).');
@@ -30,8 +30,8 @@
   // ───────── Chat page ─────────
   async function renderChat() {
     const v = $('#view-chat');
-    if (!me()) { v.innerHTML = `<h2 class="font-display font-black text-2xl text-white mb-3">Chat</h2>` + gate('chat'); return bind(v); }
-    v.innerHTML = `<div class="flex items-center justify-between mb-3"><h2 class="font-display font-black text-2xl text-white">Chat</h2>${tabs([['rooms', 'Rooms'], ['dm', 'Messages']], S.tab, 'data-ctab')}</div>
+    if (!me()) { v.innerHTML = `<h2 class="font-display font-black text-2xl text-ink mb-3">Chat</h2>` + gate('chat'); return bind(v); }
+    v.innerHTML = `<div class="flex items-center justify-between mb-3"><h2 class="font-display font-black text-2xl text-ink">Chat</h2>${tabs([['rooms', 'Rooms'], ['dm', 'Messages']], S.tab, 'data-ctab')}</div>
       <div class="grid md:grid-cols-[17rem_1fr] gap-3">
         <aside id="zc-list" class="surface-card rounded-2xl p-2 max-h-[70vh] overflow-y-auto"></aside>
         <div id="zc-thread" class="surface-card rounded-2xl flex flex-col h-[70vh]"><p class="m-auto text-xs text-text-muted">Pick a room or a conversation.</p></div>
@@ -43,13 +43,13 @@
       const groups = { genre: 'Genres', county: 'Counties', artist_club: 'Fan clubs' };
       L.innerHTML = Object.keys(groups).map((k) => {
         const rs = (data || []).filter((r) => r.kind === k);
-        return rs.length ? `<p class="px-2 pt-2 pb-1 text-[10px] uppercase tracking-wider text-text-muted">${groups[k]}</p>` + rs.map((r) => `<button data-room="${esc(r.id)}" data-title="${esc(r.title)}" class="w-full text-left rounded-xl px-3 py-1.5 text-xs text-white hover:bg-white/10">${esc(r.title)}</button>`).join('') : '';
+        return rs.length ? `<p class="px-2 pt-2 pb-1 text-[10px] uppercase tracking-wider text-text-muted">${groups[k]}</p>` + rs.map((r) => `<button data-room="${esc(r.id)}" data-title="${esc(r.title)}" class="w-full text-left rounded-xl px-3 py-1.5 text-xs text-ink hover:bg-ink/[0.07]">${esc(r.title)}</button>`).join('') : '';
       }).join('');
     } else {
       const { data } = await sb.from('conversations').select('id,user_a,user_b').order('created_at', { ascending: false });
       const rows = (data || []).map((c) => ({ id: c.id, other: c.user_a === me().id ? c.user_b : c.user_a }));
       await nm(rows.map((r) => r.other));
-      L.innerHTML = rows.length ? rows.map((r) => `<button data-dm="${esc(r.id)}" data-title="${esc(names[r.other])}" class="w-full text-left rounded-xl px-3 py-1.5 text-xs text-white hover:bg-white/10">${esc(names[r.other])}</button>`).join('')
+      L.innerHTML = rows.length ? rows.map((r) => `<button data-dm="${esc(r.id)}" data-title="${esc(names[r.other])}" class="w-full text-left rounded-xl px-3 py-1.5 text-xs text-ink hover:bg-ink/[0.07]">${esc(names[r.other])}</button>`).join('')
         : '<p class="p-3 text-xs text-text-muted">No messages yet. Open a track and tap 💬 to message its artist.</p>';
     }
     bind(L);
@@ -58,9 +58,9 @@
   async function openThread(type, id, title) {
     S.cur = { type, id }; if (ch) { sb.removeChannel(ch); ch = null; }
     const T = $('#zc-thread');
-    T.innerHTML = `<div class="flex items-center justify-between px-4 py-2 border-b border-white/10"><span class="font-bold text-sm text-white truncate">${esc(title)}</span>${type === 'dm' ? '<button id="zc-block" class="text-[11px] text-text-muted hover:text-white">Block</button>' : ''}</div>
+    T.innerHTML = `<div class="flex items-center justify-between px-4 py-2 border-b border-ink/10"><span class="font-bold text-sm text-ink truncate">${esc(title)}</span>${type === 'dm' ? '<button id="zc-block" class="text-[11px] text-text-muted hover:text-ink">Block</button>' : ''}</div>
       <div id="zc-msgs" class="flex-1 overflow-y-auto p-3 space-y-2"></div>
-      <div class="flex gap-2 p-2 border-t border-white/10"><input id="zc-in" maxlength="1000" placeholder="Write a message" class="min-w-0 flex-1 ${IN}"/><button id="zc-send" class="${GOLD}">Send</button></div>`;
+      <div class="flex gap-2 p-2 border-t border-ink/10"><input id="zc-in" maxlength="1000" placeholder="Write a message" class="min-w-0 flex-1 ${IN}"/><button id="zc-send" class="${GOLD}">Send</button></div>`;
     $('#zc-msgs').onclick = (e) => { const b = e.target.closest('[data-rep]'); if (b) reportIt(S.cur.type === 'room' ? 'message' : 'dm_message', b.dataset.rep, b.dataset.body); };
     const t = type === 'room' ? 'chat_messages' : 'dm_messages', col = type === 'room' ? 'room_id' : 'conversation_id';
     const { data } = await sb.from(t).select('id,sender_id,body').eq(col, id).order('created_at', { ascending: false }).limit(50);
@@ -84,7 +84,7 @@
   function addMsg(m) {
     const box = $('#zc-msgs'); if (!box || box.querySelector(`[data-mid="${m.id}"]`)) return;
     const mine = m.sender_id === me().id;
-    box.insertAdjacentHTML('beforeend', `<div data-mid="${m.id}" class="flex ${mine ? 'justify-end' : ''}"><div class="max-w-[80%] rounded-2xl px-3 py-1.5 text-xs ${mine ? 'bg-primary-gold text-black' : 'bg-white/10 text-white'}">${mine ? '' : `<b class="block text-[10px] text-primary-gold">${esc(names[m.sender_id])}</b>`}${esc(m.body)}${mine ? '' : `<button data-rep="${m.id}" data-body="${esc(m.body)}" class="ml-2 text-[10px] opacity-60" title="Report">⚑</button>`}</div></div>`);
+    box.insertAdjacentHTML('beforeend', `<div data-mid="${m.id}" class="flex ${mine ? 'justify-end' : ''}"><div class="max-w-[80%] rounded-2xl px-3 py-1.5 text-xs ${mine ? 'bg-primary-gold text-black' : 'bg-ink/[0.07] text-ink'}">${mine ? '' : `<b class="block text-[10px] text-primary-gold">${esc(names[m.sender_id])}</b>`}${esc(m.body)}${mine ? '' : `<button data-rep="${m.id}" data-body="${esc(m.body)}" class="ml-2 text-[10px] opacity-60" title="Report">⚑</button>`}</div></div>`);
     box.scrollTop = box.scrollHeight;
   }
   async function startDm(other) {
@@ -98,13 +98,13 @@
   // ───────── Following page ─────────
   async function renderFollowing() {
     const v = $('#view-following');
-    if (!me()) { v.innerHTML = `<h2 class="font-display font-black text-2xl text-white mb-3">Following</h2>` + gate('follows and fan clubs'); return bind(v); }
-    v.innerHTML = `<div class="flex items-center justify-between mb-3"><h2 class="font-display font-black text-2xl text-white">Following</h2>${tabs([['following', 'Following'], ['clubs', 'Fan clubs'], ['alerts', 'Alerts']], F.tab, 'data-ftab')}</div><div id="zf-body" class="space-y-2"></div>`;
+    if (!me()) { v.innerHTML = `<h2 class="font-display font-black text-2xl text-ink mb-3">Following</h2>` + gate('follows and fan clubs'); return bind(v); }
+    v.innerHTML = `<div class="flex items-center justify-between mb-3"><h2 class="font-display font-black text-2xl text-ink">Following</h2>${tabs([['following', 'Following'], ['clubs', 'Fan clubs'], ['alerts', 'Alerts']], F.tab, 'data-ftab')}</div><div id="zf-body" class="space-y-2"></div>`;
     bind(v); const B = $('#zf-body'); const id = me().id;
     if (F.tab === 'following') {
       const { data } = await sb.from('follows').select('followee_id,notify').eq('follower_id', id);
       const rows = data || []; await nm(rows.map((r) => r.followee_id));
-      B.innerHTML = rows.length ? rows.map((r) => `<div class="surface-card rounded-xl p-3 flex items-center gap-2"><span class="flex-1 text-sm text-white truncate">${esc(names[r.followee_id])}</span>
+      B.innerHTML = rows.length ? rows.map((r) => `<div class="surface-card rounded-xl p-3 flex items-center gap-2"><span class="flex-1 text-sm text-ink truncate">${esc(names[r.followee_id])}</span>
         <button data-bell="${r.followee_id}" data-on="${r.notify}" class="${PILL}">${r.notify ? '🔔 On' : '🔕 Off'}</button><button data-msg="${r.followee_id}" class="${PILL}">💬</button><button data-unf="${r.followee_id}" class="${PILL}">Unfollow</button></div>`).join('')
         : '<p class="text-xs text-text-muted">You are not following anyone yet. Play a track and tap Follow.</p>';
     } else if (F.tab === 'clubs') {
@@ -114,14 +114,14 @@
         sb.from('follows').select('*', { count: 'exact', head: true }).eq('followee_id', id),
         sb.from('artist_subscriptions').select('*', { count: 'exact', head: true }).eq('artist_id', id).eq('status', 'active')]);
       await nm((subs || []).map((s) => s.artist_id));
-      B.innerHTML = `<div class="surface-card rounded-xl p-3"><p class="text-sm font-bold text-white mb-1">Your fan club</p><p class="text-[11px] text-text-muted mb-2">${f.count || 0} followers · ${c.count || 0} paying members. Set a monthly price in KES (0 turns it off). Needs at least one link added.</p>
+      B.innerHTML = `<div class="surface-card rounded-xl p-3"><p class="text-sm font-bold text-ink mb-1">Your fan club</p><p class="text-[11px] text-text-muted mb-2">${f.count || 0} followers · ${c.count || 0} paying members. Set a monthly price in KES (0 turns it off). Needs at least one link added.</p>
         <div class="flex gap-2"><input id="zf-price" type="number" min="0" value="${prof && prof.subscription_price_kes || ''}" placeholder="Price KES / month" class="min-w-0 flex-1 ${IN}"/><button id="zf-save" class="${GOLD}">Save</button></div></div>
-        <p class="pt-2 text-xs font-bold text-white">Clubs you joined</p>` +
-        ((subs || []).length ? subs.map((s) => `<div class="surface-card rounded-xl p-3 flex justify-between text-xs text-white"><span>${esc(names[s.artist_id])} · KES ${s.price_kes}/mo</span><span class="${s.status === 'active' ? 'text-secondary-green' : 'text-text-muted'}">${s.status === 'pending' ? 'Pending payment' : esc(s.status)}</span></div>`).join('') : '<p class="text-xs text-text-muted">No fan clubs yet.</p>');
+        <p class="pt-2 text-xs font-bold text-ink">Clubs you joined</p>` +
+        ((subs || []).length ? subs.map((s) => `<div class="surface-card rounded-xl p-3 flex justify-between text-xs text-ink"><span>${esc(names[s.artist_id])} · KES ${s.price_kes}/mo</span><span class="${s.status === 'active' ? 'text-secondary-green' : 'text-text-muted'}">${s.status === 'pending' ? 'Pending payment' : esc(s.status)}</span></div>`).join('') : '<p class="text-xs text-text-muted">No fan clubs yet.</p>');
       $('#zf-save').onclick = async () => { const { error } = await sb.rpc('set_fan_club_price', { p_price: +$('#zf-price').value || 0 }); toast(error ? error.message : 'Fan club updated.'); renderFollowing(); };
     } else {
       const { data } = await sb.from('notifications').select('id,kind,payload,read,created_at').eq('user_id', id).order('created_at', { ascending: false }).limit(30);
-      B.innerHTML = (data || []).length ? data.map((n) => `<div class="surface-card rounded-xl p-3 text-xs ${n.read ? 'text-text-muted' : 'text-white'}">🎵 New link: <b>${esc(n.payload && n.payload.title)}</b></div>`).join('') : '<p class="text-xs text-text-muted">No alerts yet. Turn on the bell for artists you follow.</p>';
+      B.innerHTML = (data || []).length ? data.map((n) => `<div class="surface-card rounded-xl p-3 text-xs ${n.read ? 'text-text-muted' : 'text-ink'}">🎵 New link: <b>${esc(n.payload && n.payload.title)}</b></div>`).join('') : '<p class="text-xs text-text-muted">No alerts yet. Turn on the bell for artists you follow.</p>';
       if ((data || []).some((n) => !n.read)) sb.from('notifications').update({ read: true }).eq('user_id', id).eq('read', false).then(() => {});
     }
     bind(B);
@@ -150,7 +150,7 @@
   async function artistBar(m) {
     const P = $('#zr-player'); if (!P) return;
     let bar = $('#zr-artist');
-    if (!bar) { P.querySelector('#zr-gifts').insertAdjacentHTML('beforebegin', '<div id="zr-artist" class="flex flex-wrap items-center gap-1.5 pt-2 text-[11px] text-white"></div>'); bar = $('#zr-artist'); }
+    if (!bar) { P.querySelector('#zr-gifts').insertAdjacentHTML('beforebegin', '<div id="zr-artist" class="flex flex-wrap items-center gap-1.5 pt-2 text-[11px] text-ink"></div>'); bar = $('#zr-artist'); }
     bar.innerHTML = '';
     const { data } = await sb.from('media_items').select('added_by,profiles:added_by(display_name,subscription_price_kes)').eq('id', m.id).maybeSingle();
     if (!data || !data.added_by || (me() && data.added_by === me().id)) return;
