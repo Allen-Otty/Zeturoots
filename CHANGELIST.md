@@ -1,5 +1,13 @@
 # ZetuRoots change list
 
+## Done (branch `light-glass`)
+- Light glass theme: cream canvas with soft gold and green light, frosted top bar, nav, player, menus and modals
+- Fixed blank pages: the Profile section was never closed, so 24 pages (Channels, About, Library, Login, Podcasts and more) sat inside it and vanished whenever Profile was hidden
+- Broken or blocked images now show a gold music tile instead of alt text (`zr-ui.js`)
+- Pages that fail to load show a Retry bar instead of staying blank; home trending shows a loading shimmer
+- App shell (HTML, CSS, JS) is now network-first in the service worker, so users never get old and new files mixed
+- Prebuilt `tw.css` paints instantly (no unstyled flash). After adding new Tailwind classes, run `cd tools && npm install && npm run build:css`. Keep the `theme` block in `tools/tailwind.config.js` the same as the one in `index.html`
+
 ## Done (branch `youtube-links`)
 - Brand reskin: black, metallic gold and green, new logo and launch icons
 - Supabase backend: profiles, genres, links library, playlists, coin wallet, gifts, play counting, artist stats, cash-out requests

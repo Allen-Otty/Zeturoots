@@ -1,9 +1,11 @@
-// ZetuRoots PWA Service Worker v1.13.0
-const CACHE_NAME = 'zeturoots-v1.13.0';
+// ZetuRoots PWA Service Worker v1.14.0
+const CACHE_NAME = 'zeturoots-v1.14.0';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './app.css',
+  './tw.css',
+  './zr-ui.js',
   './app.js',
   './zr-cloud.js',
   './zr-social.js',
@@ -72,7 +74,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static Assets & Shell: Stale-While-Revalidate
+  // App shell (pages, scripts, styles): network-first so users never get a mix of old and new files.
+  const sameOrigin = url.origin === self.location.origin;
+  if (sameOrigin && (request.mode === 'navigate' || ['document', 'script', 'style'].includes(request.destination))) {
+    event.respondWith(
+      fetch(request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const copy = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+        }
+        return networkResponse;
+      }).catch(() => caches.match(request).then((hit) => hit || (request.mode === 'navigate' ? caches.match('./index.html') : undefined)))
+    );
+    return;
+  }
+
+  // Images, fonts and everything else: Stale-While-Revalidate
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       const fetchPromise = fetch(request).then((networkResponse) => {

@@ -64,28 +64,28 @@
 
   function card() {
     return `<div id="zr-link-card" class="surface-card rounded-2xl p-4 mb-4 border border-primary-gold/30">
-      <h3 class="font-display font-black text-base text-white mb-1">Add a link</h3>
+      <h3 class="font-display font-black text-base text-ink mb-1">Add a link</h3>
       <p class="text-xs text-text-muted mb-3">Share music, mixes and videos from other platforms. ZetuRoots plays them from the original source.</p>
       <div id="zr-auth"></div>
-      <div id="zr-stats" class="hidden rounded-xl bg-white/5 p-3 mb-3 text-xs text-white"></div>
+      <div id="zr-stats" class="hidden rounded-xl bg-ink/[0.04] p-3 mb-3 text-xs text-ink"></div>
       <div id="zr-add" class="hidden space-y-2">
-        <input id="zr-url" placeholder="Paste a link from ${SUPPORTED}" class="w-full rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/>
+        <input id="zr-url" placeholder="Paste a link from ${SUPPORTED}" class="w-full rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"/>
         <p id="zr-hint" class="px-1 text-[11px] text-text-muted"></p>
-        <div class="flex gap-2"><input id="zr-title" placeholder="Title" class="min-w-0 flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/><input id="zr-artist" placeholder="Artist" class="min-w-0 flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/></div>
+        <div class="flex gap-2"><input id="zr-title" placeholder="Title" class="min-w-0 flex-1 rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"/><input id="zr-artist" placeholder="Artist" class="min-w-0 flex-1 rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"/></div>
         <div class="flex gap-2">
-          <select id="zr-kind" class="rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"><option value="track">Track</option><option value="mixtape">DJ mixtape</option><option value="episode">Podcast</option></select>
-          <select id="zr-genre" class="min-w-0 flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"><option value="">Genre</option></select>
-          <select id="zr-type" class="rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"><option value="video">Video</option><option value="audio">Audio</option></select>
+          <select id="zr-kind" class="rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"><option value="track">Track</option><option value="mixtape">DJ mixtape</option><option value="episode">Podcast</option></select>
+          <select id="zr-genre" class="min-w-0 flex-1 rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"><option value="">Genre</option></select>
+          <select id="zr-type" class="rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"><option value="video">Video</option><option value="audio">Audio</option></select>
         </div>
-        <input id="zr-county" placeholder="County (optional)" class="w-full rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/>
-        <div class="flex items-center justify-between"><button id="zr-out" class="text-[11px] text-text-muted hover:text-white">Sign out</button><button id="zr-save" class="bg-primary-gold text-black font-bold rounded-full px-4 py-1.5 text-xs">Add link</button></div>
+        <input id="zr-county" placeholder="County (optional)" class="w-full rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"/>
+        <div class="flex items-center justify-between"><button id="zr-out" class="text-[11px] text-text-muted hover:text-ink">Sign out</button><button id="zr-save" class="bg-primary-gold text-black font-bold rounded-full px-4 py-1.5 text-xs">Add link</button></div>
         <p class="px-1 text-[10px] text-text-muted">By adding a link you confirm it is your music or you have permission to share it.</p>
       </div>
-      <h4 class="font-bold text-sm text-white mt-5 mb-2">Linked library</h4>
+      <h4 class="font-bold text-sm text-ink mt-5 mb-2">Linked library</h4>
       <div id="zr-list" class="space-y-2"></div>
-      <h4 class="font-bold text-sm text-white mt-5 mb-2">Playlists</h4>
-      <div id="zr-pl-make" class="hidden flex gap-2 mb-2"><input id="zr-pl-name" placeholder="New playlist name" class="flex-1 rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/><button id="zr-pl-new" class="bg-primary-gold text-black font-bold rounded-full px-3.5 py-1.5 text-xs">Create</button></div>
-      <select id="zr-pl-target" class="hidden w-full rounded-full bg-black border border-white/10 px-2 py-2 text-xs text-white mb-2"></select>
+      <h4 class="font-bold text-sm text-ink mt-5 mb-2">Playlists</h4>
+      <div id="zr-pl-make" class="hidden flex gap-2 mb-2"><input id="zr-pl-name" placeholder="New playlist name" class="flex-1 rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"/><button id="zr-pl-new" class="bg-primary-gold text-black font-bold rounded-full px-3.5 py-1.5 text-xs">Create</button></div>
+      <select id="zr-pl-target" class="hidden w-full rounded-full bg-white/70 border border-ink/10 px-2 py-2 text-xs text-ink mb-2"></select>
       <div id="zr-pls" class="space-y-2"></div>
     </div>`;
   }
@@ -93,10 +93,10 @@
   function renderAuth() {
     $('zr-add').classList.toggle('hidden', !user);
     $('zr-auth').innerHTML = user ? '' : `<div class="space-y-2">
-      <input id="zr-email" type="email" placeholder="Email" class="w-full rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/>
-      <input id="zr-pass" type="password" placeholder="Password (6+ characters)" class="w-full rounded-full bg-black border border-white/10 px-3 py-1.5 text-xs text-white"/>
+      <input id="zr-email" type="email" placeholder="Email" class="w-full rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"/>
+      <input id="zr-pass" type="password" placeholder="Password (6+ characters)" class="w-full rounded-full bg-white/70 border border-ink/10 px-3 py-1.5 text-xs text-ink"/>
       <button id="zr-in" class="bg-primary-gold text-black font-bold rounded-full px-4 py-1.5 text-xs">Sign in</button>
-      <button id="zr-up" class="ml-1 px-2 text-xs text-white/80 hover:text-white">Create account</button></div>`;
+      <button id="zr-up" class="ml-1 px-2 text-xs text-ink/80 hover:text-ink">Create account</button></div>`;
     if (!user) {
       const go = async (up) => {
         const cred = { email: $('zr-email').value.trim(), password: $('zr-pass').value };
@@ -113,9 +113,9 @@
     const { data, error } = await sb.from('media_items').select('id,provider,provider_id,title,artist_name,thumbnail_url,media_type').order('created_at', { ascending: false }).limit(30);
     if (error) return ($('zr-list').textContent = 'Could not load library.');
     lib = data;
-    $('zr-list').innerHTML = data.length ? data.map((m, i) => `<button data-i="${i}" class="w-full flex items-center gap-3 text-left rounded-xl bg-white/5 p-2">
-      ${m.thumbnail_url ? `<img src="${esc(m.thumbnail_url)}" alt="" class="w-14 h-14 rounded-lg object-cover"/>` : '<div class="w-14 h-14 rounded-lg bg-white/10"></div>'}
-      <span class="min-w-0"><span class="block text-sm text-white truncate">${esc(m.title)}</span><span class="block text-xs text-text-muted truncate">${esc(m.artist_name)} · ${esc(m.provider)}</span></span><span data-add="${i}" class="ml-auto px-2 text-lg text-primary-gold">+</span></button>`).join('') : '<p class="text-xs text-text-muted">No links yet. Be the first to add one.</p>';
+    $('zr-list').innerHTML = data.length ? data.map((m, i) => `<button data-i="${i}" class="w-full flex items-center gap-3 text-left rounded-xl bg-ink/[0.04] p-2">
+      ${m.thumbnail_url ? `<img src="${esc(m.thumbnail_url)}" alt="" class="w-14 h-14 rounded-lg object-cover"/>` : '<div class="w-14 h-14 rounded-lg bg-ink/[0.07]"></div>'}
+      <span class="min-w-0"><span class="block text-sm text-ink truncate">${esc(m.title)}</span><span class="block text-xs text-text-muted truncate">${esc(m.artist_name)} · ${esc(m.provider)}</span></span><span data-add="${i}" class="ml-auto px-2 text-lg text-primary-gold">+</span></button>`).join('') : '<p class="text-xs text-text-muted">No links yet. Be the first to add one.</p>';
     $('zr-list').querySelectorAll('button').forEach((b) => (b.onclick = (e) => (e.target.dataset.add ? addToPl(lib[+e.target.dataset.add].id) : play(+b.dataset.i, lib))));
   }
 
@@ -137,8 +137,8 @@
     if ($('zr-player')) return;
     const d = document.createElement('div');
     d.id = 'zr-player';
-    d.className = 'fixed bottom-16 right-2 left-2 sm:left-auto sm:w-96 z-[80] hidden rounded-2xl bg-black border border-primary-gold/40 p-2 shadow-2xl';
-    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-white truncate"></span><span class="flex items-center"><button id="zr-mode" class="mr-1 rounded-full bg-white/10 px-2 py-0.5 text-[10px] text-white"></button><button id="zr-prev" class="text-white px-2">‹</button><button id="zr-next" class="text-white px-2">›</button><button id="zr-x" class="text-white text-lg leading-none px-2">×</button></span></div><div id="zr-frame"><div id="zr-yt-wrap"><div id="zr-yt"></div></div><iframe id="zr-emb" class="hidden w-full rounded-xl" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Player"></iframe></div><div id="zr-gifts" class="flex flex-wrap justify-center gap-1.5 pt-2"></div>';
+    d.className = 'fixed bottom-16 right-2 left-2 sm:left-auto sm:w-96 z-[80] hidden rounded-2xl bg-white/70 border border-primary-gold/40 p-2 shadow-2xl';
+    d.innerHTML = '<div class="flex justify-between items-center px-1 pb-1"><span id="zr-now" class="text-xs text-ink truncate"></span><span class="flex items-center"><button id="zr-mode" class="mr-1 rounded-full bg-ink/[0.07] px-2 py-0.5 text-[10px] text-ink"></button><button id="zr-prev" class="text-ink px-2">‹</button><button id="zr-next" class="text-ink px-2">›</button><button id="zr-x" class="text-ink text-lg leading-none px-2">×</button></span></div><div id="zr-frame"><div id="zr-yt-wrap"><div id="zr-yt"></div></div><iframe id="zr-emb" class="hidden w-full rounded-xl" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Player"></iframe></div><div id="zr-gifts" class="flex flex-wrap justify-center gap-1.5 pt-2"></div>';
     document.body.appendChild(d);
     fillGifts();
     $('zr-x').onclick = () => { if (yt && yt.stopVideo) yt.stopVideo(); $('zr-emb').src = 'about:blank'; d.classList.add('hidden'); };
@@ -149,7 +149,7 @@
 
   async function fillGifts() {
     const { data } = await sb.from('gifts').select('id,name,coins,icon').order('coins');
-    $('zr-gifts').innerHTML = (data || []).map((g) => `<button data-g="${esc(g.id)}" class="rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] leading-tight text-white">${esc(g.icon)}<br>${g.coins}</button>`).join('');
+    $('zr-gifts').innerHTML = (data || []).map((g) => `<button data-g="${esc(g.id)}" class="rounded-full bg-ink/[0.07] px-2.5 py-0.5 text-[10px] leading-tight text-ink">${esc(g.icon)}<br>${g.coins}</button>`).join('');
     $('zr-gifts').querySelectorAll('button').forEach((b) => (b.onclick = async () => {
       if (!user) return toast('Sign in to send gifts.');
       const m = queue[qi];
@@ -166,7 +166,7 @@
     box.classList.remove('hidden');
     box.innerHTML = `<div class="flex justify-between"><span>Coins: <b>${data.balance}</b></span><span>Earned: <b>${data.earned}</b></span><span>Plays: <b>${data.plays}</b></span><span>Gifts: <b>${data.gifts}</b></span></div>` +
       (data.top.length ? '<div class="mt-2 text-text-muted">Top tracks: ' + data.top.map((x) => esc(x.title) + ' (' + x.plays + ')').join(' · ') + '</div>' : '') +
-      (data.earned >= 1000 ? '<div class="mt-3 flex gap-2"><input id="zr-co-coins" type="number" min="1000" placeholder="Coins (1000+)" class="w-1/3 rounded-lg bg-black border border-white/10 px-2 py-1 text-white"/><input id="zr-co-phone" placeholder="2547XXXXXXXX" class="flex-1 rounded-lg bg-black border border-white/10 px-2 py-1 text-white"/><button id="zr-co-go" class="bg-primary-gold text-black font-bold rounded-full px-3">Cash out</button></div>' : '<div class="mt-2 text-text-muted">Cash-out opens at 1000 earned coins.</div>');
+      (data.earned >= 1000 ? '<div class="mt-3 flex gap-2"><input id="zr-co-coins" type="number" min="1000" placeholder="Coins (1000+)" class="w-1/3 rounded-lg bg-white/70 border border-ink/10 px-2 py-1 text-ink"/><input id="zr-co-phone" placeholder="2547XXXXXXXX" class="flex-1 rounded-lg bg-white/70 border border-ink/10 px-2 py-1 text-ink"/><button id="zr-co-go" class="bg-primary-gold text-black font-bold rounded-full px-3">Cash out</button></div>' : '<div class="mt-2 text-text-muted">Cash-out opens at 1000 earned coins.</div>');
     const go = $('zr-co-go');
     if (go) go.onclick = async () => {
       const { error } = await sb.rpc('request_cashout', { p_coins: +$('zr-co-coins').value, p_phone: $('zr-co-phone').value.trim() });
@@ -220,7 +220,7 @@
     $('zr-pl-make').classList.toggle('hidden', !user);
     const { data } = await sb.from('playlists').select('id,title,owner_id,playlist_items(count)').order('created_at', { ascending: false }).limit(20);
     const all = data || [];
-    $('zr-pls').innerHTML = all.length ? all.map((p) => `<button data-p="${esc(p.id)}" class="w-full text-left rounded-xl bg-white/5 p-3 text-sm text-white">${esc(p.title)} <span class="text-xs text-text-muted">· ${p.playlist_items[0] ? p.playlist_items[0].count : 0} items</span></button>`).join('') : '<p class="text-xs text-text-muted">No playlists yet.</p>';
+    $('zr-pls').innerHTML = all.length ? all.map((p) => `<button data-p="${esc(p.id)}" class="w-full text-left rounded-xl bg-ink/[0.04] p-3 text-sm text-ink">${esc(p.title)} <span class="text-xs text-text-muted">· ${p.playlist_items[0] ? p.playlist_items[0].count : 0} items</span></button>`).join('') : '<p class="text-xs text-text-muted">No playlists yet.</p>';
     $('zr-pls').querySelectorAll('button').forEach((b) => (b.onclick = () => playPl(b.dataset.p)));
     const mine = user ? all.filter((p) => p.owner_id === user.id) : [];
     const sel = $('zr-pl-target');
