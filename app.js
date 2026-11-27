@@ -1306,7 +1306,7 @@ class ZetuRootsApp {
         <div class="surface-card relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/5] flex flex-col justify-between"
              onclick="app.playTrackById(${t.id})">
           <div class="absolute inset-0">
-            <img src="${t.img}" alt="${t.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+            <img loading="lazy" decoding="async" src="${t.img}" alt="${t.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
             <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
           </div>
           
@@ -1372,7 +1372,7 @@ class ZetuRootsApp {
       <div class="surface-card rounded-2xl overflow-hidden flex flex-col sm:flex-row items-stretch group border border-surface-border hover:border-primary-gold/50 transition-all shadow-md hover:shadow-xl hover:shadow-primary-gold/5 bg-[#FFFFFF]">
         <!-- 16:9 Thumbnail (Left Column as drawn in sketch) -->
         <div class="relative w-full sm:w-60 md:w-72 shrink-0 aspect-video bg-black overflow-hidden cursor-pointer" onclick="app.playTrackById(${t.id})">
-          <img src="${t.img}" alt="${t.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90"/>
+          <img loading="lazy" decoding="async" src="${t.img}" alt="${t.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-90"/>
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           
           <!-- Top Left Badge: #1 TRENDING -->
@@ -1456,7 +1456,7 @@ class ZetuRootsApp {
         <!-- Rank 2: Silver -->
         <div class="flex flex-col items-center w-1/3 max-w-[110px] cursor-pointer" onclick="app.playTrackById(${p2.id})">
           <div class="relative mb-2">
-            <img src="${p2.img}" class="w-16 h-16 rounded-full object-cover border-2 border-silver shadow-lg"/>
+            <img loading="lazy" decoding="async" src="${p2.img}" class="w-16 h-16 rounded-full object-cover border-2 border-silver shadow-lg"/>
             <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full badge-silver font-bold text-xs flex items-center justify-center">2</span>
           </div>
           <p class="font-display font-bold text-xs text-ink text-center truncate w-full">${p2.artist}</p>
@@ -1472,7 +1472,7 @@ class ZetuRootsApp {
             <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-primary-gold">
               <span class="material-symbols-outlined text-2xl">crown</span>
             </div>
-            <img src="${p1.img}" class="w-20 h-20 rounded-full object-cover border-4 border-primary-gold glow-gold shadow-2xl"/>
+            <img loading="lazy" decoding="async" src="${p1.img}" class="w-20 h-20 rounded-full object-cover border-4 border-primary-gold glow-gold shadow-2xl"/>
             <span class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full badge-gold font-bold text-sm flex items-center justify-center">1</span>
           </div>
           <p class="font-display font-bold text-sm text-primary-gold text-center truncate w-full">${p1.artist}</p>
@@ -1486,7 +1486,7 @@ class ZetuRootsApp {
         <!-- Rank 3: Bronze -->
         <div class="flex flex-col items-center w-1/3 max-w-[110px] cursor-pointer" onclick="app.playTrackById(${p3.id})">
           <div class="relative mb-2">
-            <img src="${p3.img}" class="w-16 h-16 rounded-full object-cover border-2 border-bronze shadow-lg"/>
+            <img loading="lazy" decoding="async" src="${p3.img}" class="w-16 h-16 rounded-full object-cover border-2 border-bronze shadow-lg"/>
             <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full badge-bronze font-bold text-xs flex items-center justify-center">3</span>
           </div>
           <p class="font-display font-bold text-xs text-ink text-center truncate w-full">${p3.artist}</p>
@@ -1512,7 +1512,7 @@ class ZetuRootsApp {
           <span class="font-display font-black text-base w-6 text-center ${idx < 3 ? 'text-primary-gold' : 'text-text-muted'}">
             ${t.periodRank || t.rank || idx + 1}
           </span>
-          <img src="${t.img}" alt="${t.title}" class="w-12 h-12 rounded-lg object-cover"/>
+          <img loading="lazy" decoding="async" src="${t.img}" alt="${t.title}" class="w-12 h-12 rounded-lg object-cover"/>
           <div>
             <h4 class="font-display font-bold text-sm text-ink truncate max-w-[160px] md:max-w-xs">${t.title}</h4>
             <p class="text-xs text-primary-gold truncate">${t.artist}</p>
@@ -1636,7 +1636,7 @@ class ZetuRootsApp {
       <div class="surface-card rounded-xl overflow-hidden h-full flex flex-col justify-between">
         <div>
           <div class="relative w-full h-48 bg-white/70">
-            <img src="${ev.img}" alt="${ev.title}" class="w-full h-full object-cover opacity-80"/>
+            <img loading="lazy" decoding="async" src="${ev.img}" alt="${ev.title}" class="w-full h-full object-cover opacity-80"/>
             <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
             <span class="absolute top-3 left-3 bg-primary-gold text-black font-bold text-xs px-2.5 py-1 rounded-full">
               ${ev.county}
@@ -1927,7 +1927,7 @@ class ZetuRootsApp {
       phone: "0700000000",
       county: "Nairobi City",
       role: "fan",
-      avatar: "https://images.unsplash.com/photo-1534308143439-3c0e5d430e77?w=300&h=300&fit=crop",
+      avatar: "https://images.unsplash.com/photo-1534308143439-3c0e5d430e77?w=300&h=300&fit=crop&auto=format",
       bio: "Explore, stream and support Kenyan music across all 47 counties.",
       verified: false
     };
@@ -1957,7 +1957,7 @@ class ZetuRootsApp {
       profileRoleBadge.className = `inline-block mt-2 text-xs font-bold px-3 py-0.5 rounded-full uppercase font-mono ${rb.color}`;
     }
     if (profileBio) profileBio.textContent = user.bio || `ZetuRoots ${user.role} member`;
-    if (profileAvatar) profileAvatar.src = user.avatar || 'https://images.unsplash.com/photo-1534308143439-3c0e5d430e77?w=300&h=300&fit=crop';
+    if (profileAvatar) profileAvatar.src = user.avatar || 'https://images.unsplash.com/photo-1534308143439-3c0e5d430e77?w=300&h=300&fit=crop&auto=format';
     if (profileVerified) {
       profileVerified.style.display = user.verified ? 'inline' : 'none';
     }
@@ -2568,7 +2568,7 @@ class ZetuRootsApp {
         genre: 'Gengetone',
         dialect: 'Sheng',
         kecoboReg: 'NRR-2024-88912',
-        avatar: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=120&h=120&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=120&h=120&fit=crop&auto=format',
         bio: 'Shrap King • #1 Topper Artist',
         verified: true,
         badge: 'gold'
@@ -2582,7 +2582,7 @@ class ZetuRootsApp {
         county: 'Nakuru',
         role: 'dj',
         mixStyle: 'Street Mixes & Gengetone',
-        avatar: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=120&h=120&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=120&h=120&fit=crop&auto=format',
         bio: 'Official Nakuru street mixtape maestro',
         verified: true,
         badge: 'silver'
@@ -2594,7 +2594,7 @@ class ZetuRootsApp {
         phone: '0712345671',
         county: 'Nairobi City',
         role: 'fan',
-        avatar: 'https://images.unsplash.com/photo-1534308143439-3c0e5d430e77?w=120&h=120&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1534308143439-3c0e5d430e77?w=120&h=120&fit=crop&auto=format',
         bio: 'Nairobi music head & Sheng culture lover',
         verified: false
       },
@@ -2607,7 +2607,7 @@ class ZetuRootsApp {
         county: 'Nairobi City',
         role: 'label',
         businessReg: 'CPR/2021/77881',
-        avatar: 'https://images.unsplash.com/photo-1598387993441-a364f854cfac?w=120&h=120&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1598387993441-a364f854cfac?w=120&h=120&fit=crop&auto=format',
         bio: 'Kenya record label & rights management',
         verified: true
       },
@@ -2620,7 +2620,7 @@ class ZetuRootsApp {
         county: 'Nairobi City',
         role: 'organizer',
         venues: 'Carnivore Grounds, Nairobi',
-        avatar: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=120&h=120&fit=crop',
+        avatar: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=120&h=120&fit=crop&auto=format',
         bio: 'Organizers of Shujaa Fest & live Kenyan concerts',
         verified: true
       }
@@ -2670,7 +2670,7 @@ class ZetuRootsApp {
         roleTag.textContent = roleIcons[this.currentUser.role] || '🎧 Fan';
       }
       if (userAvatar) {
-        userAvatar.src = this.currentUser.avatar || 'https://images.unsplash.com/photo-1534308143439-3c0e5d430e77?w=120&h=120&fit=crop';
+        userAvatar.src = this.currentUser.avatar || 'https://images.unsplash.com/photo-1534308143439-3c0e5d430e77?w=120&h=120&fit=crop&auto=format';
       }
     } else {
       if (signinBtn) signinBtn.classList.remove('hidden');
@@ -3264,7 +3264,7 @@ class ZetuRootsApp {
           <span class="text-xs font-mono ${idx === this.audio.currentIndex ? 'text-secondary-green font-bold' : 'text-text-dim'}">
             ${idx === this.audio.currentIndex ? '▶' : idx + 1}
           </span>
-          <img src="${t.img}" class="w-10 h-10 rounded object-cover"/>
+          <img loading="lazy" decoding="async" src="${t.img}" class="w-10 h-10 rounded object-cover"/>
           <div>
             <p class="text-xs font-bold text-ink truncate max-w-[160px]">${t.title}</p>
             <p class="text-[10px] text-text-muted">${t.artist}</p>
@@ -3440,7 +3440,7 @@ class ZetuRootsApp {
         trendingContainer.innerHTML = results.map((t, idx) => `
           <div class="surface-card rounded-xl p-3 flex items-center justify-between mb-2.5 cursor-pointer" onclick="app.playTrackById(${t.id})">
             <div class="flex items-center gap-3">
-              <img src="${t.img}" class="w-12 h-12 rounded object-cover"/>
+              <img loading="lazy" decoding="async" src="${t.img}" class="w-12 h-12 rounded object-cover"/>
               <div>
                 <h4 class="font-bold text-sm text-ink">${t.title}</h4>
                 <p class="text-xs text-primary-gold">${t.artist}</p>
@@ -4481,7 +4481,7 @@ class ZetuRootsApp {
         return `
           <div class="bg-surface/80 rounded-xl p-3 border border-surface-border flex items-center justify-between gap-3">
             <div class="flex items-center gap-2.5 min-w-0">
-              <img src="${ad.logo}" class="w-9 h-9 rounded-lg object-cover shrink-0 border border-surface-border"/>
+              <img loading="lazy" decoding="async" src="${ad.logo}" class="w-9 h-9 rounded-lg object-cover shrink-0 border border-surface-border"/>
               <div class="min-w-0">
                 <h5 class="font-display font-bold text-xs text-ink truncate">${ad.brand}</h5>
                 <span class="text-[9px] font-mono text-text-dim block">${ad.category} • CPM: KES ${ad.cpmKes}</span>
@@ -4521,8 +4521,8 @@ class ZetuRootsApp {
         title: 'Lipa Na M-Pesa Bila Stress',
         tagline: 'Zero transaction fees under KES 100! Pay bills and send money anywhere in Kenya.',
         category: 'Fintech & Mobile Money',
-        logo: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=100&h=100&fit=crop',
-        bannerImg: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&h=450&fit=crop',
+        logo: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=100&h=100&fit=crop&auto=format',
+        bannerImg: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&h=450&fit=crop&auto=format',
         ctaText: 'Open M-Pesa App',
         ctaUrl: 'https://www.safaricom.co.ke/mpesa',
         duration: 15,
@@ -4801,7 +4801,7 @@ class ZetuRootsApp {
         genre: localTrack ? localTrack.genre : 'Gengetone',
         dialect: localTrack ? localTrack.dialect : 'Sheng',
         kecoboReg: localTrack ? localTrack.kecoboReg : 'NRR-2026-88912',
-        avatar: localTrack ? localTrack.img : 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop',
+        avatar: localTrack ? localTrack.img : 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&auto=format',
         bio: `Authentic Kenyan recording artist certified on ZetuRoots.`,
         monthlyListeners: 185000,
         followersCount: 42000
@@ -4826,7 +4826,7 @@ class ZetuRootsApp {
     const fansAlsoLike = data.fansAlsoLike || [];
 
     const avatarEl = document.getElementById('artist-profile-avatar');
-    if (avatarEl) avatarEl.src = artist.avatar || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop';
+    if (avatarEl) avatarEl.src = artist.avatar || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&auto=format';
 
     const backdropEl = document.getElementById('artist-hero-backdrop');
     if (backdropEl) backdropEl.style.backgroundImage = `url('${artist.avatar}')`;
@@ -4868,7 +4868,7 @@ class ZetuRootsApp {
           <div class="p-3 sm:p-3.5 flex items-center justify-between hover:bg-surface-high transition-colors cursor-pointer group" onclick="app.playTrackById(${t.id})">
             <div class="flex items-center gap-3.5 min-w-0">
               <span class="w-6 text-center font-mono font-bold text-xs text-text-dim group-hover:text-primary-gold">${idx + 1}</span>
-              <img src="${t.img}" class="w-10 h-10 rounded-lg object-cover shrink-0 border border-surface-border"/>
+              <img loading="lazy" decoding="async" src="${t.img}" class="w-10 h-10 rounded-lg object-cover shrink-0 border border-surface-border"/>
               <div class="min-w-0">
                 <h4 class="font-display font-bold text-sm text-ink truncate group-hover:text-primary-gold">${t.title}</h4>
                 <div class="flex items-center gap-2 mt-0.5">
@@ -4937,7 +4937,7 @@ class ZetuRootsApp {
         fansEl.innerHTML = fansAlsoLike.map(f => `
           <div class="surface-card p-3 rounded-2xl border border-surface-border text-center hover:border-primary-gold/50 cursor-pointer transition-all group active:scale-95" onclick="app.openArtistProfile('${f.name}')">
             <div class="w-20 h-20 rounded-full mx-auto overflow-hidden border-2 border-primary-gold/40 shadow-lg mb-2 group-hover:scale-105 transition-transform">
-              <img src="${f.avatar}" class="w-full h-full object-cover"/>
+              <img loading="lazy" decoding="async" src="${f.avatar}" class="w-full h-full object-cover"/>
             </div>
             <h4 class="font-display font-bold text-xs text-ink truncate group-hover:text-primary-gold">${f.name}</h4>
             <p class="text-[10px] font-mono text-secondary-green truncate mt-0.5">${f.genre}</p>
@@ -4958,7 +4958,7 @@ class ZetuRootsApp {
     gridEl.innerHTML = tracks.map(t => `
       <div class="surface-card p-3 rounded-xl border border-surface-border hover:border-primary-gold/40 transition-all cursor-pointer group" onclick="app.playTrackById(${t.id})">
         <div class="aspect-square rounded-lg overflow-hidden relative mb-2.5 shadow-md">
-          <img src="${t.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+          <img loading="lazy" decoding="async" src="${t.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
           <button class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-primary-gold text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
             <span class="material-symbols-outlined text-lg">play_arrow</span>
           </button>
@@ -5048,7 +5048,7 @@ class ZetuRootsApp {
       artist = {
         id: artistIdOrName,
         name: foundTrack ? foundTrack.artist : artistIdOrName,
-        avatar: foundTrack ? foundTrack.img : 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop',
+        avatar: foundTrack ? foundTrack.img : 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&auto=format',
         county: foundTrack ? foundTrack.county : 'Kenya'
       };
     }
@@ -5057,7 +5057,7 @@ class ZetuRootsApp {
       artist = {
         id: cur ? cur.artist : 'artist_default',
         name: cur ? cur.artist : 'Kenyan Recording Artist',
-        avatar: cur ? cur.img : 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop',
+        avatar: cur ? cur.img : 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&auto=format',
         county: cur ? cur.county : 'Kenya'
       };
     }
@@ -5194,7 +5194,7 @@ class ZetuRootsApp {
       <div class="surface-card rounded-2xl p-4 border border-surface-border hover:border-amber-400/50 transition-all flex flex-col justify-between group">
         <div>
           <div class="flex items-start gap-3.5 mb-3">
-            <img src="${p.cover}" class="w-16 h-16 rounded-xl object-cover shrink-0 border border-amber-400/30 shadow-md"/>
+            <img loading="lazy" decoding="async" src="${p.cover}" class="w-16 h-16 rounded-xl object-cover shrink-0 border border-amber-400/30 shadow-md"/>
             <div class="min-w-0 flex-1">
               <span class="text-[9px] font-mono text-amber-700 px-2 py-0.5 rounded-full bg-amber-100/80 border border-amber-400/30 uppercase tracking-wider inline-block mb-1">
                 ${p.category}
@@ -5307,7 +5307,7 @@ class ZetuRootsApp {
           dialect: pod.category || 'Human Stories',
           duration: ep.durationStr || '45:00',
           plays: ep.plays || '10K',
-          img: pod.cover || 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop',
+          img: pod.cover || 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop&auto=format',
           audioSrc: ep.audioSrc,
           isrc: 'KE-ZR1-POD-26',
           lyrics: ep.desc + '\n\nChapters:\n' + (ep.chapters || []).map(c => `${c.time} - ${c.title}`).join('\n')
@@ -5352,7 +5352,7 @@ class ZetuRootsApp {
         <div>
           <div class="flex items-start gap-4 mb-3">
             <div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-orange-400/30 shadow-md">
-              <img src="${m.cover}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+              <img loading="lazy" decoding="async" src="${m.cover}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
               <span class="absolute bottom-0 left-0 right-0 bg-black/80 text-[9px] font-mono text-center text-orange-700 font-bold py-0.5">
                 ${m.bpm} BPM
               </span>
@@ -5452,7 +5452,7 @@ class ZetuRootsApp {
       <div class="surface-card rounded-2xl p-5 border border-surface-border hover:border-blue-400/50 transition-all flex flex-col justify-between group">
         <div>
           <div class="flex items-center gap-3.5 mb-3">
-            <img src="${l.logo}" class="w-14 h-14 rounded-2xl object-cover shrink-0 border border-blue-400/30 shadow-lg"/>
+            <img loading="lazy" decoding="async" src="${l.logo}" class="w-14 h-14 rounded-2xl object-cover shrink-0 border border-blue-400/30 shadow-lg"/>
             <div class="min-w-0 flex-1">
               <span class="text-[9px] font-mono text-blue-700 px-2 py-0.5 rounded-full bg-blue-100/80 border border-blue-400/30 uppercase inline-block mb-1">
                 Founded ${l.foundedYear}
@@ -5509,7 +5509,7 @@ class ZetuRootsApp {
             listEl.innerHTML = catalog.map(t => `
               <div class="p-3 bg-surface rounded-xl border border-surface-border flex items-center justify-between hover:border-blue-400/40 transition-colors cursor-pointer" onclick="app.playTrackById(${t.id})">
                 <div class="flex items-center gap-3">
-                  <img src="${t.img}" class="w-10 h-10 rounded-lg object-cover border border-surface-border"/>
+                  <img loading="lazy" decoding="async" src="${t.img}" class="w-10 h-10 rounded-lg object-cover border border-surface-border"/>
                   <div>
                     <h4 class="font-display font-bold text-xs text-ink">${t.title}</h4>
                     <p class="text-[11px] text-primary-gold font-mono">${t.artist} • ${t.genre}</p>
@@ -5613,7 +5613,7 @@ class ZetuRootsApp {
       <div class="surface-card rounded-2xl p-4 border border-surface-border hover:border-primary-gold/40 transition-all flex flex-col justify-between group">
         <div>
           <div class="relative w-full aspect-square rounded-xl overflow-hidden mb-3 border border-surface-border">
-            <img src="${a.avatar}" alt="${a.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <img loading="lazy" decoding="async" src="${a.avatar}" alt="${a.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
             <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
               <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-secondary-green text-black">
@@ -5784,7 +5784,7 @@ class ZetuRootsApp {
       <div class="surface-card rounded-2xl p-4 border border-surface-border hover:border-amber-400/50 transition-all flex flex-col justify-between group">
         <div>
           <div class="relative w-full aspect-square rounded-xl overflow-hidden mb-3 border border-surface-border">
-            <img src="${p.cover}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <img loading="lazy" decoding="async" src="${p.cover}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
             <button onclick="event.stopPropagation(); app.playPlaylist('${p.id}')" class="absolute bottom-3 right-3 w-11 h-11 rounded-full bg-primary-gold text-black flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-transform">
               <span class="material-symbols-outlined text-2xl">play_arrow</span>
@@ -5854,7 +5854,7 @@ class ZetuRootsApp {
               <div class="p-2.5 bg-surface rounded-xl border border-surface-border flex items-center justify-between hover:border-amber-400/40 transition-colors cursor-pointer" onclick="app.playTrackById(${t.id})">
                 <div class="flex items-center gap-3">
                   <span class="font-mono text-xs text-text-dim w-5 text-center">${idx + 1}</span>
-                  <img src="${t.img}" class="w-10 h-10 rounded-lg object-cover border border-surface-border"/>
+                  <img loading="lazy" decoding="async" src="${t.img}" class="w-10 h-10 rounded-lg object-cover border border-surface-border"/>
                   <div>
                     <h4 class="font-display font-bold text-xs text-ink">${t.title}</h4>
                     <p class="text-[11px] text-primary-gold font-mono">${t.artist} • ${t.county}</p>
@@ -5917,7 +5917,7 @@ class ZetuRootsApp {
       <div class="surface-card rounded-xl p-3 flex items-center justify-between hover:border-rose-500/40 transition-all cursor-pointer" onclick="app.playTrackById(${t.id})">
         <div class="flex items-center gap-3">
           <span class="font-mono text-xs text-text-dim w-5 text-center">${idx + 1}</span>
-          <img src="${t.img}" class="w-12 h-12 rounded-lg object-cover border border-surface-border"/>
+          <img loading="lazy" decoding="async" src="${t.img}" class="w-12 h-12 rounded-lg object-cover border border-surface-border"/>
           <div>
             <h4 class="font-display font-bold text-sm text-ink">${t.title}</h4>
             <div class="flex items-center gap-2 mt-0.5">
@@ -6068,7 +6068,7 @@ class ZetuRootsApp {
       date: 'Sat, 14 Nov 2026',
       time: '12:00 PM EAT',
       county: 'Nairobi City',
-      banner: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&h=450&fit=crop',
+      banner: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&h=450&fit=crop&auto=format',
       badge: 'LIVE MUSIC FESTIVAL',
       price: 'KES 2,500',
       description: 'A premier outdoor celebration of Kenyan contemporary music, live bands, artisanal food, and East African creative culture. Featuring 3 live stages, immersive craft beer lounges, and certified sound systems.'
@@ -6080,7 +6080,7 @@ class ZetuRootsApp {
     const venueEl = document.getElementById('event-detail-venue');
     const descEl = document.getElementById('event-detail-desc');
 
-    if (bannerEl) bannerEl.style.backgroundImage = `url('${ev.banner || ev.img || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&h=450&fit=crop'}')`;
+    if (bannerEl) bannerEl.style.backgroundImage = `url('${ev.banner || ev.img || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&h=450&fit=crop&auto=format'}')`;
     if (badgeEl) badgeEl.textContent = ev.badge || 'KENYA LIVE EVENT';
     if (titleEl) titleEl.textContent = ev.title;
     if (venueEl) venueEl.textContent = `📍 ${ev.venue} • 📅 ${ev.date} (${ev.time || '2:00 PM'})`;
@@ -6121,7 +6121,7 @@ class ZetuRootsApp {
       tagline: 'Leading East African Hip Hop & Gengetone Powerhouse',
       foundedYear: 2017,
       founder: 'Cedric & Team',
-      logo: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=200&h=200&fit=crop',
+      logo: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=200&h=200&fit=crop&auto=format',
       bio: 'Black Market Records Africa has been instrumental in the commercial growth of Gengetone, Sheng rap, and urban Kenyan street anthems across East Africa and diaspora charts.'
     };
 
@@ -6138,15 +6138,15 @@ class ZetuRootsApp {
 
     if (gridEl) {
       const roster = label.signedArtists || [
-        { name: 'Odi Wa Muranga', genre: 'Gengetone', tracksCount: 14, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop' },
-        { name: 'Fathermoh', genre: 'Urbantone', tracksCount: 19, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop' },
-        { name: 'Exray Taniua', genre: 'Gengetone', tracksCount: 12, avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop' }
+        { name: 'Odi Wa Muranga', genre: 'Gengetone', tracksCount: 14, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&auto=format' },
+        { name: 'Fathermoh', genre: 'Urbantone', tracksCount: 19, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&auto=format' },
+        { name: 'Exray Taniua', genre: 'Gengetone', tracksCount: 12, avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop&auto=format' }
       ];
 
       gridEl.innerHTML = roster.map(a => `
         <div class="p-3 rounded-xl bg-surface border border-surface-border flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <img src="${a.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop'}" class="w-10 h-10 rounded-lg object-cover border border-surface-border"/>
+            <img loading="lazy" decoding="async" src="${a.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&auto=format'}" class="w-10 h-10 rounded-lg object-cover border border-surface-border"/>
             <div>
               <h5 class="font-display font-bold text-xs text-ink">${a.name}</h5>
               <p class="text-[10px] font-mono text-primary-gold">${a.genre} • ${a.tracksCount || 10} Tracks</p>
@@ -6187,7 +6187,7 @@ class ZetuRootsApp {
       title: 'Afripods 254: Nairobi Nights',
       hosts: 'Hosted by Shaffie Weru & Mwende',
       desc: 'Raw, unfiltered conversations about Kenyan nightlife, underground beatmakers, benga heritage, and Gengetone culture straight from the capital.',
-      cover: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop',
+      cover: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop&auto=format',
       episodes: [
         { id: 'ep-1', title: 'The Benga Revolution: From Kakamega to River Road', durationStr: '42:15', date: '2 days ago', desc: 'Exploring how Benga guitar riffs formed the foundation of contemporary Kenyan pop.' },
         { id: 'ep-2', title: 'Matatu Soundclash: Inside Rongai 125 Megawatts', durationStr: '51:08', date: '1 week ago', desc: 'Interviews with master fabricators and audio engineers in Industrial Area.' },
@@ -6202,7 +6202,7 @@ class ZetuRootsApp {
     const countEl = document.getElementById('podcast-detail-count');
     const listEl = document.getElementById('podcast-detail-episodes-list');
 
-    if (coverEl) coverEl.src = pod.cover || 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop';
+    if (coverEl) coverEl.src = pod.cover || 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop&auto=format';
     if (titleEl) titleEl.textContent = pod.title;
     if (hostsEl) hostsEl.textContent = pod.hosts || pod.author || 'Afripods Kenya Network';
     if (descEl) descEl.textContent = pod.desc || pod.description || 'Deep dives into East African cultural, musical, and social trends.';
@@ -6297,7 +6297,7 @@ class ZetuRootsApp {
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
             ${matchedArtists.map(a => `
               <div onclick="app.openArtistProfile('${a.name}')" class="surface-card rounded-xl p-3 text-center cursor-pointer border border-surface-border hover:border-primary-gold transition-all group">
-                <img src="${a.avatar}" class="w-14 h-14 rounded-full mx-auto object-cover border border-surface-border group-hover:scale-105 transition-transform"/>
+                <img loading="lazy" decoding="async" src="${a.avatar}" class="w-14 h-14 rounded-full mx-auto object-cover border border-surface-border group-hover:scale-105 transition-transform"/>
                 <h5 class="font-display font-bold text-xs text-ink mt-2 truncate">${a.name}</h5>
                 <span class="text-[10px] font-mono text-text-muted block truncate">${a.genre}</span>
               </div>
@@ -6315,7 +6315,7 @@ class ZetuRootsApp {
             ${matchedTracks.map(t => `
               <div class="p-3 rounded-xl bg-surface border border-surface-border flex items-center justify-between hover:border-primary-gold/40 transition-colors cursor-pointer" onclick="app.playTrackById(${t.id})">
                 <div class="flex items-center gap-3">
-                  <img src="${t.img}" class="w-11 h-11 rounded-lg object-cover border border-surface-border"/>
+                  <img loading="lazy" decoding="async" src="${t.img}" class="w-11 h-11 rounded-lg object-cover border border-surface-border"/>
                   <div>
                     <h5 class="font-display font-bold text-sm text-ink">${t.title}</h5>
                     <p class="text-xs text-text-muted font-mono">${t.artist} • ${t.genre} • ${t.county}</p>

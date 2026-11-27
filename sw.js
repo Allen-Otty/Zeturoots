@@ -1,5 +1,5 @@
-// ZetuRoots PWA Service Worker v1.14.0
-const CACHE_NAME = 'zeturoots-v1.14.0';
+// ZetuRoots PWA Service Worker v1.15.0
+const CACHE_NAME = 'zeturoots-v1.15.0';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -78,13 +78,25 @@ self.addEventListener('fetch', (event) => {
   const sameOrigin = url.origin === self.location.origin;
   if (sameOrigin && (request.mode === 'navigate' || ['document', 'script', 'style'].includes(request.destination))) {
     event.respondWith(
-      fetch(request).then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200) {
-          const copy = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+      (async () => {
+        const fromCache = () => caches.match(request).then((hit) => hit || (request.mode === 'navigate' ? caches.match('./index.html') : undefined));
+        const network = fetch(request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const copy = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return networkResponse;
+        });
+        // On a slow or flaky connection, do not make the visitor wait: after 3s use the cached copy.
+        const slow = new Promise((resolve) => setTimeout(() => resolve(null), 3000));
+        try {
+          const first = await Promise.race([network, slow]);
+          if (first) return first;
+          return (await fromCache()) || network;
+        } catch (e) {
+          return (await fromCache()) || Response.error();
         }
-        return networkResponse;
-      }).catch(() => caches.match(request).then((hit) => hit || (request.mode === 'navigate' ? caches.match('./index.html') : undefined)))
+      })()
     );
     return;
   }

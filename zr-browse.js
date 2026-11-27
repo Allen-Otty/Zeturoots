@@ -89,7 +89,7 @@
     const c = $('#record-labels-grid'); if (!c) return;
     const { data } = await sb.from('labels').select('*').order('name'); const all = data || [];
     c.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3';
-    c.innerHTML = all.length ? all.map((l, i) => `<button data-l="${i}" class="surface-card rounded-2xl p-4 text-left border border-ink/10 hover:border-primary-gold/50 flex items-center gap-3"><img src="${esc(l.logo_url)}" alt="" class="h-14 w-14 rounded-xl object-cover shrink-0"/><span class="min-w-0"><b class="block text-sm text-ink truncate">${esc(l.name)}</b><span class="block text-[11px] text-text-muted truncate">${esc(l.city)} · since ${l.founded_year || '—'}</span></span></button>`).join('') : empty('No labels yet.');
+    c.innerHTML = all.length ? all.map((l, i) => `<button data-l="${i}" class="surface-card rounded-2xl p-4 text-left border border-ink/10 hover:border-primary-gold/50 flex items-center gap-3"><img loading="lazy" decoding="async" src="${esc(l.logo_url)}" alt="" class="h-14 w-14 rounded-xl object-cover shrink-0"/><span class="min-w-0"><b class="block text-sm text-ink truncate">${esc(l.name)}</b><span class="block text-[11px] text-text-muted truncate">${esc(l.city)} · since ${l.founded_year || '—'}</span></span></button>`).join('') : empty('No labels yet.');
     c.querySelectorAll('[data-l]').forEach((b) => (b.onclick = () => {
       const l = all[+b.dataset.l], sec = $('#label-catalog-section'); if (sec) sec.classList.remove('hidden');
       const lg = $('#label-selected-logo'); if (lg) { if (lg.tagName === 'IMG') lg.src = l.logo_url; else lg.style.backgroundImage = `url(${l.logo_url})`; }

@@ -1,5 +1,12 @@
 # ZetuRoots change list
 
+## Done (branch `perf-load`)
+- Faster first load: removed the Tailwind CDN script (render-blocking), the duplicate Google Fonts `@import` in app.css, and blocking text-font CSS; icon font uses display=block so icon names never flash as words
+- Logo 152 KB to 14 KB; images lazy-load and request WebP/AVIF from Unsplash (`auto=format`)
+- Service worker: network-first but falls back to cache after 3 s on slow connections (cache v1.15.0)
+- Netlify now builds `tw.css` on every deploy (`netlify.toml` build command), so new Tailwind classes work without a manual rebuild. Tailwind settings live only in `tools/tailwind.config.js`
+- Images and icons cached for a week
+
 ## Done (branch `light-glass`)
 - Light glass theme: cream canvas with soft gold and green light, frosted top bar, nav, player, menus and modals
 - Fixed blank pages: the Profile section was never closed, so 24 pages (Channels, About, Library, Login, Podcasts and more) sat inside it and vanished whenever Profile was hidden
