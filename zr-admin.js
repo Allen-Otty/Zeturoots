@@ -16,10 +16,70 @@
     (data || []).forEach((p) => (names[p.id] = p.display_name || 'User')); need.forEach((i) => (names[i] = names[i] || 'User'));
   }
 
+
+  // ── Catalogue: admins add official links (YouTube, Spotify, SoundCloud, Audiomack, Mixcloud, Vimeo). Nothing is hosted or downloaded; players use the provider's own embed. ──
+  const FIELD = 'w-full rounded-xl bg-white/70 border border-ink/10 px-3 py-2 text-sm text-ink';
+  const MAX_LINES = 25;
+  async function catalogue(B) {
+    const [{ data: genres }, { data: mine }] = await Promise.all([
+      sb.from('genres').select('id,name').order('name'),
+      sb.from('media_items').select('id,provider,title,artist_name,county,status,created_at').eq('added_by', me().id).order('created_at', { ascending: false }).limit(30),
+    ]);
+    const counties = typeof KENYA_COUNTIES !== 'undefined' ? KENYA_COUNTIES : [];
+    B.innerHTML = `<form id="zc-form" class="surface-card rounded-2xl p-4 space-y-2" novalidate>
+      <p class="text-sm font-bold text-ink">Add official links</p>
+      <p class="text-[11px] text-text-muted">Paste one link per line (up to ${MAX_LINES}). Titles and artwork are filled in from the provider. Supported: ${esc(Z.SUPPORTED)}.</p>
+      <textarea id="zc-urls" rows="4" class="${FIELD}" placeholder="https://www.youtube.com/watch?v=..." aria-label="Links, one per line"></textarea>
+      <div class="grid grid-cols-2 gap-2">
+        <input id="zc-artist" class="${FIELD}" maxlength="80" placeholder="Artist name (optional)" aria-label="Artist name"/>
+        <select id="zc-kind" class="${FIELD}" aria-label="Type"><option value="track">Track</option><option value="mixtape">Mixtape</option><option value="episode">Podcast episode</option></select>
+        <select id="zc-genre" class="${FIELD}" aria-label="Genre"><option value="">Genre (optional)</option>${(genres || []).map((g) => `<option value="${esc(g.id)}">${esc(g.name)}</option>`).join('')}</select>
+        <select id="zc-county" class="${FIELD}" aria-label="County"><option value="">County (optional)</option>${counties.map((c) => `<option>${esc(c)}</option>`).join('')}</select>
+      </div>
+      ${(genres || []).length ? '' : '<p class="text-[11px] text-text-muted">Genres will appear here once they have been added to the database.</p>'}
+      <label class="flex items-start gap-2 text-xs text-ink"><input id="zc-ok" type="checkbox" class="mt-0.5"/><span>I confirm these are the official links published by the artist or rights holder, or that I am authorised to share them. ZetuRoots only embeds the provider's own player.</span></label>
+      <div class="flex items-center gap-2"><button id="zc-go" type="submit" class="${GOLD}">Add links</button><span id="zc-msg" class="text-xs text-text-muted" role="status"></span></div>
+    </form>
+    <p class="text-xs font-bold text-ink pt-2">Added by you</p>
+    <div id="zc-list" class="space-y-1.5">${(mine || []).length ? (mine || []).map((m) => `<div class="surface-card rounded-xl p-2.5 flex items-center justify-between gap-2"><div class="min-w-0"><p class="text-sm text-ink truncate">${esc(m.title)}</p><p class="text-[11px] text-text-muted truncate">${esc(m.artist_name || 'Unknown artist')} · ${esc(m.provider)}${m.county ? ' · ' + esc(m.county) : ''}${m.status !== 'active' ? ' · ' + esc(m.status) : ''}</p></div><button data-del="${m.id}" class="${PILL}" aria-label="Remove ${esc(m.title)}">Remove</button></div>`).join('') : '<p class="text-xs text-text-muted">Nothing added yet.</p>'}</div>`;
+
+    B.querySelectorAll('[data-del]').forEach((b) => (b.onclick = async () => {
+      if (!window.confirm('Remove this link from ZetuRoots?')) return;
+      const { error } = await sb.from('media_items').delete().eq('id', b.dataset.del);
+      toast(error ? error.message : 'Removed.'); render();
+    }));
+
+    $('#zc-form').onsubmit = async (ev) => {
+      ev.preventDefault();
+      const msg = $('#zc-msg'), btn = $('#zc-go');
+      const lines = [...new Set($('#zc-urls').value.split(/\r?\n/).map((x) => x.trim()).filter(Boolean))];
+      if (!lines.length) return (msg.textContent = 'Paste at least one link.');
+      if (lines.length > MAX_LINES) return (msg.textContent = `Please add at most ${MAX_LINES} links at a time.`);
+      if (!$('#zc-ok').checked) return (msg.textContent = 'Please confirm the links are official or authorised.');
+      btn.disabled = true; let ok = 0; const problems = [];
+      for (let i = 0; i < lines.length; i++) {
+        msg.textContent = `Adding ${i + 1} of ${lines.length}…`;
+        const l = Z.parseLink(lines[i]);
+        if (!l) { problems.push(`Not a supported link: ${lines[i].slice(0, 40)}`); continue; }
+        const meta = await Z.fetchMeta(l);
+        const { error } = await sb.from('media_items').insert({
+          provider: l.provider, provider_id: l.id, url: Z.canon(l), kind: $('#zc-kind').value,
+          media_type: l.provider === 'youtube' || l.provider === 'vimeo' ? 'video' : 'audio',
+          title: meta.title || 'Untitled', artist_name: $('#zc-artist').value.trim() || meta.artist || null,
+          thumbnail_url: meta.thumb || null, genre_id: $('#zc-genre').value || null, county: $('#zc-county').value || null, added_by: me().id,
+        });
+        if (error) problems.push(error.code === '23505' ? `Already on ZetuRoots: ${lines[i].slice(0, 40)}` : error.message); else ok++;
+      }
+      btn.disabled = false;
+      toast(ok ? `${ok} link${ok > 1 ? 's' : ''} added.` : 'No links were added.');
+      if (problems.length) { msg.textContent = problems.slice(0, 3).join(' · '); if (ok) setTimeout(render, 1800); } else render();
+    };
+  }
+
   async function render() {
     const v = $('#view-admin');
     if (!isAdmin) { v.innerHTML = '<h2 class="font-display font-black text-2xl text-ink mb-3">Admin</h2><div class="surface-card rounded-2xl p-6 text-center text-sm text-text-muted">This page is for ZetuRoots admins.</div>'; return; }
-    v.innerHTML = `<div class="flex items-center justify-between mb-3"><h2 class="font-display font-black text-2xl text-ink">Admin</h2><div class="flex gap-1 rounded-full bg-ink/[0.04] p-0.5">${[['overview', 'Overview'], ['payouts', 'Payouts'], ['reports', 'Reports']].map(([k, l]) => `<button data-atab="${k}" class="rounded-full px-3 py-1 text-xs font-semibold ${k === tab ? 'bg-primary-gold text-black' : 'text-text-muted'}">${l}</button>`).join('')}</div></div><div id="za-body" class="space-y-2 max-w-3xl"></div>`;
+    v.innerHTML = `<div class="flex items-center justify-between mb-3"><h2 class="font-display font-black text-2xl text-ink">Admin</h2><div class="flex gap-1 rounded-full bg-ink/[0.04] p-0.5">${[['overview', 'Overview'], ['catalogue', 'Catalogue'], ['payouts', 'Payouts'], ['reports', 'Reports']].map(([k, l]) => `<button data-atab="${k}" class="rounded-full px-3 py-1 text-xs font-semibold ${k === tab ? 'bg-primary-gold text-black' : 'text-text-muted'}">${l}</button>`).join('')}</div></div><div id="za-body" class="space-y-2 max-w-3xl"></div>`;
     v.querySelectorAll('[data-atab]').forEach((b) => (b.onclick = () => { tab = b.dataset.atab; render(); }));
     const B = $('#za-body');
     if (tab === 'overview') {
@@ -27,6 +87,8 @@
       B.className = 'grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl';
       B.innerHTML = stat('Users', num(data.users)) + stat('Links', num(data.links)) + stat('Plays', num(data.plays)) + stat('Open reports', num(data.open_reports)) +
         stat('Payouts waiting', num(data.pending_cashouts)) + stat('Waiting (KES)', num(data.pending_kes)) + stat('Coins in wallets', num(data.coins_in_wallets)) + stat('Earned, unpaid', num(data.earned_unpaid));
+    } else if (tab === 'catalogue') {
+      B.className = 'space-y-2 max-w-3xl'; await catalogue(B);
     } else if (tab === 'payouts') {
       const { data } = await sb.from('cashout_requests').select('id,user_id,coins,kes_amount,phone,status,note,created_at').order('created_at', { ascending: false }).limit(40);
       const rows = data || []; await nm(rows.map((r) => r.user_id));
