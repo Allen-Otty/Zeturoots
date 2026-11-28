@@ -1,4 +1,4 @@
-/* Keep `theme` identical to the tailwind.config block in index.html. */
+/* Single source of truth for Tailwind (theme colours, fonts, plugins). Netlify rebuilds tw.css from this on every deploy. */
 module.exports = Object.assign({
       darkMode: "class",
       theme: {

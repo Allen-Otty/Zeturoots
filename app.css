@@ -1,6 +1,5 @@
 /* ZetuRoots / ZR Zawanoot - Mobile-First PWA Stylesheet
    Light glassmorphism theme: warm cream canvas with soft gold + green light, frosted-glass surfaces. */
-@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   color-scheme: light;

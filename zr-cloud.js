@@ -114,7 +114,7 @@
     if (error) return ($('zr-list').textContent = 'Could not load library.');
     lib = data;
     $('zr-list').innerHTML = data.length ? data.map((m, i) => `<button data-i="${i}" class="w-full flex items-center gap-3 text-left rounded-xl bg-ink/[0.04] p-2">
-      ${m.thumbnail_url ? `<img src="${esc(m.thumbnail_url)}" alt="" class="w-14 h-14 rounded-lg object-cover"/>` : '<div class="w-14 h-14 rounded-lg bg-ink/[0.07]"></div>'}
+      ${m.thumbnail_url ? `<img loading="lazy" decoding="async" src="${esc(m.thumbnail_url)}" alt="" class="w-14 h-14 rounded-lg object-cover"/>` : '<div class="w-14 h-14 rounded-lg bg-ink/[0.07]"></div>'}
       <span class="min-w-0"><span class="block text-sm text-ink truncate">${esc(m.title)}</span><span class="block text-xs text-text-muted truncate">${esc(m.artist_name)} · ${esc(m.provider)}</span></span><span data-add="${i}" class="ml-auto px-2 text-lg text-primary-gold">+</span></button>`).join('') : '<p class="text-xs text-text-muted">No links yet. Be the first to add one.</p>';
     $('zr-list').querySelectorAll('button').forEach((b) => (b.onclick = (e) => (e.target.dataset.add ? addToPl(lib[+e.target.dataset.add].id) : play(+b.dataset.i, lib))));
   }
