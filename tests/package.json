@@ -1,0 +1,7 @@
+{
+  "name": "zeturoots-tests",
+  "private": true,
+  "description": "Browser tests. Not part of the Netlify build. Run: cd tests && npm install && npm test (set CHROME_PATH if Playwright's browser is not installed).",
+  "scripts": { "test": "node admin-catalogue.test.cjs" },
+  "devDependencies": { "playwright": "^1.49.0" }
+}
